@@ -510,3 +510,9 @@ healthchecksdb
 MigrationBackup/
 
 # End of https://www.gitignore.io/api/c++,aspnetcore,visualstudio
+
+.vs/
+*.dll
+*.cache
+*.pdb
+*.config
