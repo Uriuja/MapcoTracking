@@ -1,0 +1,173 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>GoReports</title>
+    <meta charset="utf-8" />
+
+    <link href="~/wwwroot/css/estilos.css" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link href="~/wwwroot/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <script type="text/javascript" src="~/wwwroot/lib/bootstrap/dist/js/bootstrap.js"></script>
+    <script type="text/javascript" src="~/wwwroot/js/app.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    >
+    <title></title>
+</head>
+<body>
+    <div class="col-md-12">
+        <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute">
+            <div class="container-fluid">
+                <div class="navbar-wrapper">
+                    <div class="navbar-toggle">
+
+                    </div>
+                    <img src="">
+                </div>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-bar navbar-kebab"></span>
+                    <span class="navbar-toggler-bar navbar-kebab"></span>
+                    <span class="navbar-toggler-bar navbar-kebab"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-end" id="navigation">
+
+                </div>
+            </div>
+        </nav>
+    </div>
+    <div class="col-md-12">
+        <section class="form_wrap">
+            <form action="" class="form_contact" id="frmSearch" name="frmSearch">
+                <h2>Generar Reporte Tienda</h2>
+                <div class="user_info col-md-12">
+                    <div class="row">
+                        <div class="form-group col-md-4">
+                            <label for="ap_pat">Apellido Paterno</label>
+                            <input type="text" id="ap_pat">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="ap_mat">Apellido Materno</label>
+                            <input type="text" id="ap_mat">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="mensaje">Nombres</label>
+                            <input type="text" id="name">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-3">
+                            <label for="desde">Desde</label>
+                            <input type="text" id="desde">
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="hasta">Hasta</label>
+                            <input type="text" id="hasta">
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="promotor">Promotor</label>
+                            <input type="text" id="promotor">
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="solicitud">Id Solicitud</label>
+                            <input type="text" id="solicitud">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-4">
+                            <label for="mensaje">Región</label>
+                            <select name="region" id="region" class="custom-select">
+                                <option value="0">Seleccione</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="mensaje">Subregión</label>
+                            <select name="subregion" id="subregion" class="custom-select">
+                                <option value="0">Seleccione</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="mensaje">Tienda</label>
+                            <select name="tienda" id="tienda" class="custom-select">
+                                <option value="0">Seleccione</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-4">
+                            <br />
+                            <input type="button" value="Generar" id="btnSend" class="btn btn-primary">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <br />
+                            <input type="button" value="Limpiar" id="btnClean" class="btn btn-primary">
+                        </div>
+                    </div>
+
+                </div>
+            </form>
+        </section>
+    </div>
+    <div class="container hide" id="resultContainer">
+        <div class="row adjust">
+            <div class="data col-md-12">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>No Consulta</th>
+                            <th>Precalificación</th>
+                            <th>Confirmado</th>
+                            <th>Fecha</th>
+                            <th>Nombre</th>
+                            <th>Apellido Paterno</th>
+                            <th>Apellido Materno</th>
+                            <th>Fecha de Nacimiento</th>
+                            <th>Ciudad</th>
+                            <th>Municipio</th>
+                            <th>Estado</th>
+                            <th>Promotor</th>
+                            <th>Tienda</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="table-primary">
+                            <td>65515</td>
+                            <td>Declinado</td>
+                            <td>1</td>
+                            <td>01/06/2019 08:03:08 a. m.</td>
+                            <td>OCTAVIO</td>
+                            <td>LEYVA</td>
+                            <td>ROMERO</td>
+                            <td>1959-12-19</td>
+                            <td></td>
+                            <td></td>
+                            <td>Sinaloa</td>
+                            <td>856</td>
+                            <td>0520</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div id="loading" class="hide">
+        <div id="loading-center">
+            <div id="loading-center-absolute">
+                <div class="object" id="object_one"></div>
+                <div class="object" id="object_two"></div>
+                <div class="object" id="object_three"></div>
+                <div class="object" id="object_four"></div>
+                <div class="object" id="object_five"></div>
+                <div class="object" id="object_six"></div>
+                <div class="object" id="object_seven"></div>
+                <div class="object" id="object_eight"></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

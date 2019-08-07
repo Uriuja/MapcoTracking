@@ -7,8 +7,8 @@ namespace MapcoSolution.Models
 {
     public class ModelUserLogin
     {
-        public string Usuario { get; set; }
-        public string Contraseña { get; set; }
+        public string user { get; set; }
+        public string password { get; set; }
 
     }
 }

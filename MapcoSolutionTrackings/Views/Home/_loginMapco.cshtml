@@ -20,6 +20,8 @@
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="~/wwwroot/js/login.js"></script>
+    <script src="~/alert/swal.js"></script>
 
 
 
@@ -36,12 +38,12 @@
             <center>
                 <div class="middle">
                     <div id="login">
-                        <form method ="post"  action="Home/LoginLog" paction="javascript:void(0)";>
+                        <form method="post" action="Home/LoginLog" paction="javascript:void(0)" ;>
                             <fieldset class="clearfix">
                                 <p><span class="fa fa-user"></span><input type="text" Placeholder="Usuario" required asp-for="Usuario" id="inputUsuario" name="Usuario"></p>
                                 <p><span class="fa fa-lock"></span><input type="password" Placeholder="Contraseña" required asp-for="Contraseña" id="inputContraseña" name="Contraseña"></p>
                                 <div>
-                                    <span style="width:25%; text-align:right;  display: inline-block;"><input type="submit" value="Acceso" OnClick="Validar_Usuario"></span>
+                                    <span style="width:25%; text-align:right;  display: inline-block;"><input type="submit" value="Acceso" id="btn_send"></span>
                                 </div>
                             </fieldset>
                             <div class="clearfix"></div>

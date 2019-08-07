@@ -19,7 +19,7 @@ using MapcoSolutionTrackings.Models;
 
 namespace MapcoSolutionTrackings.Controllers
 {
-    public class ReportsController :  System.Web.UI.Page
+    public class ReportsController : Controller
     {
 
         private const string PARAMETER = "@PARAS";
@@ -56,7 +56,7 @@ namespace MapcoSolutionTrackings.Controllers
         #endregion
 
         #region Fill 
-        protected void Fill_Estatus()
+        public void Fill_Estatus()
         {
             try
             {
@@ -82,7 +82,7 @@ namespace MapcoSolutionTrackings.Controllers
             }
             catch (Exception ex)
             {
-                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Popup32", "alert('Ocurrio Un Error, Por Favor Contacte Al Area De IT\\n" + ex.Message.Replace("'", "\"") + " ')", true);
+                //ScriptManager.RegisterClientScriptBlock(this, GetType(), "Popup32", "alert('Ocurrio Un Error, Por Favor Contacte Al Area De IT\\n" + ex.Message.Replace("'", "\"") + " ')", true);
             }
 
         }
@@ -112,69 +112,17 @@ namespace MapcoSolutionTrackings.Controllers
             }
             catch (Exception ex)
             {
-                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Popup32", "alert('Ocurrio Un Error, Por Favor Contacte Al Area De IT\\n" + ex.Message.Replace("'", "\"") + " ')", true);
+                //ScriptManager.RegisterClientScriptBlock(this, GetType(), "Popup32", "alert('Ocurrio Un Error, Por Favor Contacte Al Area De IT\\n" + ex.Message.Replace("'", "\"") + " ')", true);
             }
 
         }
 
-        private void Fill_Data()
+        public Object Fill_Data()
         {
 
-            List<MetricItem_Mapco> items = Get_Metrics_Data();
+            return Get_Metrics_Data();
 
-            //List<string> selectedRegion = new List<string>();
-            //foreach (ListItem item in LB_Region.Items)
-            //{
-            //    if (item.Selected)
-            //    {
-            //        selectedRegion.Add(item.Text);
-            //    }
-            //}
-
-
-            //List<string> selectedSubregion = new List<string>();
-            //foreach (ListItem item in LB_Subregion.Items)
-            //{
-            //    if (item.Selected)
-            //    {
-            //        selectedSubregion.Add(item.Text);
-            //    }
-            //}
-
-            //List<string> selectedTienda = new List<string>();
-            //foreach (ListItem item in LB_Tienda.Items)
-            //{
-            //    if (item.Selected)
-            //    {
-            //        selectedTienda.Add(item.Text);
-            //    }
-            //}
-
-            //if (selectedRegion.Count > 0)
-            //{
-            //    items = (from item_Mapco in items
-            //             where selectedRegion.Contains(item_Mapco.Region)
-            //             select item_Mapco).ToList();
-            //}
-
-            //if (selectedSubregion.Count > 0)
-            //{
-            //    items = (from item_Mapco in items
-            //             where selectedSubregion.Contains(item_Mapco.Subregion)
-            //             select item_Mapco).ToList();
-            //}
-
-            //if (selectedTienda.Count > 0)
-            //{
-            //    items = (from item_Mapco in items
-            //             where selectedTienda.Contains(item_Mapco.Tienda)
-            //             select item_Mapco).ToList();
-            //}
-
-            //Fill_Filters(false, items);
-            //Context.Session["selectedTienda"] = selectedTienda;
-            //Context.Session["selectedRegion"] = selectedRegion;
-            //Context.Session["selectedSubregion"] = selectedSubregion;
+         
         }
 
         #endregion
@@ -438,11 +386,11 @@ namespace MapcoSolutionTrackings.Controllers
             string query2 = (string)Query2.Clone();
             string query3 = (string)Query3.Clone();
             string query4 = (string)Query4.Clone();
-            string parameters = Get_Query_Filters();
-            query = query.Replace(PARAMETER, parameters);
-            query2 = query2.Replace(PARAMETER, parameters);
-            query3 = query3.Replace(PARAMETER, parameters);
-            query4 = query4.Replace(PARAMETER, parameters);
+            //string parameters = Get_Query_Filters();
+            //query = query.Replace(PARAMETER, parameters);
+            //query2 = query2.Replace(PARAMETER, parameters);
+            //query3 = query3.Replace(PARAMETER, parameters);
+            //query4 = query4.Replace(PARAMETER, parameters);
 
             try
             {
@@ -533,233 +481,233 @@ namespace MapcoSolutionTrackings.Controllers
             }
         }
 
-        protected void Generar_Reporte(ModelReports modRepo,object sender, EventArgs e)
-        {
-            //Reiniciar_Tablas();
-            Update_Promotor();
+        //protected void Generar_Reporte(ModelReports modRepo,object sender, EventArgs e)
+        //{
+        //    //Reiniciar_Tablas();
+        //    Update_Promotor();
 
-            if (ViewState["Nivel"].ToString() == "Administrador")
-            {
-                Generar_Reporte_Administrador(modRepo);
-            }
-            else
-            {
+        //    if (ViewState["Nivel"].ToString() == "Administrador")
+        //    {
+        //        Generar_Reporte_Administrador(modRepo);
+        //    }
+        //    else
+        //    {
 
-                int dia_mes = Convert.ToInt32(DateTime.Now.ToString("dd"));
-                DateTime inicio_mes = DateTime.Now;
-                inicio_mes = inicio_mes.AddDays(Convert.ToInt32((-dia_mes) + 1));
-                DateTime minimo = inicio_mes.AddMonths(-2);
-                string Minimo = Convert.ToString(minimo.ToString("yyyy-MM-dd"));
-
-
-
-                if (Convert.ToDateTime(Minimo) > Convert.ToDateTime(modRepo.desde))
-                {
-
-                    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Popup32", "alert('Sólo puedes visualizar desde el primer día de 2 meses atrás hasta hoy!')", true);
-                }
-                else
-                {
-                    try
-                    {
-
-                        SqlCommand cmd = new SqlCommand();
-                        SqlDataAdapter da = new SqlDataAdapter(cmd);
-                        DataTable t = new DataTable();
-
-                        SqlCommand cmd2 = new SqlCommand();
-                        SqlDataAdapter da2 = new SqlDataAdapter(cmd2);
-                        DataTable t2 = new DataTable();
-
-                        SqlCommand cmd3 = new SqlCommand();
-                        SqlDataAdapter da3 = new SqlDataAdapter(cmd3);
-                        DataTable t3 = new DataTable();
-
-                        SqlCommand cmd4 = new SqlCommand();
-                        SqlDataAdapter da4 = new SqlDataAdapter(cmd4);
-                        DataTable t4 = new DataTable();
-
-                        string connString = ConfigurationManager.ConnectionStrings["Mapco"].ToString();
-                        SqlConnection con = new SqlConnection(connString);
-                        con.Open();
-                        cmd.CommandType = CommandType.StoredProcedure;
-                        cmd2.CommandType = CommandType.StoredProcedure;
-                        cmd3.CommandType = CommandType.StoredProcedure;
-                        cmd4.CommandType = CommandType.StoredProcedure;
-
-
-                        cmd.Parameters.Clear();
-                        cmd.Parameters.Add("@desde", SqlDbType.VarChar).Value = Convert.ToDateTime(modRepo.desde).ToString("yyyy-dd-MM") + " 00:00:00";
-                        cmd.Parameters.Add("@hasta", SqlDbType.VarChar).Value = Convert.ToDateTime(modRepo.hasta).ToString("yyyy-dd-MM") + " 23:59:59";
-                        cmd.Parameters.Add("@nombre", SqlDbType.VarChar).Value = modRepo.name;
-                        cmd.Parameters.Add("@apaterno", SqlDbType.VarChar).Value = modRepo.APaterno;
-                        cmd.Parameters.Add("@amaterno", SqlDbType.VarChar).Value = modRepo.Amaterno;
-                        cmd.Parameters.Add("@promotor", SqlDbType.VarChar).Value = modRepo.promotor;
-                        cmd.Parameters.Add("@descripcion", SqlDbType.VarChar).Value = modRepo.Ddl_Estatus;
-                        cmd.Parameters.Add("@tienda", SqlDbType.VarChar).Value = modRepo.tienda.Trim().Replace("Tienda ", "");
-                        cmd.Parameters.Add("@idsolicitud", SqlDbType.VarChar).Value = modRepo.solicitud;
-                        cmd.CommandText = "IMspr_GetReportes";
-
-
-                        cmd.Connection = con;
-                        da.SelectCommand = cmd;
-                        da.Fill(t);
-                        //GridView1.DataSource = t;
-                        //GridView1.Columns[0].Visible = true;
-
-                        //GridView2.DataSource = t;
-
-                        cmd2.Parameters.Clear();
-                        cmd2.Parameters.Add("@desde", SqlDbType.VarChar).Value = Convert.ToDateTime(modRepo.desde).ToString("yyyy-dd-MM") + " 00:00:00";
-                        cmd2.Parameters.Add("@hasta", SqlDbType.VarChar).Value = Convert.ToDateTime(modRepo.hasta).ToString("yyyy-dd-MM") + " 23:59:59";
-                        cmd2.Parameters.Add("@nombre", SqlDbType.VarChar).Value = modRepo.name;
-                        cmd2.Parameters.Add("@apaterno", SqlDbType.VarChar).Value =modRepo.APaterno;
-                        cmd2.Parameters.Add("@amaterno", SqlDbType.VarChar).Value = modRepo.Amaterno;
-                        cmd2.Parameters.Add("@promotor", SqlDbType.VarChar).Value = modRepo.promotor;
-                        cmd2.Parameters.Add("@descripcion", SqlDbType.VarChar).Value = modRepo.Ddl_Estatus;
-                        cmd2.Parameters.Add("@tienda", SqlDbType.VarChar).Value = modRepo.tienda.Trim().Replace("Tienda ", "");
-                        cmd2.Parameters.Add("@idsolicitud", SqlDbType.VarChar).Value = modRepo.solicitud;
-                        cmd2.CommandText = "IMspr_GetReportes_Estatus";
-
-
-                        cmd2.Connection = con;
-                        da2.SelectCommand = cmd2;
-                        da2.Fill(t2);
-                        //GridView3.DataSource = t2;
-
-
-                        cmd3.Parameters.Clear();
-                        cmd3.Parameters.Add("@desde", SqlDbType.VarChar).Value = Convert.ToDateTime(modRepo.desde).ToString("yyyy-dd-MM") + " 00:00:00";
-                        cmd3.Parameters.Add("@hasta", SqlDbType.VarChar).Value = Convert.ToDateTime(modRepo.hasta).ToString("yyyy-dd-MM") + " 23:59:59";
-                        cmd3.Parameters.Add("@nombre", SqlDbType.VarChar).Value = modRepo.name;
-                        cmd3.Parameters.Add("@apaterno", SqlDbType.VarChar).Value = modRepo.APaterno;
-                        cmd3.Parameters.Add("@amaterno", SqlDbType.VarChar).Value = modRepo.Amaterno;
-                        cmd3.Parameters.Add("@promotor", SqlDbType.VarChar).Value = modRepo.promotor;
-                        cmd3.Parameters.Add("@descripcion", SqlDbType.VarChar).Value = modRepo.Ddl_Estatus;
-                        cmd3.Parameters.Add("@tienda", SqlDbType.VarChar).Value = modRepo.tienda.Trim().Replace("Tienda ", "");
-                        cmd3.Parameters.Add("@idsolicitud", SqlDbType.VarChar).Value = modRepo.solicitud;
-                        cmd3.CommandText = "IMspr_GetReportes_Estatus_Descripcion";
-
-
-                        cmd3.Connection = con;
-                        da3.SelectCommand = cmd3;
-                        da3.Fill(t3);
-                        //GridView4.DataSource = t3;
-
-                        cmd4.Parameters.Clear();
-                        cmd4.Parameters.Add("@desde", SqlDbType.VarChar).Value = Convert.ToDateTime(modRepo.desde).ToString("yyyy-dd-MM") + " 00:00:00";
-                        cmd4.Parameters.Add("@hasta", SqlDbType.VarChar).Value = Convert.ToDateTime(modRepo.hasta).ToString("yyyy-dd-MM") + " 23:59:59";
-                        cmd4.Parameters.Add("@nombre", SqlDbType.VarChar).Value = modRepo.name;
-                        cmd4.Parameters.Add("@apaterno", SqlDbType.VarChar).Value = modRepo.APaterno;
-                        cmd4.Parameters.Add("@amaterno", SqlDbType.VarChar).Value = modRepo.Amaterno;
-                        cmd4.Parameters.Add("@promotor", SqlDbType.VarChar).Value = modRepo.promotor;
-                        cmd4.Parameters.Add("@descripcion", SqlDbType.VarChar).Value =modRepo.Ddl_Estatus;
-                        cmd4.Parameters.Add("@tienda", SqlDbType.VarChar).Value = modRepo.tienda.Replace("Tienda ", "");
-                        cmd4.Parameters.Add("@idsolicitud", SqlDbType.VarChar).Value = modRepo.solicitud;
-                        cmd4.CommandText = "IMspr_GetReportes_Total_Tienda";
-
-
-                        cmd4.Connection = con;
-                        da4.SelectCommand = cmd4;
-                        da4.Fill(t4);
-                        //GridView5.DataSource = t4;
-                        //GridView6.DataSource = t4;
-
-
-                        if (t.Rows.Count > 0)
-                        {
-                            //LBRegistros.Visible = true;
-                            //LBRegistros.Font.Bold = true;
-                            //LBRegistros.Text = "Registros encontrados: " + t.Rows.Count.ToString();
-                            //GridView1.Visible = true;
-                            //GridView3.Visible = true;
-                            //GridView4.Visible = true;
-                            //GridView5.Visible = true;
-                            //GridView6.DataBind();
-                            //GridView5.DataBind();
-                            //GridView4.DataBind();
-                            //GridView3.DataBind();
-                            //GridView1.DataBind();
-                            //GridView2.DataBind();
+        //        int dia_mes = Convert.ToInt32(DateTime.Now.ToString("dd"));
+        //        DateTime inicio_mes = DateTime.Now;
+        //        inicio_mes = inicio_mes.AddDays(Convert.ToInt32((-dia_mes) + 1));
+        //        DateTime minimo = inicio_mes.AddMonths(-2);
+        //        string Minimo = Convert.ToString(minimo.ToString("yyyy-MM-dd"));
 
 
 
+        //        if (Convert.ToDateTime(Minimo) > Convert.ToDateTime(modRepo.desde))
+        //        {
+
+        //            ScriptManager.RegisterClientScriptBlock(this, GetType(), "Popup32", "alert('Sólo puedes visualizar desde el primer día de 2 meses atrás hasta hoy!')", true);
+        //        }
+        //        else
+        //        {
+        //            try
+        //            {
+
+        //                SqlCommand cmd = new SqlCommand();
+        //                SqlDataAdapter da = new SqlDataAdapter(cmd);
+        //                DataTable t = new DataTable();
+
+        //                SqlCommand cmd2 = new SqlCommand();
+        //                SqlDataAdapter da2 = new SqlDataAdapter(cmd2);
+        //                DataTable t2 = new DataTable();
+
+        //                SqlCommand cmd3 = new SqlCommand();
+        //                SqlDataAdapter da3 = new SqlDataAdapter(cmd3);
+        //                DataTable t3 = new DataTable();
+
+        //                SqlCommand cmd4 = new SqlCommand();
+        //                SqlDataAdapter da4 = new SqlDataAdapter(cmd4);
+        //                DataTable t4 = new DataTable();
+
+        //                string connString = ConfigurationManager.ConnectionStrings["Mapco"].ToString();
+        //                SqlConnection con = new SqlConnection(connString);
+        //                con.Open();
+        //                cmd.CommandType = CommandType.StoredProcedure;
+        //                cmd2.CommandType = CommandType.StoredProcedure;
+        //                cmd3.CommandType = CommandType.StoredProcedure;
+        //                cmd4.CommandType = CommandType.StoredProcedure;
 
 
-                        }
-
-                        else
-                        {
-                            //Btn_Export_To_Excel.Visible = false;
-                            //Btn_Excel2.Visible = false;
-                            //LBRegistros.Visible = false;
-                            //GridView1.Visible = false;
-                            //GridView3.Visible = false;
-                            //GridView4.Visible = false;
-                            //GridView5.Visible = false;
-                            ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "Scroll", "alert('No hay coincidencias!')", true);
-                        }
-                        con.Close();
-
-                        ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "Scroll", "scroll();", true);
+        //                cmd.Parameters.Clear();
+        //                cmd.Parameters.Add("@desde", SqlDbType.VarChar).Value = Convert.ToDateTime(modRepo.desde).ToString("yyyy-dd-MM") + " 00:00:00";
+        //                cmd.Parameters.Add("@hasta", SqlDbType.VarChar).Value = Convert.ToDateTime(modRepo.hasta).ToString("yyyy-dd-MM") + " 23:59:59";
+        //                cmd.Parameters.Add("@nombre", SqlDbType.VarChar).Value = modRepo.name;
+        //                cmd.Parameters.Add("@apaterno", SqlDbType.VarChar).Value = modRepo.APaterno;
+        //                cmd.Parameters.Add("@amaterno", SqlDbType.VarChar).Value = modRepo.Amaterno;
+        //                cmd.Parameters.Add("@promotor", SqlDbType.VarChar).Value = modRepo.promotor;
+        //                cmd.Parameters.Add("@descripcion", SqlDbType.VarChar).Value = modRepo.Ddl_Estatus;
+        //                cmd.Parameters.Add("@tienda", SqlDbType.VarChar).Value = modRepo.tienda.Trim().Replace("Tienda ", "");
+        //                cmd.Parameters.Add("@idsolicitud", SqlDbType.VarChar).Value = modRepo.solicitud;
+        //                cmd.CommandText = "IMspr_GetReportes";
 
 
-                    }
+        //                cmd.Connection = con;
+        //                da.SelectCommand = cmd;
+        //                da.Fill(t);
+        //                //GridView1.DataSource = t;
+        //                //GridView1.Columns[0].Visible = true;
 
-                    catch (Exception ex)
-                    {
-                        ScriptManager.RegisterClientScriptBlock(this, GetType(), "Popup32", "alert('Ocurrio Un Error, Por Favor Contacte Al Area De IT\\n" + ex.Message.Replace("'", "\"") + " ')", true);
-                    }
-                }
-            }
-        }
+        //                //GridView2.DataSource = t;
+
+        //                cmd2.Parameters.Clear();
+        //                cmd2.Parameters.Add("@desde", SqlDbType.VarChar).Value = Convert.ToDateTime(modRepo.desde).ToString("yyyy-dd-MM") + " 00:00:00";
+        //                cmd2.Parameters.Add("@hasta", SqlDbType.VarChar).Value = Convert.ToDateTime(modRepo.hasta).ToString("yyyy-dd-MM") + " 23:59:59";
+        //                cmd2.Parameters.Add("@nombre", SqlDbType.VarChar).Value = modRepo.name;
+        //                cmd2.Parameters.Add("@apaterno", SqlDbType.VarChar).Value =modRepo.APaterno;
+        //                cmd2.Parameters.Add("@amaterno", SqlDbType.VarChar).Value = modRepo.Amaterno;
+        //                cmd2.Parameters.Add("@promotor", SqlDbType.VarChar).Value = modRepo.promotor;
+        //                cmd2.Parameters.Add("@descripcion", SqlDbType.VarChar).Value = modRepo.Ddl_Estatus;
+        //                cmd2.Parameters.Add("@tienda", SqlDbType.VarChar).Value = modRepo.tienda.Trim().Replace("Tienda ", "");
+        //                cmd2.Parameters.Add("@idsolicitud", SqlDbType.VarChar).Value = modRepo.solicitud;
+        //                cmd2.CommandText = "IMspr_GetReportes_Estatus";
+
+
+        //                cmd2.Connection = con;
+        //                da2.SelectCommand = cmd2;
+        //                da2.Fill(t2);
+        //                //GridView3.DataSource = t2;
+
+
+        //                cmd3.Parameters.Clear();
+        //                cmd3.Parameters.Add("@desde", SqlDbType.VarChar).Value = Convert.ToDateTime(modRepo.desde).ToString("yyyy-dd-MM") + " 00:00:00";
+        //                cmd3.Parameters.Add("@hasta", SqlDbType.VarChar).Value = Convert.ToDateTime(modRepo.hasta).ToString("yyyy-dd-MM") + " 23:59:59";
+        //                cmd3.Parameters.Add("@nombre", SqlDbType.VarChar).Value = modRepo.name;
+        //                cmd3.Parameters.Add("@apaterno", SqlDbType.VarChar).Value = modRepo.APaterno;
+        //                cmd3.Parameters.Add("@amaterno", SqlDbType.VarChar).Value = modRepo.Amaterno;
+        //                cmd3.Parameters.Add("@promotor", SqlDbType.VarChar).Value = modRepo.promotor;
+        //                cmd3.Parameters.Add("@descripcion", SqlDbType.VarChar).Value = modRepo.Ddl_Estatus;
+        //                cmd3.Parameters.Add("@tienda", SqlDbType.VarChar).Value = modRepo.tienda.Trim().Replace("Tienda ", "");
+        //                cmd3.Parameters.Add("@idsolicitud", SqlDbType.VarChar).Value = modRepo.solicitud;
+        //                cmd3.CommandText = "IMspr_GetReportes_Estatus_Descripcion";
+
+
+        //                cmd3.Connection = con;
+        //                da3.SelectCommand = cmd3;
+        //                da3.Fill(t3);
+        //                //GridView4.DataSource = t3;
+
+        //                cmd4.Parameters.Clear();
+        //                cmd4.Parameters.Add("@desde", SqlDbType.VarChar).Value = Convert.ToDateTime(modRepo.desde).ToString("yyyy-dd-MM") + " 00:00:00";
+        //                cmd4.Parameters.Add("@hasta", SqlDbType.VarChar).Value = Convert.ToDateTime(modRepo.hasta).ToString("yyyy-dd-MM") + " 23:59:59";
+        //                cmd4.Parameters.Add("@nombre", SqlDbType.VarChar).Value = modRepo.name;
+        //                cmd4.Parameters.Add("@apaterno", SqlDbType.VarChar).Value = modRepo.APaterno;
+        //                cmd4.Parameters.Add("@amaterno", SqlDbType.VarChar).Value = modRepo.Amaterno;
+        //                cmd4.Parameters.Add("@promotor", SqlDbType.VarChar).Value = modRepo.promotor;
+        //                cmd4.Parameters.Add("@descripcion", SqlDbType.VarChar).Value =modRepo.Ddl_Estatus;
+        //                cmd4.Parameters.Add("@tienda", SqlDbType.VarChar).Value = modRepo.tienda.Replace("Tienda ", "");
+        //                cmd4.Parameters.Add("@idsolicitud", SqlDbType.VarChar).Value = modRepo.solicitud;
+        //                cmd4.CommandText = "IMspr_GetReportes_Total_Tienda";
+
+
+        //                cmd4.Connection = con;
+        //                da4.SelectCommand = cmd4;
+        //                da4.Fill(t4);
+        //                //GridView5.DataSource = t4;
+        //                //GridView6.DataSource = t4;
+
+
+        //                if (t.Rows.Count > 0)
+        //                {
+        //                    //LBRegistros.Visible = true;
+        //                    //LBRegistros.Font.Bold = true;
+        //                    //LBRegistros.Text = "Registros encontrados: " + t.Rows.Count.ToString();
+        //                    //GridView1.Visible = true;
+        //                    //GridView3.Visible = true;
+        //                    //GridView4.Visible = true;
+        //                    //GridView5.Visible = true;
+        //                    //GridView6.DataBind();
+        //                    //GridView5.DataBind();
+        //                    //GridView4.DataBind();
+        //                    //GridView3.DataBind();
+        //                    //GridView1.DataBind();
+        //                    //GridView2.DataBind();
+
+
+
+
+
+        //                }
+
+        //                else
+        //                {
+        //                    //Btn_Export_To_Excel.Visible = false;
+        //                    //Btn_Excel2.Visible = false;
+        //                    //LBRegistros.Visible = false;
+        //                    //GridView1.Visible = false;
+        //                    //GridView3.Visible = false;
+        //                    //GridView4.Visible = false;
+        //                    //GridView5.Visible = false;
+        //                    ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "Scroll", "alert('No hay coincidencias!')", true);
+        //                }
+        //                con.Close();
+
+        //                ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "Scroll", "scroll();", true);
+
+
+        //            }
+
+        //            catch (Exception ex)
+        //            {
+        //                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Popup32", "alert('Ocurrio Un Error, Por Favor Contacte Al Area De IT\\n" + ex.Message.Replace("'", "\"") + " ')", true);
+        //            }
+        //        }
+        //    }
+        //}
         #endregion
 
         #region Get Query and Metrics
-        private static string Get_Query_Filters()
-        {
-            string filters = "";
-            List<string> selectedRegion = (List<string>)HttpContext.Current.Session["selectedRegion"];
-            if (selectedRegion != null && selectedRegion.Count > 0)
-            {
-                filters += " AND U.Region IN ( ";
-                foreach (string region in selectedRegion)
-                {
-                    filters += "'" + region.Trim() + "', ";
-                }
-                filters += ") ";
-                filters = filters.Replace(", )", ")");
-            }
+        //private static string Get_Query_Filters()
+        //{
+        //    string filters = "";
+        //    List<string> selectedRegion = (List<string>)HttpContext.Current.Session["selectedRegion"];
+        //    if (selectedRegion != null && selectedRegion.Count > 0)
+        //    {
+        //        filters += " AND U.Region IN ( ";
+        //        foreach (string region in selectedRegion)
+        //        {
+        //            filters += "'" + region.Trim() + "', ";
+        //        }
+        //        filters += ") ";
+        //        filters = filters.Replace(", )", ")");
+        //    }
 
-            List<string> selectedSubregion = (List<string>)HttpContext.Current.Session["selectedSubregion"];
-            if (selectedSubregion != null && selectedSubregion.Count > 0)
-            {
-                filters += " AND U.Subregion IN ( ";
-                foreach (string subregion in selectedSubregion)
-                {
-                    filters += "'" + subregion.Trim() + "', ";
-                }
-                filters += ") ";
-                filters = filters.Replace(", )", ")");
-            }
+        //    List<string> selectedSubregion = (List<string>)HttpContext.Current.Session["selectedSubregion"];
+        //    if (selectedSubregion != null && selectedSubregion.Count > 0)
+        //    {
+        //        filters += " AND U.Subregion IN ( ";
+        //        foreach (string subregion in selectedSubregion)
+        //        {
+        //            filters += "'" + subregion.Trim() + "', ";
+        //        }
+        //        filters += ") ";
+        //        filters = filters.Replace(", )", ")");
+        //    }
 
 
-            List<string> selectedTienda = (List<string>)HttpContext.Current.Session["selectedTienda"];
-            if (selectedTienda != null && selectedTienda.Count > 0)
-            {
-                filters += " AND A.tienda IN ( ";
-                foreach (string tienda in selectedTienda)
-                {
-                    filters += "'" + tienda.Trim() + "', ";
-                }
-                filters += ") ";
-                filters = filters.Replace(", )", ")");
-            }
+        //    List<string> selectedTienda = (List<string>)HttpContext.Current.Session["selectedTienda"];
+        //    if (selectedTienda != null && selectedTienda.Count > 0)
+        //    {
+        //        filters += " AND A.tienda IN ( ";
+        //        foreach (string tienda in selectedTienda)
+        //        {
+        //            filters += "'" + tienda.Trim() + "', ";
+        //        }
+        //        filters += ") ";
+        //        filters = filters.Replace(", )", ")");
+        //    }
 
-            filters += " ";
-            return filters;
+        //    filters += " ";
+        //    return filters;
 
-        }
+        //}
 
         private List<MetricItem_Mapco> Get_Metrics_Data()
         {
@@ -787,8 +735,8 @@ namespace MapcoSolutionTrackings.Controllers
                     }
                     catch (Exception ex)
                     {
-                        ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "GetDataError",
-                            "alert('" + ex.Message.Replace("'", "\"") + "');", true);
+                        //ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "GetDataError",
+                        //    "alert('" + ex.Message.Replace("'", "\"") + "');", true);
                     }
                     finally
                     {
