@@ -1,0 +1,389 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="IMSOL_globalModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="C__EFMigrationsHistory">
+    <Key>
+      <PropertyRef Name="MigrationId" />
+    </Key>
+    <Property Name="MigrationId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="dtproperty">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="property" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="objectid" Type="Int32" />
+    <Property Name="property" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="value" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="uvalue" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="lvalue" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="version" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblAutoPrinterLOG">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IDSolicitud" Type="Int32" Nullable="false" />
+    <Property Name="stClient" Type="String" MaxLength="2" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="inCreditType" Type="Int32" Nullable="false" />
+    <Property Name="inImageAmount" Type="Int32" Nullable="false" />
+    <Property Name="dtLog" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="inError" Type="Int32" Nullable="false" />
+    <Property Name="stErrorMsg" Type="String" MaxLength="200" FixedLength="true" Unicode="true" />
+  </EntityType>
+  <EntityType Name="tblemployee">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Fname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Lname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="gender" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="tblUsuario">
+    <Key>
+      <PropertyRef Name="sUsuario" />
+      <PropertyRef Name="client" />
+    </Key>
+    <Property Name="sUsuario" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="sPass" Type="String" MaxLength="30" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="iNivel" Type="Int32" />
+    <Property Name="bAdmin" Type="Int32" />
+    <Property Name="Estatus" Type="Int32" />
+    <Property Name="client" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityContainer Name="IMSOL_globalEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="C__EFMigrationsHistory" EntityType="Self.C__EFMigrationsHistory" />
+    <EntitySet Name="dtproperties" EntityType="Self.dtproperty" />
+    <EntitySet Name="tblAutoPrinterLOGs" EntityType="Self.tblAutoPrinterLOG" />
+    <EntitySet Name="tblemployees" EntityType="Self.tblemployee" />
+    <EntitySet Name="tblUsuarios" EntityType="Self.tblUsuario" />
+    <FunctionImport Name="Buscar_Transacciones" ReturnType="Collection(IMSOL_globalModel.Buscar_Transacciones_Result)">
+      <Parameter Name="numero" Mode="In" Type="String" />
+      <Parameter Name="cliente" Mode="In" Type="String" />
+      <Parameter Name="busqueda" Mode="In" Type="String" />
+      <Parameter Name="fecha1" Mode="In" Type="String" />
+      <Parameter Name="fecha2" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="dt_addtosourcecontrol">
+      <Parameter Name="vchSourceSafeINI" Mode="In" Type="String" />
+      <Parameter Name="vchProjectName" Mode="In" Type="String" />
+      <Parameter Name="vchComment" Mode="In" Type="String" />
+      <Parameter Name="vchLoginName" Mode="In" Type="String" />
+      <Parameter Name="vchPassword" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="dt_addtosourcecontrol_u">
+      <Parameter Name="vchSourceSafeINI" Mode="In" Type="String" />
+      <Parameter Name="vchProjectName" Mode="In" Type="String" />
+      <Parameter Name="vchComment" Mode="In" Type="String" />
+      <Parameter Name="vchLoginName" Mode="In" Type="String" />
+      <Parameter Name="vchPassword" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="dt_adduserobject" />
+    <FunctionImport Name="dt_adduserobject_vcs">
+      <Parameter Name="vchProperty" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="dt_checkinobject">
+      <Parameter Name="chObjectType" Mode="In" Type="String" />
+      <Parameter Name="vchObjectName" Mode="In" Type="String" />
+      <Parameter Name="vchComment" Mode="In" Type="String" />
+      <Parameter Name="vchLoginName" Mode="In" Type="String" />
+      <Parameter Name="vchPassword" Mode="In" Type="String" />
+      <Parameter Name="iVCSFlags" Mode="In" Type="Int32" />
+      <Parameter Name="iActionFlag" Mode="In" Type="Int32" />
+      <Parameter Name="txStream1" Mode="In" Type="String" />
+      <Parameter Name="txStream2" Mode="In" Type="String" />
+      <Parameter Name="txStream3" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="dt_checkinobject_u">
+      <Parameter Name="chObjectType" Mode="In" Type="String" />
+      <Parameter Name="vchObjectName" Mode="In" Type="String" />
+      <Parameter Name="vchComment" Mode="In" Type="String" />
+      <Parameter Name="vchLoginName" Mode="In" Type="String" />
+      <Parameter Name="vchPassword" Mode="In" Type="String" />
+      <Parameter Name="iVCSFlags" Mode="In" Type="Int32" />
+      <Parameter Name="iActionFlag" Mode="In" Type="Int32" />
+      <Parameter Name="txStream1" Mode="In" Type="String" />
+      <Parameter Name="txStream2" Mode="In" Type="String" />
+      <Parameter Name="txStream3" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="dt_checkoutobject">
+      <Parameter Name="chObjectType" Mode="In" Type="String" />
+      <Parameter Name="vchObjectName" Mode="In" Type="String" />
+      <Parameter Name="vchComment" Mode="In" Type="String" />
+      <Parameter Name="vchLoginName" Mode="In" Type="String" />
+      <Parameter Name="vchPassword" Mode="In" Type="String" />
+      <Parameter Name="iVCSFlags" Mode="In" Type="Int32" />
+      <Parameter Name="iActionFlag" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="dt_checkoutobject_u">
+      <Parameter Name="chObjectType" Mode="In" Type="String" />
+      <Parameter Name="vchObjectName" Mode="In" Type="String" />
+      <Parameter Name="vchComment" Mode="In" Type="String" />
+      <Parameter Name="vchLoginName" Mode="In" Type="String" />
+      <Parameter Name="vchPassword" Mode="In" Type="String" />
+      <Parameter Name="iVCSFlags" Mode="In" Type="Int32" />
+      <Parameter Name="iActionFlag" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="dt_displayoaerror">
+      <Parameter Name="iObject" Mode="In" Type="Int32" />
+      <Parameter Name="iresult" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="dt_displayoaerror_u">
+      <Parameter Name="iObject" Mode="In" Type="Int32" />
+      <Parameter Name="iresult" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="dt_droppropertiesbyid">
+      <Parameter Name="id" Mode="In" Type="Int32" />
+      <Parameter Name="property" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="dt_dropuserobjectbyid">
+      <Parameter Name="id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="dt_generateansiname">
+      <Parameter Name="name" Mode="InOut" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="dt_getobjwithprop" ReturnType="Collection(Int32)">
+      <Parameter Name="property" Mode="In" Type="String" />
+      <Parameter Name="value" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="dt_getobjwithprop_u" ReturnType="Collection(Int32)">
+      <Parameter Name="property" Mode="In" Type="String" />
+      <Parameter Name="uvalue" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="dt_getpropertiesbyid" ReturnType="Collection(IMSOL_globalModel.dt_getpropertiesbyid_Result)">
+      <Parameter Name="id" Mode="In" Type="Int32" />
+      <Parameter Name="property" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="dt_getpropertiesbyid_u" ReturnType="Collection(IMSOL_globalModel.dt_getpropertiesbyid_u_Result)">
+      <Parameter Name="id" Mode="In" Type="Int32" />
+      <Parameter Name="property" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="dt_getpropertiesbyid_vcs">
+      <Parameter Name="id" Mode="In" Type="Int32" />
+      <Parameter Name="property" Mode="In" Type="String" />
+      <Parameter Name="value" Mode="InOut" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="dt_getpropertiesbyid_vcs_u">
+      <Parameter Name="id" Mode="In" Type="Int32" />
+      <Parameter Name="property" Mode="In" Type="String" />
+      <Parameter Name="value" Mode="InOut" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="dt_isundersourcecontrol">
+      <Parameter Name="vchLoginName" Mode="In" Type="String" />
+      <Parameter Name="vchPassword" Mode="In" Type="String" />
+      <Parameter Name="iWhoToo" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="dt_isundersourcecontrol_u">
+      <Parameter Name="vchLoginName" Mode="In" Type="String" />
+      <Parameter Name="vchPassword" Mode="In" Type="String" />
+      <Parameter Name="iWhoToo" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="dt_removefromsourcecontrol" />
+    <FunctionImport Name="dt_setpropertybyid">
+      <Parameter Name="id" Mode="In" Type="Int32" />
+      <Parameter Name="property" Mode="In" Type="String" />
+      <Parameter Name="value" Mode="In" Type="String" />
+      <Parameter Name="lvalue" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="dt_setpropertybyid_u">
+      <Parameter Name="id" Mode="In" Type="Int32" />
+      <Parameter Name="property" Mode="In" Type="String" />
+      <Parameter Name="uvalue" Mode="In" Type="String" />
+      <Parameter Name="lvalue" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="dt_validateloginparams">
+      <Parameter Name="vchLoginName" Mode="In" Type="String" />
+      <Parameter Name="vchPassword" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="dt_validateloginparams_u">
+      <Parameter Name="vchLoginName" Mode="In" Type="String" />
+      <Parameter Name="vchPassword" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="dt_vcsenabled" />
+    <FunctionImport Name="dt_verstamp006" ReturnType="Collection(Int32)" />
+    <FunctionImport Name="dt_whocheckedout">
+      <Parameter Name="chObjectType" Mode="In" Type="String" />
+      <Parameter Name="vchObjectName" Mode="In" Type="String" />
+      <Parameter Name="vchLoginName" Mode="In" Type="String" />
+      <Parameter Name="vchPassword" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="dt_whocheckedout_u">
+      <Parameter Name="chObjectType" Mode="In" Type="String" />
+      <Parameter Name="vchObjectName" Mode="In" Type="String" />
+      <Parameter Name="vchLoginName" Mode="In" Type="String" />
+      <Parameter Name="vchPassword" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="IMspr_CriptPass">
+      <Parameter Name="sPass" Mode="In" Type="String" />
+      <Parameter Name="sResult" Mode="InOut" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="IMspr_GetAutentication" ReturnType="Collection(IMSOL_globalModel.IMspr_GetAutentication_Result)">
+      <Parameter Name="sUsuario" Mode="In" Type="String" />
+      <Parameter Name="sPass" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="IMspr_GetCrypData">
+      <Parameter Name="sData" Mode="In" Type="String" />
+      <Parameter Name="sCryptData" Mode="InOut" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="imspr_SetLogInfoApp">
+      <Parameter Name="iAccion" Mode="In" Type="Int32" />
+      <Parameter Name="IDSolicitud" Mode="In" Type="Int32" />
+      <Parameter Name="stClient" Mode="In" Type="String" />
+      <Parameter Name="inCreditType" Mode="In" Type="Int32" />
+      <Parameter Name="inImageAmount" Mode="In" Type="Int32" />
+      <Parameter Name="inError" Mode="In" Type="Int32" />
+      <Parameter Name="stErrorMsg" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="Validar_Usuario" ReturnType="Collection(IMSOL_globalModel.Validar_Usuario_Result)">
+      <Parameter Name="sUsuario" Mode="In" Type="String" />
+      <Parameter Name="sPass" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="Validar_Usuario_Cencel" ReturnType="Collection(IMSOL_globalModel.Validar_Usuario_Cencel_Result)">
+      <Parameter Name="sUsuario" Mode="In" Type="String" />
+      <Parameter Name="sPass" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="Validar_Usuario_Devlyn" ReturnType="Collection(IMSOL_globalModel.Validar_Usuario_Devlyn_Result)">
+      <Parameter Name="sUsuario" Mode="In" Type="String" />
+      <Parameter Name="sPass" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="Validar_Usuario_Dportenis" ReturnType="Collection(IMSOL_globalModel.Validar_Usuario_Dportenis_Result)">
+      <Parameter Name="sUsuario" Mode="In" Type="String" />
+      <Parameter Name="sPass" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="Validar_Usuario_KimageMobile" ReturnType="Collection(IMSOL_globalModel.Validar_Usuario_KimageMobile_Result)">
+      <Parameter Name="sUsuario" Mode="In" Type="String" />
+      <Parameter Name="sPass" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="Validar_Usuario_Mapco" ReturnType="Collection(IMSOL_globalModel.Validar_Usuario_Mapco_Result)">
+      <Parameter Name="sUsuario" Mode="In" Type="String" />
+      <Parameter Name="sPass" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="Validar_Usuario_Pakar" ReturnType="Collection(IMSOL_globalModel.Validar_Usuario_Pakar_Result)">
+      <Parameter Name="sUsuario" Mode="In" Type="String" />
+      <Parameter Name="sPass" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="Validar_Usuario_rfp" ReturnType="Collection(IMSOL_globalModel.Validar_Usuario_rfp_Result)">
+      <Parameter Name="sUsuario" Mode="In" Type="String" />
+      <Parameter Name="sPass" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="Validar_Usuario_Santandreu" ReturnType="Collection(IMSOL_globalModel.Validar_Usuario_Santandreu_Result)">
+      <Parameter Name="sUsuario" Mode="In" Type="String" />
+      <Parameter Name="sPass" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="Validar_Usuario_Usashoes" ReturnType="Collection(IMSOL_globalModel.Validar_Usuario_Usashoes_Result)">
+      <Parameter Name="sUsuario" Mode="In" Type="String" />
+      <Parameter Name="sPass" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="Validar_Usuario_VickyForm" ReturnType="Collection(IMSOL_globalModel.Validar_Usuario_VickyForm_Result)">
+      <Parameter Name="sUsuario" Mode="In" Type="String" />
+      <Parameter Name="sPass" Mode="In" Type="String" />
+    </FunctionImport>
+  </EntityContainer>
+  <ComplexType Name="Buscar_Transacciones_Result">
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="Int32" Name="Reg" Nullable="false" />
+    <Property Type="String" Name="Data" Nullable="false" MaxLength="300" />
+    <Property Type="DateTime" Name="Fecha" Nullable="false" Precision="23" />
+  </ComplexType>
+  <ComplexType Name="dt_getpropertiesbyid_Result">
+    <Property Type="String" Name="property" Nullable="false" MaxLength="64" />
+    <Property Type="Int32" Name="version" Nullable="false" />
+    <Property Type="String" Name="value" Nullable="true" MaxLength="255" />
+    <Property Type="Binary" Name="lvalue" Nullable="true" MaxLength="Max" />
+  </ComplexType>
+  <ComplexType Name="dt_getpropertiesbyid_u_Result">
+    <Property Type="String" Name="property" Nullable="false" MaxLength="64" />
+    <Property Type="Int32" Name="version" Nullable="false" />
+    <Property Type="String" Name="uvalue" Nullable="true" MaxLength="255" />
+    <Property Type="Binary" Name="lvalue" Nullable="true" MaxLength="Max" />
+  </ComplexType>
+  <ComplexType Name="IMspr_GetAutentication_Result">
+    <Property Type="String" Name="AUT" Nullable="true" MaxLength="2" />
+    <Property Type="Int32" Name="iNivel" Nullable="true" />
+    <Property Type="Int32" Name="bAdmin" Nullable="true" />
+    <Property Type="Int32" Name="Estatus" Nullable="true" />
+    <Property Type="String" Name="Client" Nullable="false" MaxLength="10" />
+  </ComplexType>
+  <ComplexType Name="Validar_Usuario_Result">
+    <Property Type="String" Name="AUT" Nullable="true" MaxLength="2" />
+    <Property Type="Int32" Name="iNivel" Nullable="true" />
+    <Property Type="Int32" Name="bAdmin" Nullable="true" />
+    <Property Type="Int32" Name="Estatus" Nullable="true" />
+    <Property Type="String" Name="Client" Nullable="false" MaxLength="10" />
+  </ComplexType>
+  <ComplexType Name="Validar_Usuario_Cencel_Result">
+    <Property Type="String" Name="AUT" Nullable="true" MaxLength="2" />
+    <Property Type="Int32" Name="iNivel" Nullable="true" />
+    <Property Type="Int32" Name="bAdmin" Nullable="true" />
+    <Property Type="Int32" Name="Estatus" Nullable="true" />
+    <Property Type="String" Name="Client" Nullable="false" MaxLength="10" />
+  </ComplexType>
+  <ComplexType Name="Validar_Usuario_Devlyn_Result">
+    <Property Type="String" Name="AUT" Nullable="true" MaxLength="2" />
+    <Property Type="Int32" Name="iNivel" Nullable="true" />
+    <Property Type="Int32" Name="bAdmin" Nullable="true" />
+    <Property Type="Int32" Name="Estatus" Nullable="true" />
+    <Property Type="String" Name="Client" Nullable="false" MaxLength="10" />
+  </ComplexType>
+  <ComplexType Name="Validar_Usuario_Dportenis_Result">
+    <Property Type="String" Name="AUT" Nullable="true" MaxLength="2" />
+    <Property Type="Int32" Name="iNivel" Nullable="true" />
+    <Property Type="Int32" Name="bAdmin" Nullable="true" />
+    <Property Type="Int32" Name="Estatus" Nullable="true" />
+    <Property Type="String" Name="Client" Nullable="false" MaxLength="10" />
+  </ComplexType>
+  <ComplexType Name="Validar_Usuario_KimageMobile_Result">
+    <Property Type="String" Name="sUsuario" Nullable="false" MaxLength="10" />
+    <Property Type="String" Name="sPass" Nullable="false" MaxLength="30" />
+    <Property Type="Int32" Name="iNivel" Nullable="true" />
+    <Property Type="Int32" Name="bAdmin" Nullable="true" />
+    <Property Type="Int32" Name="Estatus" Nullable="true" />
+    <Property Type="String" Name="client" Nullable="false" MaxLength="10" />
+  </ComplexType>
+  <ComplexType Name="Validar_Usuario_Mapco_Result">
+    <Property Type="String" Name="AUT" Nullable="true" MaxLength="2" />
+    <Property Type="Int32" Name="iNivel" Nullable="true" />
+    <Property Type="Int32" Name="bAdmin" Nullable="true" />
+    <Property Type="Int32" Name="Estatus" Nullable="true" />
+    <Property Type="String" Name="Client" Nullable="false" MaxLength="10" />
+  </ComplexType>
+  <ComplexType Name="Validar_Usuario_Pakar_Result">
+    <Property Type="String" Name="AUT" Nullable="true" MaxLength="2" />
+    <Property Type="Int32" Name="iNivel" Nullable="true" />
+    <Property Type="Int32" Name="bAdmin" Nullable="true" />
+    <Property Type="Int32" Name="Estatus" Nullable="true" />
+    <Property Type="String" Name="Client" Nullable="false" MaxLength="10" />
+  </ComplexType>
+  <ComplexType Name="Validar_Usuario_rfp_Result">
+    <Property Type="String" Name="AUT" Nullable="true" MaxLength="2" />
+    <Property Type="Int32" Name="iNivel" Nullable="true" />
+    <Property Type="Int32" Name="bAdmin" Nullable="true" />
+    <Property Type="Int32" Name="Estatus" Nullable="true" />
+    <Property Type="String" Name="Client" Nullable="false" MaxLength="10" />
+  </ComplexType>
+  <ComplexType Name="Validar_Usuario_Santandreu_Result">
+    <Property Type="String" Name="AUT" Nullable="true" MaxLength="2" />
+    <Property Type="Int32" Name="iNivel" Nullable="true" />
+    <Property Type="Int32" Name="bAdmin" Nullable="true" />
+    <Property Type="Int32" Name="Estatus" Nullable="true" />
+    <Property Type="String" Name="Client" Nullable="false" MaxLength="10" />
+  </ComplexType>
+  <ComplexType Name="Validar_Usuario_Usashoes_Result">
+    <Property Type="String" Name="AUT" Nullable="true" MaxLength="2" />
+    <Property Type="Int32" Name="iNivel" Nullable="true" />
+    <Property Type="Int32" Name="bAdmin" Nullable="true" />
+    <Property Type="Int32" Name="Estatus" Nullable="true" />
+    <Property Type="String" Name="Client" Nullable="false" MaxLength="10" />
+  </ComplexType>
+  <ComplexType Name="Validar_Usuario_VickyForm_Result">
+    <Property Type="String" Name="AUT" Nullable="true" MaxLength="2" />
+    <Property Type="Int32" Name="iNivel" Nullable="true" />
+    <Property Type="Int32" Name="bAdmin" Nullable="true" />
+    <Property Type="Int32" Name="Estatus" Nullable="true" />
+    <Property Type="String" Name="Client" Nullable="false" MaxLength="10" />
+  </ComplexType>
+</Schema>

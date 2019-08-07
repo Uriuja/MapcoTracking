@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html>
+@*@using Microsoft.AspNetCore.Http;*@
+
+<html>
+<head>
+
+    @*@model ModelUserLogin*@
+    @{
+        ViewData["Title"] = "_LoginMapco";
+
+    }
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="~/wwwroot/css/main.css">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+
+
+    <html class="lt-ie9 lt-ie8 lt-ie7" lang="en">
+    <html class="lt-ie9 lt-ie8" lang="en">
+    <html class="lt-ie9" lang="en">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+</head>
+<body>
+    <div class="main">
+        @*@RenderBody()*@
+        <div class="container">
+            <center>
+                <div class="middle">
+                    <div id="login">
+                        <form method ="post"  action="Home/LoginLog" paction="javascript:void(0)";>
+                            <fieldset class="clearfix">
+                                <p><span class="fa fa-user"></span><input type="text" Placeholder="Usuario" required asp-for="Usuario" id="inputUsuario" name="Usuario"></p>
+                                <p><span class="fa fa-lock"></span><input type="password" Placeholder="Contraseña" required asp-for="Contraseña" id="inputContraseña" name="Contraseña"></p>
+                                <div>
+                                    <span style="width:25%; text-align:right;  display: inline-block;"><input type="submit" value="Acceso" OnClick="Validar_Usuario"></span>
+                                </div>
+                            </fieldset>
+                            <div class="clearfix"></div>
+                        </form>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="logo">
+                        <img src="~/wwwroot/images/imgMapco/logoMapco.png" alt="logo">
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </center>
+        </div>
+    </div>
+    @*@RenderSection("Scripts", required: false)
+    @RenderSection("scripts", required: false)*@
+</body>
+</html>

@@ -1,0 +1,257 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="IMSOL_globalModelStoreContainer" CdmEntityContainer="IMSOL_globalEntities">
+    <EntitySetMapping Name="C__EFMigrationsHistory">
+      <EntityTypeMapping TypeName="IMSOL_globalModel.C__EFMigrationsHistory">
+        <MappingFragment StoreEntitySet="__EFMigrationsHistory">
+          <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+          <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="dtproperties">
+      <EntityTypeMapping TypeName="IMSOL_globalModel.dtproperty">
+        <MappingFragment StoreEntitySet="dtproperties">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="objectid" ColumnName="objectid" />
+          <ScalarProperty Name="property" ColumnName="property" />
+          <ScalarProperty Name="value" ColumnName="value" />
+          <ScalarProperty Name="uvalue" ColumnName="uvalue" />
+          <ScalarProperty Name="lvalue" ColumnName="lvalue" />
+          <ScalarProperty Name="version" ColumnName="version" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblAutoPrinterLOGs">
+      <EntityTypeMapping TypeName="IMSOL_globalModel.tblAutoPrinterLOG">
+        <MappingFragment StoreEntitySet="tblAutoPrinterLOG">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="IDSolicitud" ColumnName="IDSolicitud" />
+          <ScalarProperty Name="stClient" ColumnName="stClient" />
+          <ScalarProperty Name="inCreditType" ColumnName="inCreditType" />
+          <ScalarProperty Name="inImageAmount" ColumnName="inImageAmount" />
+          <ScalarProperty Name="dtLog" ColumnName="dtLog" />
+          <ScalarProperty Name="inError" ColumnName="inError" />
+          <ScalarProperty Name="stErrorMsg" ColumnName="stErrorMsg" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblemployees">
+      <EntityTypeMapping TypeName="IMSOL_globalModel.tblemployee">
+        <MappingFragment StoreEntitySet="tblemployee">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Fname" ColumnName="Fname" />
+          <ScalarProperty Name="Lname" ColumnName="Lname" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="gender" ColumnName="gender" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblUsuarios">
+      <EntityTypeMapping TypeName="IMSOL_globalModel.tblUsuario">
+        <MappingFragment StoreEntitySet="tblUsuarios">
+          <ScalarProperty Name="sUsuario" ColumnName="sUsuario" />
+          <ScalarProperty Name="sPass" ColumnName="sPass" />
+          <ScalarProperty Name="iNivel" ColumnName="iNivel" />
+          <ScalarProperty Name="bAdmin" ColumnName="bAdmin" />
+          <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+          <ScalarProperty Name="client" ColumnName="client" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="Buscar_Transacciones" FunctionName="IMSOL_globalModel.Store.Buscar_Transacciones">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="IMSOL_globalModel.Buscar_Transacciones_Result">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Reg" ColumnName="Reg" />
+          <ScalarProperty Name="Data" ColumnName="Data" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="dt_addtosourcecontrol" FunctionName="IMSOL_globalModel.Store.dt_addtosourcecontrol" />
+    <FunctionImportMapping FunctionImportName="dt_addtosourcecontrol_u" FunctionName="IMSOL_globalModel.Store.dt_addtosourcecontrol_u" />
+    <FunctionImportMapping FunctionImportName="dt_adduserobject" FunctionName="IMSOL_globalModel.Store.dt_adduserobject" />
+    <FunctionImportMapping FunctionImportName="dt_adduserobject_vcs" FunctionName="IMSOL_globalModel.Store.dt_adduserobject_vcs" />
+    <FunctionImportMapping FunctionImportName="dt_checkinobject" FunctionName="IMSOL_globalModel.Store.dt_checkinobject" />
+    <FunctionImportMapping FunctionImportName="dt_checkinobject_u" FunctionName="IMSOL_globalModel.Store.dt_checkinobject_u" />
+    <FunctionImportMapping FunctionImportName="dt_checkoutobject" FunctionName="IMSOL_globalModel.Store.dt_checkoutobject" />
+    <FunctionImportMapping FunctionImportName="dt_checkoutobject_u" FunctionName="IMSOL_globalModel.Store.dt_checkoutobject_u" />
+    <FunctionImportMapping FunctionImportName="dt_displayoaerror" FunctionName="IMSOL_globalModel.Store.dt_displayoaerror" />
+    <FunctionImportMapping FunctionImportName="dt_displayoaerror_u" FunctionName="IMSOL_globalModel.Store.dt_displayoaerror_u" />
+    <FunctionImportMapping FunctionImportName="dt_droppropertiesbyid" FunctionName="IMSOL_globalModel.Store.dt_droppropertiesbyid" />
+    <FunctionImportMapping FunctionImportName="dt_dropuserobjectbyid" FunctionName="IMSOL_globalModel.Store.dt_dropuserobjectbyid" />
+    <FunctionImportMapping FunctionImportName="dt_generateansiname" FunctionName="IMSOL_globalModel.Store.dt_generateansiname" />
+    <FunctionImportMapping FunctionImportName="dt_getobjwithprop" FunctionName="IMSOL_globalModel.Store.dt_getobjwithprop" />
+    <FunctionImportMapping FunctionImportName="dt_getobjwithprop_u" FunctionName="IMSOL_globalModel.Store.dt_getobjwithprop_u" />
+    <FunctionImportMapping FunctionImportName="dt_getpropertiesbyid" FunctionName="IMSOL_globalModel.Store.dt_getpropertiesbyid">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="IMSOL_globalModel.dt_getpropertiesbyid_Result">
+          <ScalarProperty Name="property" ColumnName="property" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="value" ColumnName="value" />
+          <ScalarProperty Name="lvalue" ColumnName="lvalue" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="dt_getpropertiesbyid_u" FunctionName="IMSOL_globalModel.Store.dt_getpropertiesbyid_u">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="IMSOL_globalModel.dt_getpropertiesbyid_u_Result">
+          <ScalarProperty Name="property" ColumnName="property" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="uvalue" ColumnName="uvalue" />
+          <ScalarProperty Name="lvalue" ColumnName="lvalue" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="dt_getpropertiesbyid_vcs" FunctionName="IMSOL_globalModel.Store.dt_getpropertiesbyid_vcs" />
+    <FunctionImportMapping FunctionImportName="dt_getpropertiesbyid_vcs_u" FunctionName="IMSOL_globalModel.Store.dt_getpropertiesbyid_vcs_u" />
+    <FunctionImportMapping FunctionImportName="dt_isundersourcecontrol" FunctionName="IMSOL_globalModel.Store.dt_isundersourcecontrol" />
+    <FunctionImportMapping FunctionImportName="dt_isundersourcecontrol_u" FunctionName="IMSOL_globalModel.Store.dt_isundersourcecontrol_u" />
+    <FunctionImportMapping FunctionImportName="dt_removefromsourcecontrol" FunctionName="IMSOL_globalModel.Store.dt_removefromsourcecontrol" />
+    <FunctionImportMapping FunctionImportName="dt_setpropertybyid" FunctionName="IMSOL_globalModel.Store.dt_setpropertybyid" />
+    <FunctionImportMapping FunctionImportName="dt_setpropertybyid_u" FunctionName="IMSOL_globalModel.Store.dt_setpropertybyid_u" />
+    <FunctionImportMapping FunctionImportName="dt_validateloginparams" FunctionName="IMSOL_globalModel.Store.dt_validateloginparams" />
+    <FunctionImportMapping FunctionImportName="dt_validateloginparams_u" FunctionName="IMSOL_globalModel.Store.dt_validateloginparams_u" />
+    <FunctionImportMapping FunctionImportName="dt_vcsenabled" FunctionName="IMSOL_globalModel.Store.dt_vcsenabled" />
+    <FunctionImportMapping FunctionImportName="dt_verstamp006" FunctionName="IMSOL_globalModel.Store.dt_verstamp006" />
+    <FunctionImportMapping FunctionImportName="dt_whocheckedout" FunctionName="IMSOL_globalModel.Store.dt_whocheckedout" />
+    <FunctionImportMapping FunctionImportName="dt_whocheckedout_u" FunctionName="IMSOL_globalModel.Store.dt_whocheckedout_u" />
+    <FunctionImportMapping FunctionImportName="IMspr_CriptPass" FunctionName="IMSOL_globalModel.Store.IMspr_CriptPass" />
+    <FunctionImportMapping FunctionImportName="IMspr_GetAutentication" FunctionName="IMSOL_globalModel.Store.IMspr_GetAutentication">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="IMSOL_globalModel.IMspr_GetAutentication_Result">
+          <ScalarProperty Name="AUT" ColumnName="AUT" />
+          <ScalarProperty Name="iNivel" ColumnName="iNivel" />
+          <ScalarProperty Name="bAdmin" ColumnName="bAdmin" />
+          <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+          <ScalarProperty Name="Client" ColumnName="Client" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="IMspr_GetCrypData" FunctionName="IMSOL_globalModel.Store.IMspr_GetCrypData" />
+    <FunctionImportMapping FunctionImportName="imspr_SetLogInfoApp" FunctionName="IMSOL_globalModel.Store.imspr_SetLogInfoApp" />
+    <FunctionImportMapping FunctionImportName="Validar_Usuario" FunctionName="IMSOL_globalModel.Store.Validar_Usuario">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="IMSOL_globalModel.Validar_Usuario_Result">
+          <ScalarProperty Name="AUT" ColumnName="AUT" />
+          <ScalarProperty Name="iNivel" ColumnName="iNivel" />
+          <ScalarProperty Name="bAdmin" ColumnName="bAdmin" />
+          <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+          <ScalarProperty Name="Client" ColumnName="Client" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Validar_Usuario_Cencel" FunctionName="IMSOL_globalModel.Store.Validar_Usuario_Cencel">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="IMSOL_globalModel.Validar_Usuario_Cencel_Result">
+          <ScalarProperty Name="AUT" ColumnName="AUT" />
+          <ScalarProperty Name="iNivel" ColumnName="iNivel" />
+          <ScalarProperty Name="bAdmin" ColumnName="bAdmin" />
+          <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+          <ScalarProperty Name="Client" ColumnName="Client" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Validar_Usuario_Devlyn" FunctionName="IMSOL_globalModel.Store.Validar_Usuario_Devlyn">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="IMSOL_globalModel.Validar_Usuario_Devlyn_Result">
+          <ScalarProperty Name="AUT" ColumnName="AUT" />
+          <ScalarProperty Name="iNivel" ColumnName="iNivel" />
+          <ScalarProperty Name="bAdmin" ColumnName="bAdmin" />
+          <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+          <ScalarProperty Name="Client" ColumnName="Client" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Validar_Usuario_Dportenis" FunctionName="IMSOL_globalModel.Store.Validar_Usuario_Dportenis">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="IMSOL_globalModel.Validar_Usuario_Dportenis_Result">
+          <ScalarProperty Name="AUT" ColumnName="AUT" />
+          <ScalarProperty Name="iNivel" ColumnName="iNivel" />
+          <ScalarProperty Name="bAdmin" ColumnName="bAdmin" />
+          <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+          <ScalarProperty Name="Client" ColumnName="Client" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Validar_Usuario_KimageMobile" FunctionName="IMSOL_globalModel.Store.Validar_Usuario_KimageMobile">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="IMSOL_globalModel.Validar_Usuario_KimageMobile_Result">
+          <ScalarProperty Name="sUsuario" ColumnName="sUsuario" />
+          <ScalarProperty Name="sPass" ColumnName="sPass" />
+          <ScalarProperty Name="iNivel" ColumnName="iNivel" />
+          <ScalarProperty Name="bAdmin" ColumnName="bAdmin" />
+          <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+          <ScalarProperty Name="client" ColumnName="client" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Validar_Usuario_Mapco" FunctionName="IMSOL_globalModel.Store.Validar_Usuario_Mapco">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="IMSOL_globalModel.Validar_Usuario_Mapco_Result">
+          <ScalarProperty Name="AUT" ColumnName="AUT" />
+          <ScalarProperty Name="iNivel" ColumnName="iNivel" />
+          <ScalarProperty Name="bAdmin" ColumnName="bAdmin" />
+          <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+          <ScalarProperty Name="Client" ColumnName="Client" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Validar_Usuario_Pakar" FunctionName="IMSOL_globalModel.Store.Validar_Usuario_Pakar">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="IMSOL_globalModel.Validar_Usuario_Pakar_Result">
+          <ScalarProperty Name="AUT" ColumnName="AUT" />
+          <ScalarProperty Name="iNivel" ColumnName="iNivel" />
+          <ScalarProperty Name="bAdmin" ColumnName="bAdmin" />
+          <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+          <ScalarProperty Name="Client" ColumnName="Client" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Validar_Usuario_rfp" FunctionName="IMSOL_globalModel.Store.Validar_Usuario_rfp">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="IMSOL_globalModel.Validar_Usuario_rfp_Result">
+          <ScalarProperty Name="AUT" ColumnName="AUT" />
+          <ScalarProperty Name="iNivel" ColumnName="iNivel" />
+          <ScalarProperty Name="bAdmin" ColumnName="bAdmin" />
+          <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+          <ScalarProperty Name="Client" ColumnName="Client" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Validar_Usuario_Santandreu" FunctionName="IMSOL_globalModel.Store.Validar_Usuario_Santandreu">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="IMSOL_globalModel.Validar_Usuario_Santandreu_Result">
+          <ScalarProperty Name="AUT" ColumnName="AUT" />
+          <ScalarProperty Name="iNivel" ColumnName="iNivel" />
+          <ScalarProperty Name="bAdmin" ColumnName="bAdmin" />
+          <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+          <ScalarProperty Name="Client" ColumnName="Client" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Validar_Usuario_Usashoes" FunctionName="IMSOL_globalModel.Store.Validar_Usuario_Usashoes">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="IMSOL_globalModel.Validar_Usuario_Usashoes_Result">
+          <ScalarProperty Name="AUT" ColumnName="AUT" />
+          <ScalarProperty Name="iNivel" ColumnName="iNivel" />
+          <ScalarProperty Name="bAdmin" ColumnName="bAdmin" />
+          <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+          <ScalarProperty Name="Client" ColumnName="Client" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Validar_Usuario_VickyForm" FunctionName="IMSOL_globalModel.Store.Validar_Usuario_VickyForm">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="IMSOL_globalModel.Validar_Usuario_VickyForm_Result">
+          <ScalarProperty Name="AUT" ColumnName="AUT" />
+          <ScalarProperty Name="iNivel" ColumnName="iNivel" />
+          <ScalarProperty Name="bAdmin" ColumnName="bAdmin" />
+          <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+          <ScalarProperty Name="Client" ColumnName="Client" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+  </EntityContainerMapping>
+</Mapping>

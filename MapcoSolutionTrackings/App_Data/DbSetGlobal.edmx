@@ -1,0 +1,963 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="IMSOL_globalModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="__EFMigrationsHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+          </Key>
+          <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="dtproperties">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="property" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="objectid" Type="int" />
+          <Property Name="property" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="value" Type="varchar" MaxLength="255" />
+          <Property Name="uvalue" Type="nvarchar" MaxLength="255" />
+          <Property Name="lvalue" Type="image" />
+          <Property Name="version" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblAutoPrinterLOG">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDSolicitud" Type="int" Nullable="false" />
+          <Property Name="stClient" Type="nchar" MaxLength="2" Nullable="false" />
+          <Property Name="inCreditType" Type="int" Nullable="false" />
+          <Property Name="inImageAmount" Type="int" Nullable="false" />
+          <Property Name="dtLog" Type="datetime" Nullable="false" />
+          <Property Name="inError" Type="int" Nullable="false" />
+          <Property Name="stErrorMsg" Type="nchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="tblemployee">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Fname" Type="nvarchar(max)" />
+          <Property Name="Lname" Type="nvarchar(max)" />
+          <Property Name="email" Type="nvarchar(max)" />
+          <Property Name="gender" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="tblUsuarios">
+          <Key>
+            <PropertyRef Name="sUsuario" />
+            <PropertyRef Name="client" />
+          </Key>
+          <Property Name="sUsuario" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="sPass" Type="nchar" MaxLength="30" Nullable="false" />
+          <Property Name="iNivel" Type="int" />
+          <Property Name="bAdmin" Type="int" />
+          <Property Name="Estatus" Type="int" />
+          <Property Name="client" Type="nchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <Function Name="Buscar_Transacciones" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="numero" Type="varchar" Mode="In" />
+          <Parameter Name="cliente" Type="varchar" Mode="In" />
+          <Parameter Name="busqueda" Type="varchar" Mode="In" />
+          <Parameter Name="fecha1" Type="varchar" Mode="In" />
+          <Parameter Name="fecha2" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="dt_addtosourcecontrol" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="vchSourceSafeINI" Type="varchar" Mode="In" />
+          <Parameter Name="vchProjectName" Type="varchar" Mode="In" />
+          <Parameter Name="vchComment" Type="varchar" Mode="In" />
+          <Parameter Name="vchLoginName" Type="varchar" Mode="In" />
+          <Parameter Name="vchPassword" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="dt_addtosourcecontrol_u" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="vchSourceSafeINI" Type="nvarchar" Mode="In" />
+          <Parameter Name="vchProjectName" Type="nvarchar" Mode="In" />
+          <Parameter Name="vchComment" Type="nvarchar" Mode="In" />
+          <Parameter Name="vchLoginName" Type="nvarchar" Mode="In" />
+          <Parameter Name="vchPassword" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="dt_adduserobject" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="dt_adduserobject_vcs" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="vchProperty" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="dt_checkinobject" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="chObjectType" Type="char" Mode="In" />
+          <Parameter Name="vchObjectName" Type="varchar" Mode="In" />
+          <Parameter Name="vchComment" Type="varchar" Mode="In" />
+          <Parameter Name="vchLoginName" Type="varchar" Mode="In" />
+          <Parameter Name="vchPassword" Type="varchar" Mode="In" />
+          <Parameter Name="iVCSFlags" Type="int" Mode="In" />
+          <Parameter Name="iActionFlag" Type="int" Mode="In" />
+          <Parameter Name="txStream1" Type="text" Mode="In" />
+          <Parameter Name="txStream2" Type="text" Mode="In" />
+          <Parameter Name="txStream3" Type="text" Mode="In" />
+        </Function>
+        <Function Name="dt_checkinobject_u" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="chObjectType" Type="char" Mode="In" />
+          <Parameter Name="vchObjectName" Type="nvarchar" Mode="In" />
+          <Parameter Name="vchComment" Type="nvarchar" Mode="In" />
+          <Parameter Name="vchLoginName" Type="nvarchar" Mode="In" />
+          <Parameter Name="vchPassword" Type="nvarchar" Mode="In" />
+          <Parameter Name="iVCSFlags" Type="int" Mode="In" />
+          <Parameter Name="iActionFlag" Type="int" Mode="In" />
+          <Parameter Name="txStream1" Type="text" Mode="In" />
+          <Parameter Name="txStream2" Type="text" Mode="In" />
+          <Parameter Name="txStream3" Type="text" Mode="In" />
+        </Function>
+        <Function Name="dt_checkoutobject" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="chObjectType" Type="char" Mode="In" />
+          <Parameter Name="vchObjectName" Type="varchar" Mode="In" />
+          <Parameter Name="vchComment" Type="varchar" Mode="In" />
+          <Parameter Name="vchLoginName" Type="varchar" Mode="In" />
+          <Parameter Name="vchPassword" Type="varchar" Mode="In" />
+          <Parameter Name="iVCSFlags" Type="int" Mode="In" />
+          <Parameter Name="iActionFlag" Type="int" Mode="In" />
+        </Function>
+        <Function Name="dt_checkoutobject_u" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="chObjectType" Type="char" Mode="In" />
+          <Parameter Name="vchObjectName" Type="nvarchar" Mode="In" />
+          <Parameter Name="vchComment" Type="nvarchar" Mode="In" />
+          <Parameter Name="vchLoginName" Type="nvarchar" Mode="In" />
+          <Parameter Name="vchPassword" Type="nvarchar" Mode="In" />
+          <Parameter Name="iVCSFlags" Type="int" Mode="In" />
+          <Parameter Name="iActionFlag" Type="int" Mode="In" />
+        </Function>
+        <Function Name="dt_displayoaerror" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="iObject" Type="int" Mode="In" />
+          <Parameter Name="iresult" Type="int" Mode="In" />
+        </Function>
+        <Function Name="dt_displayoaerror_u" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="iObject" Type="int" Mode="In" />
+          <Parameter Name="iresult" Type="int" Mode="In" />
+        </Function>
+        <Function Name="dt_droppropertiesbyid" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+          <Parameter Name="property" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="dt_dropuserobjectbyid" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="dt_generateansiname" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="name" Type="varchar" Mode="InOut" />
+        </Function>
+        <Function Name="dt_getobjwithprop" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="property" Type="varchar" Mode="In" />
+          <Parameter Name="value" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="dt_getobjwithprop_u" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="property" Type="varchar" Mode="In" />
+          <Parameter Name="uvalue" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="dt_getpropertiesbyid" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+          <Parameter Name="property" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="dt_getpropertiesbyid_u" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+          <Parameter Name="property" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="dt_getpropertiesbyid_vcs" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+          <Parameter Name="property" Type="varchar" Mode="In" />
+          <Parameter Name="value" Type="varchar" Mode="InOut" />
+        </Function>
+        <Function Name="dt_getpropertiesbyid_vcs_u" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+          <Parameter Name="property" Type="varchar" Mode="In" />
+          <Parameter Name="value" Type="nvarchar" Mode="InOut" />
+        </Function>
+        <Function Name="dt_isundersourcecontrol" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="vchLoginName" Type="varchar" Mode="In" />
+          <Parameter Name="vchPassword" Type="varchar" Mode="In" />
+          <Parameter Name="iWhoToo" Type="int" Mode="In" />
+        </Function>
+        <Function Name="dt_isundersourcecontrol_u" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="vchLoginName" Type="nvarchar" Mode="In" />
+          <Parameter Name="vchPassword" Type="nvarchar" Mode="In" />
+          <Parameter Name="iWhoToo" Type="int" Mode="In" />
+        </Function>
+        <Function Name="dt_removefromsourcecontrol" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="dt_setpropertybyid" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+          <Parameter Name="property" Type="varchar" Mode="In" />
+          <Parameter Name="value" Type="varchar" Mode="In" />
+          <Parameter Name="lvalue" Type="image" Mode="In" />
+        </Function>
+        <Function Name="dt_setpropertybyid_u" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+          <Parameter Name="property" Type="varchar" Mode="In" />
+          <Parameter Name="uvalue" Type="nvarchar" Mode="In" />
+          <Parameter Name="lvalue" Type="image" Mode="In" />
+        </Function>
+        <Function Name="dt_validateloginparams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="vchLoginName" Type="varchar" Mode="In" />
+          <Parameter Name="vchPassword" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="dt_validateloginparams_u" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="vchLoginName" Type="nvarchar" Mode="In" />
+          <Parameter Name="vchPassword" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="dt_vcsenabled" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="dt_verstamp006" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="dt_whocheckedout" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="chObjectType" Type="char" Mode="In" />
+          <Parameter Name="vchObjectName" Type="varchar" Mode="In" />
+          <Parameter Name="vchLoginName" Type="varchar" Mode="In" />
+          <Parameter Name="vchPassword" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="dt_whocheckedout_u" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="chObjectType" Type="char" Mode="In" />
+          <Parameter Name="vchObjectName" Type="nvarchar" Mode="In" />
+          <Parameter Name="vchLoginName" Type="nvarchar" Mode="In" />
+          <Parameter Name="vchPassword" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="IMspr_CriptPass" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="sPass" Type="varchar" Mode="In" />
+          <Parameter Name="sResult" Type="varchar" Mode="InOut" />
+        </Function>
+        <Function Name="IMspr_GetAutentication" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="sUsuario" Type="nvarchar" Mode="In" />
+          <Parameter Name="sPass" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="IMspr_GetCrypData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="sData" Type="nvarchar" Mode="In" />
+          <Parameter Name="sCryptData" Type="nvarchar" Mode="InOut" />
+        </Function>
+        <Function Name="imspr_SetLogInfoApp" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="iAccion" Type="int" Mode="In" />
+          <Parameter Name="IDSolicitud" Type="int" Mode="In" />
+          <Parameter Name="stClient" Type="nvarchar" Mode="In" />
+          <Parameter Name="inCreditType" Type="int" Mode="In" />
+          <Parameter Name="inImageAmount" Type="int" Mode="In" />
+          <Parameter Name="inError" Type="int" Mode="In" />
+          <Parameter Name="stErrorMsg" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="Validar_Usuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="sUsuario" Type="nvarchar" Mode="In" />
+          <Parameter Name="sPass" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="Validar_Usuario_Cencel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="sUsuario" Type="nvarchar" Mode="In" />
+          <Parameter Name="sPass" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="Validar_Usuario_Devlyn" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="sUsuario" Type="nvarchar" Mode="In" />
+          <Parameter Name="sPass" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="Validar_Usuario_Dportenis" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="sUsuario" Type="nvarchar" Mode="In" />
+          <Parameter Name="sPass" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="Validar_Usuario_KimageMobile" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="sUsuario" Type="nvarchar" Mode="In" />
+          <Parameter Name="sPass" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="Validar_Usuario_Mapco" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="sUsuario" Type="nvarchar" Mode="In" />
+          <Parameter Name="sPass" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="Validar_Usuario_Pakar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="sUsuario" Type="nvarchar" Mode="In" />
+          <Parameter Name="sPass" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="Validar_Usuario_rfp" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="sUsuario" Type="nvarchar" Mode="In" />
+          <Parameter Name="sPass" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="Validar_Usuario_Santandreu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="sUsuario" Type="nvarchar" Mode="In" />
+          <Parameter Name="sPass" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="Validar_Usuario_Usashoes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="sUsuario" Type="nvarchar" Mode="In" />
+          <Parameter Name="sPass" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="Validar_Usuario_VickyForm" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="sUsuario" Type="nvarchar" Mode="In" />
+          <Parameter Name="sPass" Type="nvarchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="IMSOL_globalModelStoreContainer">
+          <EntitySet Name="__EFMigrationsHistory" EntityType="Self.__EFMigrationsHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dtproperties" EntityType="Self.dtproperties" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblAutoPrinterLOG" EntityType="Self.tblAutoPrinterLOG" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblemployee" EntityType="Self.tblemployee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblUsuarios" EntityType="Self.tblUsuarios" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="IMSOL_globalModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="C__EFMigrationsHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+          </Key>
+          <Property Name="MigrationId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="dtproperty">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="property" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="objectid" Type="Int32" />
+          <Property Name="property" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="value" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="uvalue" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="lvalue" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="version" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblAutoPrinterLOG">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDSolicitud" Type="Int32" Nullable="false" />
+          <Property Name="stClient" Type="String" MaxLength="2" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="inCreditType" Type="Int32" Nullable="false" />
+          <Property Name="inImageAmount" Type="Int32" Nullable="false" />
+          <Property Name="dtLog" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="inError" Type="Int32" Nullable="false" />
+          <Property Name="stErrorMsg" Type="String" MaxLength="200" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="tblemployee">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Fname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Lname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="gender" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="tblUsuario">
+          <Key>
+            <PropertyRef Name="sUsuario" />
+            <PropertyRef Name="client" />
+          </Key>
+          <Property Name="sUsuario" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="sPass" Type="String" MaxLength="30" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="iNivel" Type="Int32" />
+          <Property Name="bAdmin" Type="Int32" />
+          <Property Name="Estatus" Type="Int32" />
+          <Property Name="client" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="IMSOL_globalEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="C__EFMigrationsHistory" EntityType="Self.C__EFMigrationsHistory" />
+          <EntitySet Name="dtproperties" EntityType="Self.dtproperty" />
+          <EntitySet Name="tblAutoPrinterLOGs" EntityType="Self.tblAutoPrinterLOG" />
+          <EntitySet Name="tblemployees" EntityType="Self.tblemployee" />
+          <EntitySet Name="tblUsuarios" EntityType="Self.tblUsuario" />
+          <FunctionImport Name="Buscar_Transacciones" ReturnType="Collection(IMSOL_globalModel.Buscar_Transacciones_Result)">
+            <Parameter Name="numero" Mode="In" Type="String" />
+            <Parameter Name="cliente" Mode="In" Type="String" />
+            <Parameter Name="busqueda" Mode="In" Type="String" />
+            <Parameter Name="fecha1" Mode="In" Type="String" />
+            <Parameter Name="fecha2" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="dt_addtosourcecontrol">
+            <Parameter Name="vchSourceSafeINI" Mode="In" Type="String" />
+            <Parameter Name="vchProjectName" Mode="In" Type="String" />
+            <Parameter Name="vchComment" Mode="In" Type="String" />
+            <Parameter Name="vchLoginName" Mode="In" Type="String" />
+            <Parameter Name="vchPassword" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="dt_addtosourcecontrol_u">
+            <Parameter Name="vchSourceSafeINI" Mode="In" Type="String" />
+            <Parameter Name="vchProjectName" Mode="In" Type="String" />
+            <Parameter Name="vchComment" Mode="In" Type="String" />
+            <Parameter Name="vchLoginName" Mode="In" Type="String" />
+            <Parameter Name="vchPassword" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="dt_adduserobject" />
+          <FunctionImport Name="dt_adduserobject_vcs">
+            <Parameter Name="vchProperty" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="dt_checkinobject">
+            <Parameter Name="chObjectType" Mode="In" Type="String" />
+            <Parameter Name="vchObjectName" Mode="In" Type="String" />
+            <Parameter Name="vchComment" Mode="In" Type="String" />
+            <Parameter Name="vchLoginName" Mode="In" Type="String" />
+            <Parameter Name="vchPassword" Mode="In" Type="String" />
+            <Parameter Name="iVCSFlags" Mode="In" Type="Int32" />
+            <Parameter Name="iActionFlag" Mode="In" Type="Int32" />
+            <Parameter Name="txStream1" Mode="In" Type="String" />
+            <Parameter Name="txStream2" Mode="In" Type="String" />
+            <Parameter Name="txStream3" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="dt_checkinobject_u">
+            <Parameter Name="chObjectType" Mode="In" Type="String" />
+            <Parameter Name="vchObjectName" Mode="In" Type="String" />
+            <Parameter Name="vchComment" Mode="In" Type="String" />
+            <Parameter Name="vchLoginName" Mode="In" Type="String" />
+            <Parameter Name="vchPassword" Mode="In" Type="String" />
+            <Parameter Name="iVCSFlags" Mode="In" Type="Int32" />
+            <Parameter Name="iActionFlag" Mode="In" Type="Int32" />
+            <Parameter Name="txStream1" Mode="In" Type="String" />
+            <Parameter Name="txStream2" Mode="In" Type="String" />
+            <Parameter Name="txStream3" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="dt_checkoutobject">
+            <Parameter Name="chObjectType" Mode="In" Type="String" />
+            <Parameter Name="vchObjectName" Mode="In" Type="String" />
+            <Parameter Name="vchComment" Mode="In" Type="String" />
+            <Parameter Name="vchLoginName" Mode="In" Type="String" />
+            <Parameter Name="vchPassword" Mode="In" Type="String" />
+            <Parameter Name="iVCSFlags" Mode="In" Type="Int32" />
+            <Parameter Name="iActionFlag" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="dt_checkoutobject_u">
+            <Parameter Name="chObjectType" Mode="In" Type="String" />
+            <Parameter Name="vchObjectName" Mode="In" Type="String" />
+            <Parameter Name="vchComment" Mode="In" Type="String" />
+            <Parameter Name="vchLoginName" Mode="In" Type="String" />
+            <Parameter Name="vchPassword" Mode="In" Type="String" />
+            <Parameter Name="iVCSFlags" Mode="In" Type="Int32" />
+            <Parameter Name="iActionFlag" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="dt_displayoaerror">
+            <Parameter Name="iObject" Mode="In" Type="Int32" />
+            <Parameter Name="iresult" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="dt_displayoaerror_u">
+            <Parameter Name="iObject" Mode="In" Type="Int32" />
+            <Parameter Name="iresult" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="dt_droppropertiesbyid">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="property" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="dt_dropuserobjectbyid">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="dt_generateansiname">
+            <Parameter Name="name" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="dt_getobjwithprop" ReturnType="Collection(Int32)">
+            <Parameter Name="property" Mode="In" Type="String" />
+            <Parameter Name="value" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="dt_getobjwithprop_u" ReturnType="Collection(Int32)">
+            <Parameter Name="property" Mode="In" Type="String" />
+            <Parameter Name="uvalue" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="dt_getpropertiesbyid" ReturnType="Collection(IMSOL_globalModel.dt_getpropertiesbyid_Result)">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="property" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="dt_getpropertiesbyid_u" ReturnType="Collection(IMSOL_globalModel.dt_getpropertiesbyid_u_Result)">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="property" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="dt_getpropertiesbyid_vcs">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="property" Mode="In" Type="String" />
+            <Parameter Name="value" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="dt_getpropertiesbyid_vcs_u">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="property" Mode="In" Type="String" />
+            <Parameter Name="value" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="dt_isundersourcecontrol">
+            <Parameter Name="vchLoginName" Mode="In" Type="String" />
+            <Parameter Name="vchPassword" Mode="In" Type="String" />
+            <Parameter Name="iWhoToo" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="dt_isundersourcecontrol_u">
+            <Parameter Name="vchLoginName" Mode="In" Type="String" />
+            <Parameter Name="vchPassword" Mode="In" Type="String" />
+            <Parameter Name="iWhoToo" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="dt_removefromsourcecontrol" />
+          <FunctionImport Name="dt_setpropertybyid">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="property" Mode="In" Type="String" />
+            <Parameter Name="value" Mode="In" Type="String" />
+            <Parameter Name="lvalue" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="dt_setpropertybyid_u">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="property" Mode="In" Type="String" />
+            <Parameter Name="uvalue" Mode="In" Type="String" />
+            <Parameter Name="lvalue" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="dt_validateloginparams">
+            <Parameter Name="vchLoginName" Mode="In" Type="String" />
+            <Parameter Name="vchPassword" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="dt_validateloginparams_u">
+            <Parameter Name="vchLoginName" Mode="In" Type="String" />
+            <Parameter Name="vchPassword" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="dt_vcsenabled" />
+          <FunctionImport Name="dt_verstamp006" ReturnType="Collection(Int32)" />
+          <FunctionImport Name="dt_whocheckedout">
+            <Parameter Name="chObjectType" Mode="In" Type="String" />
+            <Parameter Name="vchObjectName" Mode="In" Type="String" />
+            <Parameter Name="vchLoginName" Mode="In" Type="String" />
+            <Parameter Name="vchPassword" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="dt_whocheckedout_u">
+            <Parameter Name="chObjectType" Mode="In" Type="String" />
+            <Parameter Name="vchObjectName" Mode="In" Type="String" />
+            <Parameter Name="vchLoginName" Mode="In" Type="String" />
+            <Parameter Name="vchPassword" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="IMspr_CriptPass">
+            <Parameter Name="sPass" Mode="In" Type="String" />
+            <Parameter Name="sResult" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="IMspr_GetAutentication" ReturnType="Collection(IMSOL_globalModel.IMspr_GetAutentication_Result)">
+            <Parameter Name="sUsuario" Mode="In" Type="String" />
+            <Parameter Name="sPass" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="IMspr_GetCrypData">
+            <Parameter Name="sData" Mode="In" Type="String" />
+            <Parameter Name="sCryptData" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="imspr_SetLogInfoApp">
+            <Parameter Name="iAccion" Mode="In" Type="Int32" />
+            <Parameter Name="IDSolicitud" Mode="In" Type="Int32" />
+            <Parameter Name="stClient" Mode="In" Type="String" />
+            <Parameter Name="inCreditType" Mode="In" Type="Int32" />
+            <Parameter Name="inImageAmount" Mode="In" Type="Int32" />
+            <Parameter Name="inError" Mode="In" Type="Int32" />
+            <Parameter Name="stErrorMsg" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Validar_Usuario" ReturnType="Collection(IMSOL_globalModel.Validar_Usuario_Result)">
+            <Parameter Name="sUsuario" Mode="In" Type="String" />
+            <Parameter Name="sPass" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Validar_Usuario_Cencel" ReturnType="Collection(IMSOL_globalModel.Validar_Usuario_Cencel_Result)">
+            <Parameter Name="sUsuario" Mode="In" Type="String" />
+            <Parameter Name="sPass" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Validar_Usuario_Devlyn" ReturnType="Collection(IMSOL_globalModel.Validar_Usuario_Devlyn_Result)">
+            <Parameter Name="sUsuario" Mode="In" Type="String" />
+            <Parameter Name="sPass" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Validar_Usuario_Dportenis" ReturnType="Collection(IMSOL_globalModel.Validar_Usuario_Dportenis_Result)">
+            <Parameter Name="sUsuario" Mode="In" Type="String" />
+            <Parameter Name="sPass" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Validar_Usuario_KimageMobile" ReturnType="Collection(IMSOL_globalModel.Validar_Usuario_KimageMobile_Result)">
+            <Parameter Name="sUsuario" Mode="In" Type="String" />
+            <Parameter Name="sPass" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Validar_Usuario_Mapco" ReturnType="Collection(IMSOL_globalModel.Validar_Usuario_Mapco_Result)">
+            <Parameter Name="sUsuario" Mode="In" Type="String" />
+            <Parameter Name="sPass" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Validar_Usuario_Pakar" ReturnType="Collection(IMSOL_globalModel.Validar_Usuario_Pakar_Result)">
+            <Parameter Name="sUsuario" Mode="In" Type="String" />
+            <Parameter Name="sPass" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Validar_Usuario_rfp" ReturnType="Collection(IMSOL_globalModel.Validar_Usuario_rfp_Result)">
+            <Parameter Name="sUsuario" Mode="In" Type="String" />
+            <Parameter Name="sPass" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Validar_Usuario_Santandreu" ReturnType="Collection(IMSOL_globalModel.Validar_Usuario_Santandreu_Result)">
+            <Parameter Name="sUsuario" Mode="In" Type="String" />
+            <Parameter Name="sPass" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Validar_Usuario_Usashoes" ReturnType="Collection(IMSOL_globalModel.Validar_Usuario_Usashoes_Result)">
+            <Parameter Name="sUsuario" Mode="In" Type="String" />
+            <Parameter Name="sPass" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Validar_Usuario_VickyForm" ReturnType="Collection(IMSOL_globalModel.Validar_Usuario_VickyForm_Result)">
+            <Parameter Name="sUsuario" Mode="In" Type="String" />
+            <Parameter Name="sPass" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="Buscar_Transacciones_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="Int32" Name="Reg" Nullable="false" />
+          <Property Type="String" Name="Data" Nullable="false" MaxLength="300" />
+          <Property Type="DateTime" Name="Fecha" Nullable="false" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="dt_getpropertiesbyid_Result">
+          <Property Type="String" Name="property" Nullable="false" MaxLength="64" />
+          <Property Type="Int32" Name="version" Nullable="false" />
+          <Property Type="String" Name="value" Nullable="true" MaxLength="255" />
+          <Property Type="Binary" Name="lvalue" Nullable="true" MaxLength="Max" />
+        </ComplexType>
+        <ComplexType Name="dt_getpropertiesbyid_u_Result">
+          <Property Type="String" Name="property" Nullable="false" MaxLength="64" />
+          <Property Type="Int32" Name="version" Nullable="false" />
+          <Property Type="String" Name="uvalue" Nullable="true" MaxLength="255" />
+          <Property Type="Binary" Name="lvalue" Nullable="true" MaxLength="Max" />
+        </ComplexType>
+        <ComplexType Name="IMspr_GetAutentication_Result">
+          <Property Type="String" Name="AUT" Nullable="true" MaxLength="2" />
+          <Property Type="Int32" Name="iNivel" Nullable="true" />
+          <Property Type="Int32" Name="bAdmin" Nullable="true" />
+          <Property Type="Int32" Name="Estatus" Nullable="true" />
+          <Property Type="String" Name="Client" Nullable="false" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="Validar_Usuario_Result">
+          <Property Type="String" Name="AUT" Nullable="true" MaxLength="2" />
+          <Property Type="Int32" Name="iNivel" Nullable="true" />
+          <Property Type="Int32" Name="bAdmin" Nullable="true" />
+          <Property Type="Int32" Name="Estatus" Nullable="true" />
+          <Property Type="String" Name="Client" Nullable="false" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="Validar_Usuario_Cencel_Result">
+          <Property Type="String" Name="AUT" Nullable="true" MaxLength="2" />
+          <Property Type="Int32" Name="iNivel" Nullable="true" />
+          <Property Type="Int32" Name="bAdmin" Nullable="true" />
+          <Property Type="Int32" Name="Estatus" Nullable="true" />
+          <Property Type="String" Name="Client" Nullable="false" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="Validar_Usuario_Devlyn_Result">
+          <Property Type="String" Name="AUT" Nullable="true" MaxLength="2" />
+          <Property Type="Int32" Name="iNivel" Nullable="true" />
+          <Property Type="Int32" Name="bAdmin" Nullable="true" />
+          <Property Type="Int32" Name="Estatus" Nullable="true" />
+          <Property Type="String" Name="Client" Nullable="false" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="Validar_Usuario_Dportenis_Result">
+          <Property Type="String" Name="AUT" Nullable="true" MaxLength="2" />
+          <Property Type="Int32" Name="iNivel" Nullable="true" />
+          <Property Type="Int32" Name="bAdmin" Nullable="true" />
+          <Property Type="Int32" Name="Estatus" Nullable="true" />
+          <Property Type="String" Name="Client" Nullable="false" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="Validar_Usuario_KimageMobile_Result">
+          <Property Type="String" Name="sUsuario" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="sPass" Nullable="false" MaxLength="30" />
+          <Property Type="Int32" Name="iNivel" Nullable="true" />
+          <Property Type="Int32" Name="bAdmin" Nullable="true" />
+          <Property Type="Int32" Name="Estatus" Nullable="true" />
+          <Property Type="String" Name="client" Nullable="false" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="Validar_Usuario_Mapco_Result">
+          <Property Type="String" Name="AUT" Nullable="true" MaxLength="2" />
+          <Property Type="Int32" Name="iNivel" Nullable="true" />
+          <Property Type="Int32" Name="bAdmin" Nullable="true" />
+          <Property Type="Int32" Name="Estatus" Nullable="true" />
+          <Property Type="String" Name="Client" Nullable="false" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="Validar_Usuario_Pakar_Result">
+          <Property Type="String" Name="AUT" Nullable="true" MaxLength="2" />
+          <Property Type="Int32" Name="iNivel" Nullable="true" />
+          <Property Type="Int32" Name="bAdmin" Nullable="true" />
+          <Property Type="Int32" Name="Estatus" Nullable="true" />
+          <Property Type="String" Name="Client" Nullable="false" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="Validar_Usuario_rfp_Result">
+          <Property Type="String" Name="AUT" Nullable="true" MaxLength="2" />
+          <Property Type="Int32" Name="iNivel" Nullable="true" />
+          <Property Type="Int32" Name="bAdmin" Nullable="true" />
+          <Property Type="Int32" Name="Estatus" Nullable="true" />
+          <Property Type="String" Name="Client" Nullable="false" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="Validar_Usuario_Santandreu_Result">
+          <Property Type="String" Name="AUT" Nullable="true" MaxLength="2" />
+          <Property Type="Int32" Name="iNivel" Nullable="true" />
+          <Property Type="Int32" Name="bAdmin" Nullable="true" />
+          <Property Type="Int32" Name="Estatus" Nullable="true" />
+          <Property Type="String" Name="Client" Nullable="false" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="Validar_Usuario_Usashoes_Result">
+          <Property Type="String" Name="AUT" Nullable="true" MaxLength="2" />
+          <Property Type="Int32" Name="iNivel" Nullable="true" />
+          <Property Type="Int32" Name="bAdmin" Nullable="true" />
+          <Property Type="Int32" Name="Estatus" Nullable="true" />
+          <Property Type="String" Name="Client" Nullable="false" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="Validar_Usuario_VickyForm_Result">
+          <Property Type="String" Name="AUT" Nullable="true" MaxLength="2" />
+          <Property Type="Int32" Name="iNivel" Nullable="true" />
+          <Property Type="Int32" Name="bAdmin" Nullable="true" />
+          <Property Type="Int32" Name="Estatus" Nullable="true" />
+          <Property Type="String" Name="Client" Nullable="false" MaxLength="10" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="IMSOL_globalModelStoreContainer" CdmEntityContainer="IMSOL_globalEntities">
+          <EntitySetMapping Name="C__EFMigrationsHistory">
+            <EntityTypeMapping TypeName="IMSOL_globalModel.C__EFMigrationsHistory">
+              <MappingFragment StoreEntitySet="__EFMigrationsHistory">
+                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dtproperties">
+            <EntityTypeMapping TypeName="IMSOL_globalModel.dtproperty">
+              <MappingFragment StoreEntitySet="dtproperties">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="objectid" ColumnName="objectid" />
+                <ScalarProperty Name="property" ColumnName="property" />
+                <ScalarProperty Name="value" ColumnName="value" />
+                <ScalarProperty Name="uvalue" ColumnName="uvalue" />
+                <ScalarProperty Name="lvalue" ColumnName="lvalue" />
+                <ScalarProperty Name="version" ColumnName="version" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblAutoPrinterLOGs">
+            <EntityTypeMapping TypeName="IMSOL_globalModel.tblAutoPrinterLOG">
+              <MappingFragment StoreEntitySet="tblAutoPrinterLOG">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="IDSolicitud" ColumnName="IDSolicitud" />
+                <ScalarProperty Name="stClient" ColumnName="stClient" />
+                <ScalarProperty Name="inCreditType" ColumnName="inCreditType" />
+                <ScalarProperty Name="inImageAmount" ColumnName="inImageAmount" />
+                <ScalarProperty Name="dtLog" ColumnName="dtLog" />
+                <ScalarProperty Name="inError" ColumnName="inError" />
+                <ScalarProperty Name="stErrorMsg" ColumnName="stErrorMsg" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblemployees">
+            <EntityTypeMapping TypeName="IMSOL_globalModel.tblemployee">
+              <MappingFragment StoreEntitySet="tblemployee">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Fname" ColumnName="Fname" />
+                <ScalarProperty Name="Lname" ColumnName="Lname" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblUsuarios">
+            <EntityTypeMapping TypeName="IMSOL_globalModel.tblUsuario">
+              <MappingFragment StoreEntitySet="tblUsuarios">
+                <ScalarProperty Name="sUsuario" ColumnName="sUsuario" />
+                <ScalarProperty Name="sPass" ColumnName="sPass" />
+                <ScalarProperty Name="iNivel" ColumnName="iNivel" />
+                <ScalarProperty Name="bAdmin" ColumnName="bAdmin" />
+                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+                <ScalarProperty Name="client" ColumnName="client" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="Buscar_Transacciones" FunctionName="IMSOL_globalModel.Store.Buscar_Transacciones">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="IMSOL_globalModel.Buscar_Transacciones_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Reg" ColumnName="Reg" />
+                <ScalarProperty Name="Data" ColumnName="Data" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="dt_addtosourcecontrol" FunctionName="IMSOL_globalModel.Store.dt_addtosourcecontrol" />
+          <FunctionImportMapping FunctionImportName="dt_addtosourcecontrol_u" FunctionName="IMSOL_globalModel.Store.dt_addtosourcecontrol_u" />
+          <FunctionImportMapping FunctionImportName="dt_adduserobject" FunctionName="IMSOL_globalModel.Store.dt_adduserobject" />
+          <FunctionImportMapping FunctionImportName="dt_adduserobject_vcs" FunctionName="IMSOL_globalModel.Store.dt_adduserobject_vcs" />
+          <FunctionImportMapping FunctionImportName="dt_checkinobject" FunctionName="IMSOL_globalModel.Store.dt_checkinobject" />
+          <FunctionImportMapping FunctionImportName="dt_checkinobject_u" FunctionName="IMSOL_globalModel.Store.dt_checkinobject_u" />
+          <FunctionImportMapping FunctionImportName="dt_checkoutobject" FunctionName="IMSOL_globalModel.Store.dt_checkoutobject" />
+          <FunctionImportMapping FunctionImportName="dt_checkoutobject_u" FunctionName="IMSOL_globalModel.Store.dt_checkoutobject_u" />
+          <FunctionImportMapping FunctionImportName="dt_displayoaerror" FunctionName="IMSOL_globalModel.Store.dt_displayoaerror" />
+          <FunctionImportMapping FunctionImportName="dt_displayoaerror_u" FunctionName="IMSOL_globalModel.Store.dt_displayoaerror_u" />
+          <FunctionImportMapping FunctionImportName="dt_droppropertiesbyid" FunctionName="IMSOL_globalModel.Store.dt_droppropertiesbyid" />
+          <FunctionImportMapping FunctionImportName="dt_dropuserobjectbyid" FunctionName="IMSOL_globalModel.Store.dt_dropuserobjectbyid" />
+          <FunctionImportMapping FunctionImportName="dt_generateansiname" FunctionName="IMSOL_globalModel.Store.dt_generateansiname" />
+          <FunctionImportMapping FunctionImportName="dt_getobjwithprop" FunctionName="IMSOL_globalModel.Store.dt_getobjwithprop" />
+          <FunctionImportMapping FunctionImportName="dt_getobjwithprop_u" FunctionName="IMSOL_globalModel.Store.dt_getobjwithprop_u" />
+          <FunctionImportMapping FunctionImportName="dt_getpropertiesbyid" FunctionName="IMSOL_globalModel.Store.dt_getpropertiesbyid">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="IMSOL_globalModel.dt_getpropertiesbyid_Result">
+                <ScalarProperty Name="property" ColumnName="property" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="value" ColumnName="value" />
+                <ScalarProperty Name="lvalue" ColumnName="lvalue" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="dt_getpropertiesbyid_u" FunctionName="IMSOL_globalModel.Store.dt_getpropertiesbyid_u">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="IMSOL_globalModel.dt_getpropertiesbyid_u_Result">
+                <ScalarProperty Name="property" ColumnName="property" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="uvalue" ColumnName="uvalue" />
+                <ScalarProperty Name="lvalue" ColumnName="lvalue" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="dt_getpropertiesbyid_vcs" FunctionName="IMSOL_globalModel.Store.dt_getpropertiesbyid_vcs" />
+          <FunctionImportMapping FunctionImportName="dt_getpropertiesbyid_vcs_u" FunctionName="IMSOL_globalModel.Store.dt_getpropertiesbyid_vcs_u" />
+          <FunctionImportMapping FunctionImportName="dt_isundersourcecontrol" FunctionName="IMSOL_globalModel.Store.dt_isundersourcecontrol" />
+          <FunctionImportMapping FunctionImportName="dt_isundersourcecontrol_u" FunctionName="IMSOL_globalModel.Store.dt_isundersourcecontrol_u" />
+          <FunctionImportMapping FunctionImportName="dt_removefromsourcecontrol" FunctionName="IMSOL_globalModel.Store.dt_removefromsourcecontrol" />
+          <FunctionImportMapping FunctionImportName="dt_setpropertybyid" FunctionName="IMSOL_globalModel.Store.dt_setpropertybyid" />
+          <FunctionImportMapping FunctionImportName="dt_setpropertybyid_u" FunctionName="IMSOL_globalModel.Store.dt_setpropertybyid_u" />
+          <FunctionImportMapping FunctionImportName="dt_validateloginparams" FunctionName="IMSOL_globalModel.Store.dt_validateloginparams" />
+          <FunctionImportMapping FunctionImportName="dt_validateloginparams_u" FunctionName="IMSOL_globalModel.Store.dt_validateloginparams_u" />
+          <FunctionImportMapping FunctionImportName="dt_vcsenabled" FunctionName="IMSOL_globalModel.Store.dt_vcsenabled" />
+          <FunctionImportMapping FunctionImportName="dt_verstamp006" FunctionName="IMSOL_globalModel.Store.dt_verstamp006" />
+          <FunctionImportMapping FunctionImportName="dt_whocheckedout" FunctionName="IMSOL_globalModel.Store.dt_whocheckedout" />
+          <FunctionImportMapping FunctionImportName="dt_whocheckedout_u" FunctionName="IMSOL_globalModel.Store.dt_whocheckedout_u" />
+          <FunctionImportMapping FunctionImportName="IMspr_CriptPass" FunctionName="IMSOL_globalModel.Store.IMspr_CriptPass" />
+          <FunctionImportMapping FunctionImportName="IMspr_GetAutentication" FunctionName="IMSOL_globalModel.Store.IMspr_GetAutentication">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="IMSOL_globalModel.IMspr_GetAutentication_Result">
+                <ScalarProperty Name="AUT" ColumnName="AUT" />
+                <ScalarProperty Name="iNivel" ColumnName="iNivel" />
+                <ScalarProperty Name="bAdmin" ColumnName="bAdmin" />
+                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+                <ScalarProperty Name="Client" ColumnName="Client" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="IMspr_GetCrypData" FunctionName="IMSOL_globalModel.Store.IMspr_GetCrypData" />
+          <FunctionImportMapping FunctionImportName="imspr_SetLogInfoApp" FunctionName="IMSOL_globalModel.Store.imspr_SetLogInfoApp" />
+          <FunctionImportMapping FunctionImportName="Validar_Usuario" FunctionName="IMSOL_globalModel.Store.Validar_Usuario">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="IMSOL_globalModel.Validar_Usuario_Result">
+                <ScalarProperty Name="AUT" ColumnName="AUT" />
+                <ScalarProperty Name="iNivel" ColumnName="iNivel" />
+                <ScalarProperty Name="bAdmin" ColumnName="bAdmin" />
+                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+                <ScalarProperty Name="Client" ColumnName="Client" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Validar_Usuario_Cencel" FunctionName="IMSOL_globalModel.Store.Validar_Usuario_Cencel">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="IMSOL_globalModel.Validar_Usuario_Cencel_Result">
+                <ScalarProperty Name="AUT" ColumnName="AUT" />
+                <ScalarProperty Name="iNivel" ColumnName="iNivel" />
+                <ScalarProperty Name="bAdmin" ColumnName="bAdmin" />
+                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+                <ScalarProperty Name="Client" ColumnName="Client" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Validar_Usuario_Devlyn" FunctionName="IMSOL_globalModel.Store.Validar_Usuario_Devlyn">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="IMSOL_globalModel.Validar_Usuario_Devlyn_Result">
+                <ScalarProperty Name="AUT" ColumnName="AUT" />
+                <ScalarProperty Name="iNivel" ColumnName="iNivel" />
+                <ScalarProperty Name="bAdmin" ColumnName="bAdmin" />
+                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+                <ScalarProperty Name="Client" ColumnName="Client" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Validar_Usuario_Dportenis" FunctionName="IMSOL_globalModel.Store.Validar_Usuario_Dportenis">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="IMSOL_globalModel.Validar_Usuario_Dportenis_Result">
+                <ScalarProperty Name="AUT" ColumnName="AUT" />
+                <ScalarProperty Name="iNivel" ColumnName="iNivel" />
+                <ScalarProperty Name="bAdmin" ColumnName="bAdmin" />
+                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+                <ScalarProperty Name="Client" ColumnName="Client" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Validar_Usuario_KimageMobile" FunctionName="IMSOL_globalModel.Store.Validar_Usuario_KimageMobile">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="IMSOL_globalModel.Validar_Usuario_KimageMobile_Result">
+                <ScalarProperty Name="sUsuario" ColumnName="sUsuario" />
+                <ScalarProperty Name="sPass" ColumnName="sPass" />
+                <ScalarProperty Name="iNivel" ColumnName="iNivel" />
+                <ScalarProperty Name="bAdmin" ColumnName="bAdmin" />
+                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+                <ScalarProperty Name="client" ColumnName="client" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Validar_Usuario_Mapco" FunctionName="IMSOL_globalModel.Store.Validar_Usuario_Mapco">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="IMSOL_globalModel.Validar_Usuario_Mapco_Result">
+                <ScalarProperty Name="AUT" ColumnName="AUT" />
+                <ScalarProperty Name="iNivel" ColumnName="iNivel" />
+                <ScalarProperty Name="bAdmin" ColumnName="bAdmin" />
+                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+                <ScalarProperty Name="Client" ColumnName="Client" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Validar_Usuario_Pakar" FunctionName="IMSOL_globalModel.Store.Validar_Usuario_Pakar">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="IMSOL_globalModel.Validar_Usuario_Pakar_Result">
+                <ScalarProperty Name="AUT" ColumnName="AUT" />
+                <ScalarProperty Name="iNivel" ColumnName="iNivel" />
+                <ScalarProperty Name="bAdmin" ColumnName="bAdmin" />
+                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+                <ScalarProperty Name="Client" ColumnName="Client" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Validar_Usuario_rfp" FunctionName="IMSOL_globalModel.Store.Validar_Usuario_rfp">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="IMSOL_globalModel.Validar_Usuario_rfp_Result">
+                <ScalarProperty Name="AUT" ColumnName="AUT" />
+                <ScalarProperty Name="iNivel" ColumnName="iNivel" />
+                <ScalarProperty Name="bAdmin" ColumnName="bAdmin" />
+                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+                <ScalarProperty Name="Client" ColumnName="Client" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Validar_Usuario_Santandreu" FunctionName="IMSOL_globalModel.Store.Validar_Usuario_Santandreu">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="IMSOL_globalModel.Validar_Usuario_Santandreu_Result">
+                <ScalarProperty Name="AUT" ColumnName="AUT" />
+                <ScalarProperty Name="iNivel" ColumnName="iNivel" />
+                <ScalarProperty Name="bAdmin" ColumnName="bAdmin" />
+                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+                <ScalarProperty Name="Client" ColumnName="Client" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Validar_Usuario_Usashoes" FunctionName="IMSOL_globalModel.Store.Validar_Usuario_Usashoes">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="IMSOL_globalModel.Validar_Usuario_Usashoes_Result">
+                <ScalarProperty Name="AUT" ColumnName="AUT" />
+                <ScalarProperty Name="iNivel" ColumnName="iNivel" />
+                <ScalarProperty Name="bAdmin" ColumnName="bAdmin" />
+                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+                <ScalarProperty Name="Client" ColumnName="Client" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Validar_Usuario_VickyForm" FunctionName="IMSOL_globalModel.Store.Validar_Usuario_VickyForm">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="IMSOL_globalModel.Validar_Usuario_VickyForm_Result">
+                <ScalarProperty Name="AUT" ColumnName="AUT" />
+                <ScalarProperty Name="iNivel" ColumnName="iNivel" />
+                <ScalarProperty Name="bAdmin" ColumnName="bAdmin" />
+                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+                <ScalarProperty Name="Client" ColumnName="Client" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

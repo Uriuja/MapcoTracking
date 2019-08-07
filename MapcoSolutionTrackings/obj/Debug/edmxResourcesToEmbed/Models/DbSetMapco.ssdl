@@ -1,0 +1,2227 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="IMSOL_mpModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <!--Errors Found During Generation:
+warning 6013: The table/view 'IMSOL_mp.dbo.Hoja1$' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="Hoja1$">
+          <Property Name="stienda" Type="varchar" MaxLength="50" />
+          <Property Name="Region" Type="nvarchar" MaxLength="255" />
+          <Property Name="Subregion" Type="nvarchar" MaxLength="255" />
+        </EntityType>-->
+  <!--Errors Found During Generation:
+warning 6013: The table/view 'IMSOL_mp.dbo.PENMAYO19' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="PENMAYO19">
+          <Property Name="Folio" Type="nvarchar" MaxLength="255" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="255" />
+          <Property Name="Fecha Consulta" Type="datetime" />
+          <Property Name="Tipo" Type="nvarchar" MaxLength="255" />
+        </EntityType>-->
+  <EntityType Name="tblCampos">
+    <Key>
+      <PropertyRef Name="IDCampo" />
+    </Key>
+    <Property Name="IDCampo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="nchar" MaxLength="20" Nullable="false" />
+    <Property Name="Etiqueta" Type="nchar" MaxLength="50" Nullable="false" />
+    <Property Name="Longitud" Type="int" Nullable="false" />
+    <Property Name="Validaciones" Type="nchar" MaxLength="50" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'IMSOL_mp.dbo.tblComplementos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="tblComplementos">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IDSolicitud" Type="int" />
+    <Property Name="Revisada" Type="bit" />
+    <Property Name="Reviso" Type="varchar" MaxLength="50" />
+    <Property Name="Fecha" Type="datetime" />
+    <Property Name="Fecha_Envio" Type="datetime" />
+  </EntityType>
+  <EntityType Name="tblConsultas">
+    <Key>
+      <PropertyRef Name="IdConsultas" />
+      <PropertyRef Name="IdSolicitud" />
+    </Key>
+    <Property Name="IdConsultas" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdSolicitud" Type="int" Nullable="false" />
+    <Property Name="Usuario" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="Fecha" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblEstatus">
+    <Key>
+      <PropertyRef Name="IDEstatus" />
+    </Key>
+    <Property Name="IDEstatus" Type="nchar" MaxLength="3" Nullable="false" />
+    <Property Name="Estatus" Type="nchar" MaxLength="20" Nullable="false" />
+    <Property Name="Descripcion" Type="nchar" MaxLength="50" Nullable="false" />
+    <Property Name="Aplicacion" Type="nchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="tblEstatusCampos">
+    <Key>
+      <PropertyRef Name="IDEstatus" />
+      <PropertyRef Name="IDCampo" />
+    </Key>
+    <Property Name="IDEstatus" Type="nchar" MaxLength="3" Nullable="false" />
+    <Property Name="IDCampo" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblFlujos">
+    <Key>
+      <PropertyRef Name="IDFlujo" />
+    </Key>
+    <Property Name="IDFlujo" Type="int" Nullable="false" />
+    <Property Name="Descripcion" Type="nchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblFlujoTipos">
+    <Key>
+      <PropertyRef Name="IDTipo" />
+    </Key>
+    <Property Name="IDTipo" Type="int" Nullable="false" />
+    <Property Name="Nombre" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="Descripcion" Type="nchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblFlujoTrabajos">
+    <Key>
+      <PropertyRef Name="IDFlujo" />
+      <PropertyRef Name="IDActividad" />
+    </Key>
+    <Property Name="IDFlujo" Type="int" Nullable="false" />
+    <Property Name="IDActividad" Type="int" Nullable="false" />
+    <Property Name="IDTipo" Type="int" Nullable="false" />
+    <Property Name="IDEstatus" Type="nchar" MaxLength="3" Nullable="false" />
+    <Property Name="Aplicacion" Type="nchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblImagenes">
+    <Key>
+      <PropertyRef Name="IdImagenes" />
+      <PropertyRef Name="IdSolicitud" />
+    </Key>
+    <Property Name="IdImagenes" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdSolicitud" Type="int" Nullable="false" />
+    <Property Name="TipoImagen" Type="nvarchar" MaxLength="3" Nullable="false" />
+    <Property Name="Imagen" Type="image" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblLogCat">
+    <Key>
+      <PropertyRef Name="IDLogCat" />
+    </Key>
+    <Property Name="IDLogCat" Type="int" Nullable="false" />
+    <Property Name="LogAccion" Type="nchar" MaxLength="50" Nullable="false" />
+    <Property Name="Modulo" Type="nchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tblLogestatus">
+    <Key>
+      <PropertyRef Name="IdLogestatus" />
+      <PropertyRef Name="IdSolicitud" />
+    </Key>
+    <Property Name="IdLogestatus" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdSolicitud" Type="int" Nullable="false" />
+    <Property Name="Fecha" Type="datetime" Nullable="false" />
+    <Property Name="sUsuario" Type="nchar" MaxLength="20" />
+    <Property Name="Terminado" Type="tinyint" />
+    <Property Name="Newestatus" Type="nchar" MaxLength="3" Nullable="false" />
+    <Property Name="Superestatus" Type="nchar" MaxLength="3" />
+  </EntityType>
+  <EntityType Name="tblLogTarj">
+    <Key>
+      <PropertyRef Name="IDSolicitud" />
+      <PropertyRef Name="IDTarj" />
+      <PropertyRef Name="IDTarjLog" />
+    </Key>
+    <Property Name="IDSolicitud" Type="int" Nullable="false" />
+    <Property Name="IDTarj" Type="int" Nullable="false" />
+    <Property Name="IDTarjLog" Type="int" Nullable="false" />
+    <Property Name="dtLog" Type="datetime" Nullable="false" />
+    <Property Name="sUsuario" Type="nchar" MaxLength="20" Nullable="false" />
+    <Property Name="IDLogCat" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblNotas">
+    <Key>
+      <PropertyRef Name="IDSolicitud" />
+      <PropertyRef Name="IDNota" />
+    </Key>
+    <Property Name="IDSolicitud" Type="int" Nullable="false" />
+    <Property Name="IDNota" Type="int" Nullable="false" />
+    <Property Name="Nota" Type="varchar(max)" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'IMSOL_mp.dbo.TblPrecalificaciones' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="TblPrecalificaciones">
+    <Key>
+      <PropertyRef Name="IDprecalificador" />
+    </Key>
+    <Property Name="IDprecalificador" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Precalificacion" Type="varchar" MaxLength="50" />
+    <Property Name="Nombres" Type="varchar" MaxLength="50" />
+    <Property Name="Ap_Paterno" Type="varchar" MaxLength="50" />
+    <Property Name="Ap_Materno" Type="varchar" MaxLength="50" />
+    <Property Name="Fecha_de_Nacimiento" Type="varchar" MaxLength="50" />
+    <Property Name="Domicilio" Type="varchar" MaxLength="50" />
+    <Property Name="Colonia" Type="varchar" MaxLength="50" />
+    <Property Name="Ciudad" Type="varchar" MaxLength="50" />
+    <Property Name="Municipio" Type="varchar" MaxLength="50" />
+    <Property Name="Estado" Type="varchar" MaxLength="50" />
+    <Property Name="CP" Type="varchar" MaxLength="5" />
+    <Property Name="Celular" Type="varchar" MaxLength="10" />
+    <Property Name="Email" Type="varchar" MaxLength="50" />
+    <Property Name="Tienda" Type="varchar" MaxLength="5" />
+    <Property Name="Promotor" Type="varchar" MaxLength="50" />
+    <Property Name="Fecha" Type="datetime" />
+    <Property Name="Usuario" Type="varchar" MaxLength="50" />
+    <Property Name="Imagen" Type="image" />
+    <Property Name="MTQ" Type="varchar" MaxLength="350" />
+    <Property Name="Confirmado" Type="int" />
+    <Property Name="RFC" Type="varchar" MaxLength="50" />
+    <Property Name="completo" Type="varchar" MaxLength="50" />
+    <Property Name="CURP" Type="varchar" MaxLength="18" />
+  </EntityType>
+  <EntityType Name="tblReportEstatus">
+    <Key>
+      <PropertyRef Name="IDReport" />
+      <PropertyRef Name="IDEstatus" />
+    </Key>
+    <Property Name="IDReport" Type="int" Nullable="false" />
+    <Property Name="IDEstatus" Type="nchar" MaxLength="3" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblReports">
+    <Key>
+      <PropertyRef Name="IDReport" />
+    </Key>
+    <Property Name="IDReport" Type="int" Nullable="false" />
+    <Property Name="ReportName" Type="nchar" MaxLength="20" />
+    <Property Name="Parameters" Type="nchar" MaxLength="50" />
+    <Property Name="StoreProcedureName" Type="nchar" MaxLength="20" />
+    <Property Name="FileName" Type="nchar" MaxLength="20" />
+    <Property Name="FileExtensionName" Type="nchar" MaxLength="10" />
+    <Property Name="IDReportType" Type="int" />
+  </EntityType>
+  <EntityType Name="tblReportSecurity">
+    <Key>
+      <PropertyRef Name="IDReporte" />
+      <PropertyRef Name="sUsuario" />
+    </Key>
+    <Property Name="IDReporte" Type="int" Nullable="false" />
+    <Property Name="sUsuario" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="Habilitado" Type="bit" />
+  </EntityType>
+  <EntityType Name="tblReportTypes">
+    <Key>
+      <PropertyRef Name="IDReportType" />
+    </Key>
+    <Property Name="IDReportType" Type="int" Nullable="false" />
+    <Property Name="ReportType" Type="nchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblSolicitudCampos">
+    <Key>
+      <PropertyRef Name="IDSolicitud" />
+      <PropertyRef Name="IDEstatus" />
+      <PropertyRef Name="IDCampo" />
+    </Key>
+    <Property Name="IDSolicitud" Type="int" Nullable="false" />
+    <Property Name="IDEstatus" Type="nchar" MaxLength="3" Nullable="false" />
+    <Property Name="IDCampo" Type="int" Nullable="false" />
+    <Property Name="Value" Type="nchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblSolicitudes">
+    <Key>
+      <PropertyRef Name="IdSolicitud" />
+    </Key>
+    <Property Name="IdSolicitud" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NoFolio" Type="nvarchar" MaxLength="15" />
+    <Property Name="RFC" Type="nvarchar" MaxLength="13" />
+    <Property Name="ApellidoPaterno" Type="nvarchar" MaxLength="25" />
+    <Property Name="ApellidoMaterno" Type="nvarchar" MaxLength="25" />
+    <Property Name="Nombres" Type="nvarchar" MaxLength="30" />
+    <Property Name="Fecha" Type="datetime" Nullable="false" />
+    <Property Name="EstatusActual" Type="nvarchar" MaxLength="3" />
+    <Property Name="TipoCredito" Type="nvarchar" MaxLength="2" />
+    <Property Name="Tienda" Type="nvarchar" MaxLength="10" />
+    <Property Name="Promotor" Type="nvarchar" MaxLength="10" />
+    <Property Name="MotivoEstatus" Type="nvarchar" MaxLength="3" />
+    <Property Name="FechaEstatus" Type="datetime" />
+    <Property Name="Usuario" Type="nvarchar" MaxLength="50" />
+    <Property Name="EstatusRecepcion" Type="nvarchar" MaxLength="3" />
+    <Property Name="PreAprobado" Type="nvarchar" MaxLength="50" />
+    <Property Name="IDpre" Type="int" />
+    <Property Name="completo" Type="nvarchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="tblSolicitudesDatos">
+    <Key>
+      <PropertyRef Name="IDSolicitud" />
+    </Key>
+    <Property Name="IDSolicitud" Type="int" Nullable="false" />
+    <Property Name="Tienda" Type="nchar" MaxLength="10" />
+    <Property Name="Promotor" Type="nchar" MaxLength="10" />
+    <Property Name="ApellidoPaterno" Type="nchar" MaxLength="50" />
+    <Property Name="ApellidoMaterno" Type="nchar" MaxLength="50" />
+    <Property Name="Nombre" Type="nchar" MaxLength="50" />
+    <Property Name="TipoCredito" Type="bit" />
+    <Property Name="Sexo" Type="bit" />
+    <Property Name="Nacionalidad" Type="bit" />
+    <Property Name="CalleDomicilioActual" Type="nchar" MaxLength="50" />
+    <Property Name="NoExterior" Type="nchar" MaxLength="50" />
+    <Property Name="NoInterior" Type="nchar" MaxLength="50" />
+    <Property Name="Cruzacon" Type="nchar" MaxLength="50" />
+    <Property Name="Colonia" Type="nchar" MaxLength="50" />
+    <Property Name="Municipio" Type="nchar" MaxLength="50" />
+    <Property Name="Estado" Type="nchar" MaxLength="50" />
+    <Property Name="CP" Type="int" />
+    <Property Name="TiempoVivirDomicilioAA" Type="int" />
+    <Property Name="TiempoVivirDomicilioMM" Type="int" />
+    <Property Name="TiempoDomicilioAnteriorAA" Type="int" />
+    <Property Name="TiempoDomicilioAnteriorMM" Type="int" />
+    <Property Name="TelefonoCasa" Type="nchar" MaxLength="10" />
+    <Property Name="TelefonoOficina" Type="nchar" MaxLength="10" />
+    <Property Name="Extension" Type="nchar" MaxLength="10" />
+    <Property Name="TelefonoCelular" Type="nchar" MaxLength="10" />
+    <Property Name="EMail" Type="nchar" MaxLength="50" />
+    <Property Name="Casa" Type="nchar" MaxLength="50" />
+    <Property Name="PagoMensual" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="FechaNacimientoDD" Type="int" />
+    <Property Name="FechaNacimientoMM" Type="int" />
+    <Property Name="FechaNacimientoAA" Type="int" />
+    <Property Name="RFC" Type="nchar" MaxLength="13" />
+    <Property Name="EstadoCivil" Type="nchar" MaxLength="50" />
+    <Property Name="NoDependientes" Type="int" />
+    <Property Name="NombreSolteroConyuge" Type="nchar" MaxLength="50" />
+    <Property Name="ConyugeTelefonoCelular" Type="nchar" MaxLength="10" />
+    <Property Name="ConyugeEMail" Type="nchar" MaxLength="50" />
+    <Property Name="ConyugeFechaNacimientoDD" Type="int" />
+    <Property Name="ConyugeFechaNacimientoMM" Type="int" />
+    <Property Name="ConyugeFechaNacimientoAA" Type="int" />
+    <Property Name="ConyugeRFC" Type="nchar" MaxLength="13" />
+    <Property Name="NombreEmpresa" Type="nchar" MaxLength="50" />
+    <Property Name="Puesto" Type="nchar" MaxLength="50" />
+    <Property Name="Giro" Type="nchar" MaxLength="50" />
+    <Property Name="Sector" Type="nchar" MaxLength="50" />
+    <Property Name="Caracter" Type="nchar" MaxLength="50" />
+    <Property Name="AntiguedadAA" Type="int" />
+    <Property Name="AntiguedadMM" Type="int" />
+    <Property Name="IngresosComprobablessueldo" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="IngresosComprobablesConyuge" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="IngresosComprobablesPadres" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="IngresosComprobablesOtros" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="IngresosComprobablesTotal" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Escolaridad" Type="nchar" MaxLength="50" />
+    <Property Name="EmpleoAnteriorEmpresa" Type="nchar" MaxLength="50" />
+    <Property Name="EmpleoAnteriorAntiguedadAA" Type="int" />
+    <Property Name="EmpleoAnteriorAntiguedadMM" Type="int" />
+    <Property Name="EmpleoAnteriorPuesto" Type="nchar" MaxLength="50" />
+    <Property Name="Ref1Institucion" Type="nchar" MaxLength="50" />
+    <Property Name="Ref1Tipo" Type="int" />
+    <Property Name="Ref1NodeCta" Type="nchar" MaxLength="50" />
+    <Property Name="Ref2Institucion" Type="nchar" MaxLength="50" />
+    <Property Name="Ref2Tipo" Type="int" />
+    <Property Name="Ref2NodeCta" Type="nchar" MaxLength="50" />
+    <Property Name="RefPer1Nombre" Type="nchar" MaxLength="50" />
+    <Property Name="RefPer1Telefono" Type="nchar" MaxLength="50" />
+    <Property Name="RefPer2Nombre" Type="nchar" MaxLength="50" />
+    <Property Name="RefPer2Telefono" Type="nchar" MaxLength="50" />
+    <Property Name="RefPer3Nombre" Type="nchar" MaxLength="50" />
+    <Property Name="RefPer3Telefono" Type="nchar" MaxLength="50" />
+    <Property Name="EdoCuenta" Type="int" />
+    <Property Name="NombreEmpresaConyuge" Type="nchar" MaxLength="50" />
+    <Property Name="PuestoConyuge" Type="nchar" MaxLength="50" />
+    <Property Name="DomicilioEmpresaConyuge" Type="nchar" MaxLength="50" />
+    <Property Name="DomicilioEmpresa" Type="nchar" MaxLength="50" />
+    <Property Name="RefPer1Domicilio" Type="nchar" MaxLength="50" />
+    <Property Name="RefPer2Domicilio" Type="nchar" MaxLength="50" />
+    <Property Name="RefPer3Domicilio" Type="nchar" MaxLength="50" />
+    <Property Name="TarjAdic1Nombre" Type="nchar" MaxLength="50" />
+    <Property Name="TarjAdic1Telefono" Type="nchar" MaxLength="50" />
+    <Property Name="TarjAdic2Nombre" Type="nchar" MaxLength="50" />
+    <Property Name="TarjAdic2Telefono" Type="nchar" MaxLength="50" />
+    <Property Name="TarjAdic3Nombre" Type="nchar" MaxLength="50" />
+    <Property Name="TarjAdic3Telefono" Type="nchar" MaxLength="50" />
+    <Property Name="MontoCredito" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Tradicional" Type="bit" />
+    <Property Name="PagosFijos" Type="bit" />
+    <Property Name="PreAprobado" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tblSolicitudReporteObjeto">
+    <Key>
+      <PropertyRef Name="IDReport" />
+      <PropertyRef Name="IDSolicitud" />
+    </Key>
+    <Property Name="IDReport" Type="int" Nullable="false" />
+    <Property Name="IDSolicitud" Type="int" Nullable="false" />
+    <Property Name="FileObject" Type="varbinary(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblSolUltimoLog">
+    <Key>
+      <PropertyRef Name="IdSolicitud" />
+    </Key>
+    <Property Name="IdSolicitud" Type="int" Nullable="false" />
+    <Property Name="Newestatus" Type="nchar" MaxLength="3" Nullable="false" />
+    <Property Name="Superestatus" Type="nchar" MaxLength="3" />
+    <Property Name="Fecha" Type="datetime" Nullable="false" />
+    <Property Name="sUsuario" Type="nchar" MaxLength="20" Nullable="false" />
+    <Property Name="Terminado" Type="tinyint" Nullable="false" />
+    <Property Name="bNota" Type="bit" />
+    <Property Name="bImagen" Type="bit" />
+  </EntityType>
+  <EntityType Name="tblTarjSolicitudes">
+    <Key>
+      <PropertyRef Name="IDSolicitud" />
+      <PropertyRef Name="IDTarj" />
+    </Key>
+    <Property Name="IDSolicitud" Type="int" Nullable="false" />
+    <Property Name="IDTarj" Type="int" Nullable="false" />
+    <Property Name="NumTarj" Type="varbinary" MaxLength="50" Nullable="false" />
+    <Property Name="DigitosFin" Type="nchar" MaxLength="16" Nullable="false" />
+    <Property Name="Segmento" Type="nvarchar" MaxLength="50" />
+    <Property Name="Division" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tblUsuariosClient">
+    <Key>
+      <PropertyRef Name="sUsuario" />
+    </Key>
+    <Property Name="sUsuario" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="sNombre" Type="nchar" MaxLength="20" Nullable="false" />
+    <Property Name="sAPaterno" Type="nchar" MaxLength="20" Nullable="false" />
+    <Property Name="sAMaterno" Type="nchar" MaxLength="20" Nullable="false" />
+    <Property Name="sRelacion" Type="nchar" MaxLength="30" />
+    <Property Name="sNombreRelacion" Type="nchar" MaxLength="30" />
+    <Property Name="sNombreContacto" Type="nchar" MaxLength="30" />
+    <Property Name="sTelContacto" Type="nchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="tblUsuariosTiendas">
+    <Key>
+      <PropertyRef Name="sUsuario" />
+      <PropertyRef Name="sTienda" />
+    </Key>
+    <Property Name="sUsuario" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="sTienda" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="Region" Type="varchar" MaxLength="50" />
+    <Property Name="Subregion" Type="varchar" MaxLength="50" />
+    <Property Name="Administrador" Type="bit" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'IMSOL_mp.dbo.IMvw_AppAppFields' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="IMvw_AppAppFields">
+    <Key>
+      <PropertyRef Name="IDSolicitud" />
+      <PropertyRef Name="IDEstatus" />
+      <PropertyRef Name="IDCampo" />
+      <PropertyRef Name="Value" />
+    </Key>
+    <Property Name="IDSolicitud" Type="int" Nullable="false" />
+    <Property Name="IDEstatus" Type="nchar" MaxLength="3" Nullable="false" />
+    <Property Name="IDCampo" Type="int" Nullable="false" />
+    <Property Name="Value" Type="nchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'IMSOL_mp.dbo.IMvw_AppData' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="IMvw_AppData">
+    <Key>
+      <PropertyRef Name="IdSolicitud" />
+      <PropertyRef Name="NoFolio" />
+      <PropertyRef Name="RFC" />
+      <PropertyRef Name="ApellidoPaterno" />
+      <PropertyRef Name="ApellidoMaterno" />
+      <PropertyRef Name="Nombres" />
+      <PropertyRef Name="EstatusActual" />
+      <PropertyRef Name="TipoCredito" />
+      <PropertyRef Name="TipoImagen" />
+      <PropertyRef Name="Imagen" />
+    </Key>
+    <Property Name="IdSolicitud" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NoFolio" Type="nvarchar" MaxLength="15" Nullable="false" />
+    <Property Name="RFC" Type="nvarchar" MaxLength="13" Nullable="false" />
+    <Property Name="ApellidoPaterno" Type="nvarchar" MaxLength="25" Nullable="false" />
+    <Property Name="ApellidoMaterno" Type="nvarchar" MaxLength="25" Nullable="false" />
+    <Property Name="Nombres" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="EstatusActual" Type="nvarchar" MaxLength="3" Nullable="false" />
+    <Property Name="TipoCredito" Type="nvarchar" MaxLength="2" Nullable="false" />
+    <Property Name="TipoImagen" Type="nvarchar" MaxLength="3" Nullable="false" />
+    <Property Name="Imagen" Type="image" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'IMSOL_mp.dbo.Imvw_AppDataControlDesk' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="Imvw_AppDataControlDesk">
+    <Key>
+      <PropertyRef Name="IdSolicitud" />
+      <PropertyRef Name="NoFolio" />
+      <PropertyRef Name="RFC" />
+      <PropertyRef Name="ApellidoPaterno" />
+      <PropertyRef Name="ApellidoMaterno" />
+      <PropertyRef Name="Nombres" />
+      <PropertyRef Name="Fecha" />
+      <PropertyRef Name="EstatusActual" />
+      <PropertyRef Name="TipoCredito" />
+      <PropertyRef Name="Tienda" />
+    </Key>
+    <Property Name="IdSolicitud" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NoFolio" Type="nvarchar" MaxLength="15" Nullable="false" />
+    <Property Name="RFC" Type="nvarchar" MaxLength="13" Nullable="false" />
+    <Property Name="ApellidoPaterno" Type="nvarchar" MaxLength="25" Nullable="false" />
+    <Property Name="ApellidoMaterno" Type="nvarchar" MaxLength="25" Nullable="false" />
+    <Property Name="Nombres" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="Fecha" Type="datetime" Nullable="false" />
+    <Property Name="EstatusActual" Type="nvarchar" MaxLength="3" Nullable="false" />
+    <Property Name="TipoCredito" Type="nvarchar" MaxLength="2" Nullable="false" />
+    <Property Name="Tienda" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="sUsuario" Type="nchar" MaxLength="20" />
+    <Property Name="FechaControl" Type="datetime" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'IMSOL_mp.dbo.IMvw_AppDataToPrint' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="IMvw_AppDataToPrint">
+    <Key>
+      <PropertyRef Name="IdSolicitud" />
+      <PropertyRef Name="NoFolio" />
+      <PropertyRef Name="RFC" />
+      <PropertyRef Name="ApellidoPaterno" />
+      <PropertyRef Name="ApellidoMaterno" />
+      <PropertyRef Name="Nombres" />
+      <PropertyRef Name="TipoCredito" />
+      <PropertyRef Name="EstatusActual" />
+      <PropertyRef Name="Fecha" />
+      <PropertyRef Name="Imagen" />
+      <PropertyRef Name="Tienda" />
+    </Key>
+    <Property Name="IdSolicitud" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NoFolio" Type="nvarchar" MaxLength="15" Nullable="false" />
+    <Property Name="RFC" Type="nvarchar" MaxLength="13" Nullable="false" />
+    <Property Name="ApellidoPaterno" Type="nvarchar" MaxLength="25" Nullable="false" />
+    <Property Name="ApellidoMaterno" Type="nvarchar" MaxLength="25" Nullable="false" />
+    <Property Name="Nombres" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="TipoCredito" Type="varchar" MaxLength="9" Nullable="false" />
+    <Property Name="EstatusActual" Type="nvarchar" MaxLength="3" Nullable="false" />
+    <Property Name="Fecha" Type="datetime" Nullable="false" />
+    <Property Name="Imagen" Type="image" Nullable="false" />
+    <Property Name="Tienda" Type="varchar" MaxLength="10" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'IMSOL_mp.dbo.IMvw_AppDatatoPrintList' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="IMvw_AppDatatoPrintList">
+    <Key>
+      <PropertyRef Name="IdSolicitud" />
+      <PropertyRef Name="NoFolio" />
+      <PropertyRef Name="RFC" />
+      <PropertyRef Name="ApellidoPaterno" />
+      <PropertyRef Name="ApellidoMaterno" />
+      <PropertyRef Name="Nombres" />
+      <PropertyRef Name="Fecha" />
+      <PropertyRef Name="EstatusActual" />
+      <PropertyRef Name="TipoCredito" />
+      <PropertyRef Name="Tienda" />
+    </Key>
+    <Property Name="IdSolicitud" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NoFolio" Type="nvarchar" MaxLength="15" Nullable="false" />
+    <Property Name="RFC" Type="nvarchar" MaxLength="13" Nullable="false" />
+    <Property Name="ApellidoPaterno" Type="nvarchar" MaxLength="25" Nullable="false" />
+    <Property Name="ApellidoMaterno" Type="nvarchar" MaxLength="25" Nullable="false" />
+    <Property Name="Nombres" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="Fecha" Type="datetime" Nullable="false" />
+    <Property Name="EstatusActual" Type="nvarchar" MaxLength="3" Nullable="false" />
+    <Property Name="TipoCredito" Type="varchar" MaxLength="9" Nullable="false" />
+    <Property Name="Tienda" Type="varchar" MaxLength="10" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'IMSOL_mp.dbo.IMvw_AppFieldStatus' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="IMvw_AppFieldStatus">
+    <Key>
+      <PropertyRef Name="IDEstatus" />
+      <PropertyRef Name="Estatus" />
+      <PropertyRef Name="Descripcion" />
+      <PropertyRef Name="IDCampo" />
+      <PropertyRef Name="Nombre" />
+      <PropertyRef Name="Etiqueta" />
+      <PropertyRef Name="Longitud" />
+    </Key>
+    <Property Name="IDEstatus" Type="nchar" MaxLength="3" Nullable="false" />
+    <Property Name="Estatus" Type="nchar" MaxLength="20" Nullable="false" />
+    <Property Name="Descripcion" Type="nchar" MaxLength="50" Nullable="false" />
+    <Property Name="Aplicacion" Type="nchar" MaxLength="100" />
+    <Property Name="IDCampo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="nchar" MaxLength="20" Nullable="false" />
+    <Property Name="Etiqueta" Type="nchar" MaxLength="50" Nullable="false" />
+    <Property Name="Longitud" Type="int" Nullable="false" />
+    <Property Name="Validaciones" Type="nchar" MaxLength="50" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'IMSOL_mp.dbo.IMvw_AppFollowingReport' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="IMvw_AppFollowingReport">
+    <Key>
+      <PropertyRef Name="IdSolicitud" />
+      <PropertyRef Name="NoFolio" />
+      <PropertyRef Name="RFC" />
+      <PropertyRef Name="ApellidoPaterno" />
+      <PropertyRef Name="ApellidoMaterno" />
+      <PropertyRef Name="Nombres" />
+      <PropertyRef Name="TipoCredito" />
+      <PropertyRef Name="Tienda" />
+      <PropertyRef Name="Estado" />
+      <PropertyRef Name="Estatus de Tarea" />
+      <PropertyRef Name="Fecha" />
+      <PropertyRef Name="Usuario" />
+      <PropertyRef Name="IDEstatus" />
+    </Key>
+    <Property Name="IdSolicitud" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NoFolio" Type="nvarchar" MaxLength="15" Nullable="false" />
+    <Property Name="RFC" Type="nvarchar" MaxLength="13" Nullable="false" />
+    <Property Name="ApellidoPaterno" Type="nvarchar" MaxLength="25" Nullable="false" />
+    <Property Name="ApellidoMaterno" Type="nvarchar" MaxLength="25" Nullable="false" />
+    <Property Name="Nombres" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="TipoCredito" Type="varchar" MaxLength="9" Nullable="false" />
+    <Property Name="Tienda" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="Estado" Type="nchar" MaxLength="20" Nullable="false" />
+    <Property Name="Estatus de Tarea" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="Fecha" Type="datetime" Nullable="false" />
+    <Property Name="Usuario" Type="nchar" MaxLength="20" Nullable="false" />
+    <Property Name="IDEstatus" Type="nchar" MaxLength="3" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'IMSOL_mp.dbo.IMvw_AppFollowingReportDetail' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="IMvw_AppFollowingReportDetail">
+    <Key>
+      <PropertyRef Name="IdSolicitud" />
+      <PropertyRef Name="NoFolio" />
+      <PropertyRef Name="RFC" />
+      <PropertyRef Name="ApellidoPaterno" />
+      <PropertyRef Name="ApellidoMaterno" />
+      <PropertyRef Name="Nombres" />
+      <PropertyRef Name="TipoCredito" />
+      <PropertyRef Name="Tienda" />
+      <PropertyRef Name="Estado" />
+      <PropertyRef Name="Fecha" />
+    </Key>
+    <Property Name="IdSolicitud" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NoFolio" Type="nvarchar" MaxLength="15" Nullable="false" />
+    <Property Name="RFC" Type="nvarchar" MaxLength="13" Nullable="false" />
+    <Property Name="ApellidoPaterno" Type="nvarchar" MaxLength="25" Nullable="false" />
+    <Property Name="ApellidoMaterno" Type="nvarchar" MaxLength="25" Nullable="false" />
+    <Property Name="Nombres" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="TipoCredito" Type="varchar" MaxLength="9" Nullable="false" />
+    <Property Name="Tienda" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="Estado" Type="varchar" MaxLength="11" Nullable="false" />
+    <Property Name="Fecha" Type="datetime" Nullable="false" />
+    <Property Name="sUsuario" Type="nchar" MaxLength="20" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'IMSOL_mp.dbo.IMvw_AppFollowingReportStore' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="IMvw_AppFollowingReportStore">
+    <Key>
+      <PropertyRef Name="IdSolicitud" />
+      <PropertyRef Name="NoFolio" />
+      <PropertyRef Name="RFC" />
+      <PropertyRef Name="ApellidoPaterno" />
+      <PropertyRef Name="ApellidoMaterno" />
+      <PropertyRef Name="Nombres" />
+      <PropertyRef Name="TipoCredito" />
+      <PropertyRef Name="Tienda" />
+      <PropertyRef Name="Estado" />
+      <PropertyRef Name="Fecha" />
+      <PropertyRef Name="sUsuario" />
+    </Key>
+    <Property Name="IdSolicitud" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NoFolio" Type="nvarchar" MaxLength="15" Nullable="false" />
+    <Property Name="RFC" Type="nvarchar" MaxLength="13" Nullable="false" />
+    <Property Name="ApellidoPaterno" Type="nvarchar" MaxLength="25" Nullable="false" />
+    <Property Name="ApellidoMaterno" Type="nvarchar" MaxLength="25" Nullable="false" />
+    <Property Name="Nombres" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="TipoCredito" Type="varchar" MaxLength="9" Nullable="false" />
+    <Property Name="Tienda" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="Estado" Type="nchar" MaxLength="20" Nullable="false" />
+    <Property Name="Fecha" Type="datetime" Nullable="false" />
+    <Property Name="sUsuario" Type="nchar" MaxLength="10" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'IMSOL_mp.dbo.IMvw_AppLastLog' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="IMvw_AppLastLog">
+    <Key>
+      <PropertyRef Name="IdSolicitud" />
+    </Key>
+    <Property Name="IdSolicitud" Type="int" Nullable="false" />
+    <Property Name="FechaEstatus" Type="datetime" />
+    <Property Name="Estatus" Type="nchar" MaxLength="3" />
+    <Property Name="Usuario" Type="nchar" MaxLength="20" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'IMSOL_mp.dbo.IMvw_AppLastLogFull' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="IMvw_AppLastLogFull">
+    <Key>
+      <PropertyRef Name="IdSolicitud" />
+      <PropertyRef Name="FechaEstatus" />
+      <PropertyRef Name="Estatus" />
+      <PropertyRef Name="Terminado" />
+    </Key>
+    <Property Name="IdSolicitud" Type="int" Nullable="false" />
+    <Property Name="FechaEstatus" Type="datetime" Nullable="false" />
+    <Property Name="Estatus" Type="nchar" MaxLength="3" Nullable="false" />
+    <Property Name="Usuario" Type="nchar" MaxLength="20" />
+    <Property Name="Terminado" Type="tinyint" Nullable="false" />
+    <Property Name="Superestatus" Type="nchar" MaxLength="3" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'IMSOL_mp.dbo.IMvw_AppLog' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="IMvw_AppLog">
+    <Key>
+      <PropertyRef Name="IdLogestatus" />
+      <PropertyRef Name="IdSolicitud" />
+      <PropertyRef Name="Fecha" />
+      <PropertyRef Name="Estatus" />
+      <PropertyRef Name="Descripcion" />
+    </Key>
+    <Property Name="IdLogestatus" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdSolicitud" Type="int" Nullable="false" />
+    <Property Name="Fecha" Type="datetime" Nullable="false" />
+    <Property Name="Usuario" Type="nchar" MaxLength="20" />
+    <Property Name="Terminado" Type="tinyint" />
+    <Property Name="Estatus" Type="nchar" MaxLength="20" Nullable="false" />
+    <Property Name="Descripcion" Type="nchar" MaxLength="50" Nullable="false" />
+    <Property Name="Superestatus" Type="nchar" MaxLength="3" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'IMSOL_mp.dbo.IMvw_AppNotas' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="IMvw_AppNotas">
+    <Key>
+      <PropertyRef Name="IdSolicitud" />
+      <PropertyRef Name="IDNota" />
+      <PropertyRef Name="Nota" />
+    </Key>
+    <Property Name="IdSolicitud" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IDNota" Type="int" Nullable="false" />
+    <Property Name="Nota" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'IMSOL_mp.dbo.IMvw_AppViewReport' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="IMvw_AppViewReport">
+    <Key>
+      <PropertyRef Name="IdSolicitud" />
+      <PropertyRef Name="NoFolio" />
+      <PropertyRef Name="RFC" />
+      <PropertyRef Name="ApellidoPaterno" />
+      <PropertyRef Name="ApellidoMaterno" />
+      <PropertyRef Name="Nombres" />
+      <PropertyRef Name="TipoCredito" />
+      <PropertyRef Name="Tienda" />
+      <PropertyRef Name="Fecha" />
+      <PropertyRef Name="Usuario" />
+      <PropertyRef Name="IDEstado" />
+      <PropertyRef Name="Estado" />
+      <PropertyRef Name="IDSuperEstado" />
+      <PropertyRef Name="SuperEstado" />
+      <PropertyRef Name="Terminado" />
+    </Key>
+    <Property Name="IdSolicitud" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NoFolio" Type="nvarchar" MaxLength="15" Nullable="false" />
+    <Property Name="RFC" Type="nvarchar" MaxLength="13" Nullable="false" />
+    <Property Name="ApellidoPaterno" Type="nvarchar" MaxLength="25" Nullable="false" />
+    <Property Name="ApellidoMaterno" Type="nvarchar" MaxLength="25" Nullable="false" />
+    <Property Name="Nombres" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="TipoCredito" Type="varchar" MaxLength="9" Nullable="false" />
+    <Property Name="Tienda" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="Fecha" Type="datetime" Nullable="false" />
+    <Property Name="Usuario" Type="nchar" MaxLength="20" Nullable="false" />
+    <Property Name="IDEstado" Type="nchar" MaxLength="3" Nullable="false" />
+    <Property Name="Estado" Type="nchar" MaxLength="20" Nullable="false" />
+    <Property Name="IDSuperEstado" Type="nchar" MaxLength="3" Nullable="false" />
+    <Property Name="SuperEstado" Type="nchar" MaxLength="20" Nullable="false" />
+    <Property Name="Terminado" Type="tinyint" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'IMSOL_mp.dbo.IMvw_AppWorkFlow' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="IMvw_AppWorkFlow">
+    <Key>
+      <PropertyRef Name="IdSolicitud" />
+      <PropertyRef Name="NoFolio" />
+      <PropertyRef Name="RFC" />
+      <PropertyRef Name="ApellidoPaterno" />
+      <PropertyRef Name="ApellidoMaterno" />
+      <PropertyRef Name="Nombres" />
+      <PropertyRef Name="TipoCredito" />
+      <PropertyRef Name="Tienda" />
+      <PropertyRef Name="Usuario" />
+      <PropertyRef Name="IDEstatus" />
+      <PropertyRef Name="Estatus" />
+      <PropertyRef Name="FechaEstatus" />
+      <PropertyRef Name="Terminado" />
+    </Key>
+    <Property Name="IdSolicitud" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NoFolio" Type="nvarchar" MaxLength="15" Nullable="false" />
+    <Property Name="RFC" Type="nvarchar" MaxLength="13" Nullable="false" />
+    <Property Name="ApellidoPaterno" Type="nvarchar" MaxLength="25" Nullable="false" />
+    <Property Name="ApellidoMaterno" Type="nvarchar" MaxLength="25" Nullable="false" />
+    <Property Name="Nombres" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="TipoCredito" Type="nvarchar" MaxLength="2" Nullable="false" />
+    <Property Name="Tienda" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="Usuario" Type="nchar" MaxLength="20" Nullable="false" />
+    <Property Name="Aplicacion" Type="nchar" MaxLength="100" />
+    <Property Name="IDEstatus" Type="nchar" MaxLength="3" Nullable="false" />
+    <Property Name="Estatus" Type="nchar" MaxLength="20" Nullable="false" />
+    <Property Name="FechaEstatus" Type="datetime" Nullable="false" />
+    <Property Name="Terminado" Type="tinyint" Nullable="false" />
+    <Property Name="Superestatus" Type="nchar" MaxLength="3" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'IMSOL_mp.dbo.IMvw_AssignedWF' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="IMvw_AssignedWF">
+    <Key>
+      <PropertyRef Name="IdSolicitud" />
+      <PropertyRef Name="NoFolio" />
+      <PropertyRef Name="RFC" />
+      <PropertyRef Name="ApellidoPaterno" />
+      <PropertyRef Name="ApellidoMaterno" />
+      <PropertyRef Name="Nombres" />
+      <PropertyRef Name="TipoCredito" />
+      <PropertyRef Name="Tienda" />
+      <PropertyRef Name="IDEstatus" />
+      <PropertyRef Name="Estatus" />
+    </Key>
+    <Property Name="IdSolicitud" Type="int" Nullable="false" />
+    <Property Name="NoFolio" Type="nvarchar" MaxLength="15" Nullable="false" />
+    <Property Name="RFC" Type="nvarchar" MaxLength="13" Nullable="false" />
+    <Property Name="ApellidoPaterno" Type="nvarchar" MaxLength="25" Nullable="false" />
+    <Property Name="ApellidoMaterno" Type="nvarchar" MaxLength="25" Nullable="false" />
+    <Property Name="Nombres" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="TipoCredito" Type="varchar" MaxLength="9" Nullable="false" />
+    <Property Name="Tienda" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="Usuario" Type="nchar" MaxLength="20" />
+    <Property Name="Aplicacion" Type="nchar" MaxLength="100" />
+    <Property Name="IDEstatus" Type="nchar" MaxLength="3" Nullable="false" />
+    <Property Name="Estatus" Type="nchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'IMSOL_mp.dbo.IMvw_Estatus' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="IMvw_Estatus">
+    <Key>
+      <PropertyRef Name="IDEstatus" />
+      <PropertyRef Name="Estatus" />
+      <PropertyRef Name="Descripcion" />
+    </Key>
+    <Property Name="IDEstatus" Type="nchar" MaxLength="3" Nullable="false" />
+    <Property Name="Estatus" Type="nchar" MaxLength="20" Nullable="false" />
+    <Property Name="Descripcion" Type="nchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'IMSOL_mp.dbo.IMvw_ListReports' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="IMvw_ListReports">
+    <Key>
+      <PropertyRef Name="IDReport" />
+      <PropertyRef Name="ReportType" />
+    </Key>
+    <Property Name="IDReport" Type="int" Nullable="false" />
+    <Property Name="ReportName" Type="nchar" MaxLength="20" />
+    <Property Name="ReportType" Type="nchar" MaxLength="20" Nullable="false" />
+    <Property Name="Parameters" Type="nchar" MaxLength="50" />
+    <Property Name="FileExtensionName" Type="nchar" MaxLength="10" />
+    <Property Name="FileName" Type="nchar" MaxLength="20" />
+    <Property Name="StoreProcedureName" Type="nchar" MaxLength="20" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'IMSOL_mp.dbo.IMvw_MonitorLog' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="IMvw_MonitorLog">
+    <Key>
+      <PropertyRef Name="IdSolicitud" />
+      <PropertyRef Name="NoFolio" />
+      <PropertyRef Name="Nombres" />
+      <PropertyRef Name="ApellidoMaterno" />
+      <PropertyRef Name="ApellidoPaterno" />
+      <PropertyRef Name="IdLogestatus" />
+      <PropertyRef Name="Fecha" />
+      <PropertyRef Name="Newestatus" />
+    </Key>
+    <Property Name="IdSolicitud" Type="int" Nullable="false" />
+    <Property Name="NoFolio" Type="nvarchar" MaxLength="15" Nullable="false" />
+    <Property Name="Nombres" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="ApellidoMaterno" Type="nvarchar" MaxLength="25" Nullable="false" />
+    <Property Name="ApellidoPaterno" Type="nvarchar" MaxLength="25" Nullable="false" />
+    <Property Name="IdLogestatus" Type="int" Nullable="false" />
+    <Property Name="Fecha" Type="datetime" Nullable="false" />
+    <Property Name="sUsuario" Type="nchar" MaxLength="20" />
+    <Property Name="Terminado" Type="tinyint" />
+    <Property Name="Newestatus" Type="nchar" MaxLength="3" Nullable="false" />
+    <Property Name="Superestatus" Type="nchar" MaxLength="3" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'IMSOL_mp.dbo.IMvw_Report_DocControl' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="IMvw_Report_DocControl">
+    <Key>
+      <PropertyRef Name="IdSolicitud" />
+      <PropertyRef Name="NoFolio" />
+      <PropertyRef Name="RFC" />
+      <PropertyRef Name="Nombres" />
+      <PropertyRef Name="ApellidoMaterno" />
+      <PropertyRef Name="ApellidoPaterno" />
+      <PropertyRef Name="Etiqueta" />
+      <PropertyRef Name="Value" />
+      <PropertyRef Name="IDEstatus" />
+      <PropertyRef Name="IDCampo" />
+    </Key>
+    <Property Name="IdSolicitud" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NoFolio" Type="nvarchar" MaxLength="15" Nullable="false" />
+    <Property Name="RFC" Type="nvarchar" MaxLength="13" Nullable="false" />
+    <Property Name="Nombres" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="ApellidoMaterno" Type="nvarchar" MaxLength="25" Nullable="false" />
+    <Property Name="ApellidoPaterno" Type="nvarchar" MaxLength="25" Nullable="false" />
+    <Property Name="Etiqueta" Type="nchar" MaxLength="50" Nullable="false" />
+    <Property Name="Value" Type="nchar" MaxLength="100" Nullable="false" />
+    <Property Name="IDEstatus" Type="nchar" MaxLength="3" Nullable="false" />
+    <Property Name="IDCampo" Type="int" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'IMSOL_mp.dbo.IMvw_ReportPAGARE' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="IMvw_ReportPAGARE">
+    <Key>
+      <PropertyRef Name="IdSolicitud" />
+      <PropertyRef Name="NoFolio" />
+      <PropertyRef Name="RFC" />
+      <PropertyRef Name="ApellidoPaterno" />
+      <PropertyRef Name="ApellidoMaterno" />
+      <PropertyRef Name="Nombres" />
+      <PropertyRef Name="Tienda" />
+      <PropertyRef Name="Value" />
+    </Key>
+    <Property Name="IdSolicitud" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NoFolio" Type="nvarchar" MaxLength="15" Nullable="false" />
+    <Property Name="RFC" Type="nvarchar" MaxLength="13" Nullable="false" />
+    <Property Name="ApellidoPaterno" Type="nvarchar" MaxLength="25" Nullable="false" />
+    <Property Name="ApellidoMaterno" Type="nvarchar" MaxLength="25" Nullable="false" />
+    <Property Name="Nombres" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="Tienda" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="Value" Type="nchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'IMSOL_mp.dbo.IMvw_ReportSpec' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="IMvw_ReportSpec">
+    <Key>
+      <PropertyRef Name="IdSolicitud" />
+      <PropertyRef Name="IDReport" />
+      <PropertyRef Name="IDEstatus" />
+      <PropertyRef Name="sUsuario" />
+    </Key>
+    <Property Name="IdSolicitud" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IDReport" Type="int" Nullable="false" />
+    <Property Name="IDEstatus" Type="nchar" MaxLength="3" Nullable="false" />
+    <Property Name="ReportName" Type="nchar" MaxLength="20" />
+    <Property Name="Parameters" Type="nchar" MaxLength="50" />
+    <Property Name="sUsuario" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="StoreProcedureName" Type="nchar" MaxLength="20" />
+    <Property Name="FileName" Type="nchar" MaxLength="20" />
+    <Property Name="IDReportType" Type="int" />
+    <Property Name="FileExtensionName" Type="nchar" MaxLength="10" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'IMSOL_mp.dbo.IMvw_ReportSpecObject' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="IMvw_ReportSpecObject">
+    <Key>
+      <PropertyRef Name="IdSolicitud" />
+      <PropertyRef Name="IDReport" />
+      <PropertyRef Name="IDEstatus" />
+      <PropertyRef Name="sUsuario" />
+      <PropertyRef Name="FileObject" />
+    </Key>
+    <Property Name="IdSolicitud" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IDReport" Type="int" Nullable="false" />
+    <Property Name="IDEstatus" Type="nchar" MaxLength="3" Nullable="false" />
+    <Property Name="ReportName" Type="nchar" MaxLength="20" />
+    <Property Name="Parameters" Type="nchar" MaxLength="50" />
+    <Property Name="sUsuario" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="StoreProcedureName" Type="nchar" MaxLength="20" />
+    <Property Name="FileName" Type="nchar" MaxLength="20" />
+    <Property Name="IDReportType" Type="int" />
+    <Property Name="FileExtensionName" Type="nchar" MaxLength="10" />
+    <Property Name="FileObject" Type="varbinary(max)" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'IMSOL_mp.dbo.IMvw_SolicitudesDatos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="IMvw_SolicitudesDatos">
+    <Key>
+      <PropertyRef Name="IDSolicitud" />
+    </Key>
+    <Property Name="IDSolicitud" Type="int" Nullable="false" />
+    <Property Name="Tienda" Type="nchar" MaxLength="10" />
+    <Property Name="Promotor" Type="nchar" MaxLength="10" />
+    <Property Name="ApellidoPaterno" Type="nchar" MaxLength="50" />
+    <Property Name="ApellidoMaterno" Type="nchar" MaxLength="50" />
+    <Property Name="Nombre" Type="nchar" MaxLength="50" />
+    <Property Name="TipoCredito" Type="bit" />
+    <Property Name="Sexo" Type="bit" />
+    <Property Name="Nacionalidad" Type="bit" />
+    <Property Name="CalleDomicilioActual" Type="nchar" MaxLength="50" />
+    <Property Name="NoExterior" Type="nchar" MaxLength="50" />
+    <Property Name="NoInterior" Type="nchar" MaxLength="50" />
+    <Property Name="Cruzacon" Type="nchar" MaxLength="50" />
+    <Property Name="Colonia" Type="nchar" MaxLength="50" />
+    <Property Name="Municipio" Type="nchar" MaxLength="50" />
+    <Property Name="Estado" Type="nchar" MaxLength="50" />
+    <Property Name="CP" Type="int" />
+    <Property Name="TiempoVivirDomicilioAA" Type="int" />
+    <Property Name="TiempoVivirDomicilioMM" Type="int" />
+    <Property Name="TiempoDomicilioAnteriorAA" Type="int" />
+    <Property Name="TiempoDomicilioAnteriorMM" Type="int" />
+    <Property Name="TelefonoCasa" Type="nchar" MaxLength="10" />
+    <Property Name="TelefonoOficina" Type="nchar" MaxLength="10" />
+    <Property Name="Extension" Type="nchar" MaxLength="10" />
+    <Property Name="TelefonoCelular" Type="nchar" MaxLength="10" />
+    <Property Name="EMail" Type="nchar" MaxLength="50" />
+    <Property Name="Casa" Type="nchar" MaxLength="50" />
+    <Property Name="PagoMensual" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="FechaNacimientoDD" Type="int" />
+    <Property Name="FechaNacimientoMM" Type="int" />
+    <Property Name="FechaNacimientoAA" Type="int" />
+    <Property Name="RFC" Type="nchar" MaxLength="13" />
+    <Property Name="EstadoCivil" Type="nchar" MaxLength="50" />
+    <Property Name="NoDependientes" Type="int" />
+    <Property Name="NombreSolteroConyuge" Type="nchar" MaxLength="50" />
+    <Property Name="ConyugeTelefonoCelular" Type="nchar" MaxLength="10" />
+    <Property Name="ConyugeEMail" Type="nchar" MaxLength="50" />
+    <Property Name="ConyugeFechaNacimientoDD" Type="int" />
+    <Property Name="ConyugeFechaNacimientoMM" Type="int" />
+    <Property Name="ConyugeFechaNacimientoAA" Type="int" />
+    <Property Name="ConyugeRFC" Type="nchar" MaxLength="13" />
+    <Property Name="NombreEmpresa" Type="nchar" MaxLength="50" />
+    <Property Name="Puesto" Type="nchar" MaxLength="50" />
+    <Property Name="Giro" Type="nchar" MaxLength="50" />
+    <Property Name="Sector" Type="nchar" MaxLength="50" />
+    <Property Name="Caracter" Type="nchar" MaxLength="50" />
+    <Property Name="AntiguedadAA" Type="int" />
+    <Property Name="AntiguedadMM" Type="int" />
+    <Property Name="IngresosComprobablessueldo" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="IngresosComprobablesConyuge" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="IngresosComprobablesPadres" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="IngresosComprobablesOtros" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="IngresosComprobablesTotal" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Escolaridad" Type="nchar" MaxLength="50" />
+    <Property Name="EmpleoAnteriorEmpresa" Type="nchar" MaxLength="50" />
+    <Property Name="EmpleoAnteriorAntiguedadAA" Type="int" />
+    <Property Name="EmpleoAnteriorAntiguedadMM" Type="int" />
+    <Property Name="EmpleoAnteriorPuesto" Type="nchar" MaxLength="50" />
+    <Property Name="Ref1Institucion" Type="nchar" MaxLength="50" />
+    <Property Name="Ref1Tipo" Type="int" />
+    <Property Name="Ref1NodeCta" Type="nchar" MaxLength="50" />
+    <Property Name="Ref2Institucion" Type="nchar" MaxLength="50" />
+    <Property Name="Ref2Tipo" Type="int" />
+    <Property Name="Ref2NodeCta" Type="nchar" MaxLength="50" />
+    <Property Name="RefPer1Nombre" Type="nchar" MaxLength="50" />
+    <Property Name="RefPer1Telefono" Type="nchar" MaxLength="50" />
+    <Property Name="RefPer2Nombre" Type="nchar" MaxLength="50" />
+    <Property Name="RefPer2Telefono" Type="nchar" MaxLength="50" />
+    <Property Name="RefPer3Nombre" Type="nchar" MaxLength="50" />
+    <Property Name="RefPer3Telefono" Type="nchar" MaxLength="50" />
+    <Property Name="EdoCuenta" Type="int" />
+    <Property Name="NombreEmpresaConyuge" Type="nchar" MaxLength="50" />
+    <Property Name="PuestoConyuge" Type="nchar" MaxLength="50" />
+    <Property Name="DomicilioEmpresaConyuge" Type="nchar" MaxLength="50" />
+    <Property Name="DomicilioEmpresa" Type="nchar" MaxLength="50" />
+    <Property Name="RefPer1Domicilio" Type="nchar" MaxLength="50" />
+    <Property Name="RefPer2Domicilio" Type="nchar" MaxLength="50" />
+    <Property Name="RefPer3Domicilio" Type="nchar" MaxLength="50" />
+    <Property Name="TarjAdic1Nombre" Type="nchar" MaxLength="50" />
+    <Property Name="TarjAdic1Telefono" Type="nchar" MaxLength="50" />
+    <Property Name="TarjAdic2Nombre" Type="nchar" MaxLength="50" />
+    <Property Name="TarjAdic2Telefono" Type="nchar" MaxLength="50" />
+    <Property Name="TarjAdic3Nombre" Type="nchar" MaxLength="50" />
+    <Property Name="TarjAdic3Telefono" Type="nchar" MaxLength="50" />
+    <Property Name="MontoCredito" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Tradicional" Type="bit" />
+    <Property Name="PagosFijos" Type="bit" />
+    <Property Name="PreAprobado" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK_tblEstatusCampos_tblCampos">
+    <End Role="tblCampos" Type="Self.tblCampos" Multiplicity="1" />
+    <End Role="tblEstatusCampos" Type="Self.tblEstatusCampos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblCampos">
+        <PropertyRef Name="IDCampo" />
+      </Principal>
+      <Dependent Role="tblEstatusCampos">
+        <PropertyRef Name="IDCampo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblEstatusCampos_tblEstatusCampos">
+    <End Role="tblEstatus" Type="Self.tblEstatus" Multiplicity="1" />
+    <End Role="tblEstatusCampos" Type="Self.tblEstatusCampos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblEstatus">
+        <PropertyRef Name="IDEstatus" />
+      </Principal>
+      <Dependent Role="tblEstatusCampos">
+        <PropertyRef Name="IDEstatus" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblFlujoTrabajos_tblEstatus">
+    <End Role="tblEstatus" Type="Self.tblEstatus" Multiplicity="1" />
+    <End Role="tblFlujoTrabajos" Type="Self.tblFlujoTrabajos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblEstatus">
+        <PropertyRef Name="IDEstatus" />
+      </Principal>
+      <Dependent Role="tblFlujoTrabajos">
+        <PropertyRef Name="IDEstatus" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblFlujoTrabajos_tblFlujos">
+    <End Role="tblFlujos" Type="Self.tblFlujos" Multiplicity="1" />
+    <End Role="tblFlujoTrabajos" Type="Self.tblFlujoTrabajos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblFlujos">
+        <PropertyRef Name="IDFlujo" />
+      </Principal>
+      <Dependent Role="tblFlujoTrabajos">
+        <PropertyRef Name="IDFlujo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblFlujoTrabajos_tblFlujoTipos">
+    <End Role="tblFlujoTipos" Type="Self.tblFlujoTipos" Multiplicity="1" />
+    <End Role="tblFlujoTrabajos" Type="Self.tblFlujoTrabajos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblFlujoTipos">
+        <PropertyRef Name="IDTipo" />
+      </Principal>
+      <Dependent Role="tblFlujoTrabajos">
+        <PropertyRef Name="IDTipo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblLogestatus_tblEstatus">
+    <End Role="tblEstatus" Type="Self.tblEstatus" Multiplicity="1" />
+    <End Role="tblLogestatus" Type="Self.tblLogestatus" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblEstatus">
+        <PropertyRef Name="IDEstatus" />
+      </Principal>
+      <Dependent Role="tblLogestatus">
+        <PropertyRef Name="Newestatus" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblLogestatus_tblSolicitudes">
+    <End Role="tblSolicitudes" Type="Self.tblSolicitudes" Multiplicity="1" />
+    <End Role="tblLogestatus" Type="Self.tblLogestatus" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblSolicitudes">
+        <PropertyRef Name="IdSolicitud" />
+      </Principal>
+      <Dependent Role="tblLogestatus">
+        <PropertyRef Name="IdSolicitud" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblLogTarj_tblSolicitudes">
+    <End Role="tblLogCat" Type="Self.tblLogCat" Multiplicity="1" />
+    <End Role="tblLogTarj" Type="Self.tblLogTarj" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblLogCat">
+        <PropertyRef Name="IDLogCat" />
+      </Principal>
+      <Dependent Role="tblLogTarj">
+        <PropertyRef Name="IDLogCat" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblReportEstatus_tblEstatus">
+    <End Role="tblEstatus" Type="Self.tblEstatus" Multiplicity="1" />
+    <End Role="tblReportEstatus" Type="Self.tblReportEstatus" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblEstatus">
+        <PropertyRef Name="IDEstatus" />
+      </Principal>
+      <Dependent Role="tblReportEstatus">
+        <PropertyRef Name="IDEstatus" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblReportEstatus_tblReports">
+    <End Role="tblReports" Type="Self.tblReports" Multiplicity="1" />
+    <End Role="tblReportEstatus" Type="Self.tblReportEstatus" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblReports">
+        <PropertyRef Name="IDReport" />
+      </Principal>
+      <Dependent Role="tblReportEstatus">
+        <PropertyRef Name="IDReport" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblReports_tblReportTypes">
+    <End Role="tblReportTypes" Type="Self.tblReportTypes" Multiplicity="0..1" />
+    <End Role="tblReports" Type="Self.tblReports" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblReportTypes">
+        <PropertyRef Name="IDReportType" />
+      </Principal>
+      <Dependent Role="tblReports">
+        <PropertyRef Name="IDReportType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblReportSecurity_tblReports">
+    <End Role="tblReports" Type="Self.tblReports" Multiplicity="1" />
+    <End Role="tblReportSecurity" Type="Self.tblReportSecurity" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblReports">
+        <PropertyRef Name="IDReport" />
+      </Principal>
+      <Dependent Role="tblReportSecurity">
+        <PropertyRef Name="IDReporte" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblReportSecurity_tblUsuariosClient">
+    <End Role="tblUsuariosClient" Type="Self.tblUsuariosClient" Multiplicity="1" />
+    <End Role="tblReportSecurity" Type="Self.tblReportSecurity" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblUsuariosClient">
+        <PropertyRef Name="sUsuario" />
+      </Principal>
+      <Dependent Role="tblReportSecurity">
+        <PropertyRef Name="sUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblSolicitudCampos_tblCampos">
+    <End Role="tblCampos" Type="Self.tblCampos" Multiplicity="1" />
+    <End Role="tblSolicitudCampos" Type="Self.tblSolicitudCampos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblCampos">
+        <PropertyRef Name="IDCampo" />
+      </Principal>
+      <Dependent Role="tblSolicitudCampos">
+        <PropertyRef Name="IDCampo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblSolicitudCampos_tblEstatus">
+    <End Role="tblEstatus" Type="Self.tblEstatus" Multiplicity="1" />
+    <End Role="tblSolicitudCampos" Type="Self.tblSolicitudCampos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblEstatus">
+        <PropertyRef Name="IDEstatus" />
+      </Principal>
+      <Dependent Role="tblSolicitudCampos">
+        <PropertyRef Name="IDEstatus" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblSolicitudReporteObjeto_tblReports">
+    <End Role="tblReports" Type="Self.tblReports" Multiplicity="1" />
+    <End Role="tblSolicitudReporteObjeto" Type="Self.tblSolicitudReporteObjeto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblReports">
+        <PropertyRef Name="IDReport" />
+      </Principal>
+      <Dependent Role="tblSolicitudReporteObjeto">
+        <PropertyRef Name="IDReport" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblUsuariosTiendas_tblUsuarioClient">
+    <End Role="tblUsuariosClient" Type="Self.tblUsuariosClient" Multiplicity="1" />
+    <End Role="tblUsuariosTiendas" Type="Self.tblUsuariosTiendas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblUsuariosClient">
+        <PropertyRef Name="sUsuario" />
+      </Principal>
+      <Dependent Role="tblUsuariosTiendas">
+        <PropertyRef Name="sUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="Actualiza_Confirmado" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IDprecalificador" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="Actualiza_Estaus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Solicitud" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="Actualiza_PreCalificacion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Solicitud" Type="varchar" Mode="In" />
+    <Parameter Name="Idpre" Type="int" Mode="In" />
+    <Parameter Name="Resultado" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="Actualiza_Promotor" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Solicitud" Type="varchar" Mode="In" />
+    <Parameter Name="Promotor" Type="varchar" Mode="In" />
+    <Parameter Name="Resultado" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="ActualizarPreAprobado" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Resultado" Type="varchar" Mode="In" />
+    <Parameter Name="IdSol" Type="int" Mode="In" />
+  </Function>
+  <Function Name="Buscar_Pendientes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Tienda" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="Buscar_Solicitud" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="nombre" Type="varchar" Mode="In" />
+    <Parameter Name="apaterno" Type="varchar" Mode="In" />
+    <Parameter Name="amaterno" Type="varchar" Mode="In" />
+    <Parameter Name="fecha" Type="varchar" Mode="In" />
+    <Parameter Name="Tienda" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="Buscar_SolicitudPre" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="nombre" Type="varchar" Mode="In" />
+    <Parameter Name="apaterno" Type="varchar" Mode="In" />
+    <Parameter Name="amaterno" Type="varchar" Mode="In" />
+    <Parameter Name="fecha" Type="varchar" Mode="In" />
+    <Parameter Name="Tienda" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="Buscar_SolicitudPrePro" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="nombre" Type="varchar" Mode="In" />
+    <Parameter Name="apaterno" Type="varchar" Mode="In" />
+    <Parameter Name="amaterno" Type="varchar" Mode="In" />
+    <Parameter Name="fecha" Type="varchar" Mode="In" />
+    <Parameter Name="Tienda" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="Buscar_SolicitudPrePro2" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="nombre" Type="varchar" Mode="In" />
+    <Parameter Name="apaterno" Type="varchar" Mode="In" />
+    <Parameter Name="amaterno" Type="varchar" Mode="In" />
+    <Parameter Name="fecha" Type="varchar" Mode="In" />
+    <Parameter Name="Tienda" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="exec_IMspr_vw_ReportSpec__DEMOUSERVF___300" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="exec IMspr_vw_ReportSpec 'DEMOUSERVF', 300">
+    <Parameter Name="sUsuario" Type="nvarchar" Mode="In" />
+    <Parameter Name="IDSolicitud" Type="int" Mode="In" />
+  </Function>
+  <Function Name="Getsolicitudes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="fechadesde" Type="varchar" Mode="In" />
+    <Parameter Name="fechahasta" Type="varchar" Mode="In" />
+    <Parameter Name="estatus" Type="varchar" Mode="In" />
+    <Parameter Name="credito" Type="varchar" Mode="In" />
+    <Parameter Name="cliente" Type="varchar" Mode="In" />
+    <Parameter Name="idsolicitud" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="IMspr_CardManager" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="iAccion" Type="int" Mode="In" />
+    <Parameter Name="IDSolicitud" Type="int" Mode="In" />
+    <Parameter Name="sUsuario" Type="nvarchar" Mode="In" />
+    <Parameter Name="bTarjeta" Type="varbinary" Mode="In" />
+    <Parameter Name="sDigitosFin" Type="nvarchar" Mode="In" />
+    <Parameter Name="sSegmento" Type="nvarchar" Mode="In" />
+    <Parameter Name="sDivision" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="IMspr_ChgLogEstatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="iIDSolicitud" Type="int" Mode="In" />
+    <Parameter Name="sLogEstatusNew" Type="nvarchar" Mode="In" />
+    <Parameter Name="sLogSuperEstatus" Type="nvarchar" Mode="In" />
+    <Parameter Name="sUsuario" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="IMspr_ChgTypeApp" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="iIDSolicitud" Type="int" Mode="In" />
+    <Parameter Name="sTipoCredito" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="IMspr_GetAppData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Usuario" Type="nvarchar" Mode="In" />
+    <Parameter Name="IDSolicitud" Type="int" Mode="In" />
+    <Parameter Name="NoFolio" Type="nvarchar" Mode="In" />
+    <Parameter Name="RFC" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="IMspr_GetAppDataMonitoring" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Usuario" Type="nvarchar" Mode="In" />
+    <Parameter Name="Estatus" Type="nvarchar" Mode="In" />
+    <Parameter Name="FechaMonitor" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="IMspr_GetAppDataResume" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Usuario" Type="nvarchar" Mode="In" />
+    <Parameter Name="IDSolicitud" Type="int" Mode="In" />
+    <Parameter Name="NoFolio" Type="nvarchar" Mode="In" />
+    <Parameter Name="RFC" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="IMspr_GetComplementos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="IMspr_GetConsLog" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IDSolicitud" Type="int" Mode="In" />
+  </Function>
+  <Function Name="IMspr_GetEstatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="sUsuario" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="IMspr_GetEstatuSolicitud" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="iIDSolicitud" Type="int" Mode="In" />
+  </Function>
+  <Function Name="IMspr_GetLogEstatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IDSolicitud" Type="int" Mode="In" />
+  </Function>
+  <Function Name="IMspr_GetLogEstatusApp" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IDSolicitud" Type="int" Mode="In" />
+  </Function>
+  <Function Name="IMspr_GetNota" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IDSolicitud" Type="int" Mode="In" />
+    <Parameter Name="IDNota" Type="int" Mode="In" />
+  </Function>
+  <Function Name="IMspr_GetNotas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Solicitud" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="IMspr_GetNotas_Usuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Solicitud" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="IMspr_GetReportes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="desde" Type="varchar" Mode="In" />
+    <Parameter Name="hasta" Type="varchar" Mode="In" />
+    <Parameter Name="nombre" Type="varchar" Mode="In" />
+    <Parameter Name="apaterno" Type="varchar" Mode="In" />
+    <Parameter Name="amaterno" Type="varchar" Mode="In" />
+    <Parameter Name="promotor" Type="varchar" Mode="In" />
+    <Parameter Name="descripcion" Type="varchar" Mode="In" />
+    <Parameter Name="tienda" Type="varchar" Mode="In" />
+    <Parameter Name="idsolicitud" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="IMspr_GetReportes_Estatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="desde" Type="varchar" Mode="In" />
+    <Parameter Name="hasta" Type="varchar" Mode="In" />
+    <Parameter Name="nombre" Type="varchar" Mode="In" />
+    <Parameter Name="apaterno" Type="varchar" Mode="In" />
+    <Parameter Name="amaterno" Type="varchar" Mode="In" />
+    <Parameter Name="promotor" Type="varchar" Mode="In" />
+    <Parameter Name="descripcion" Type="varchar" Mode="In" />
+    <Parameter Name="tienda" Type="varchar" Mode="In" />
+    <Parameter Name="idsolicitud" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="IMspr_GetReportes_Estatus_Descripcion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="desde" Type="varchar" Mode="In" />
+    <Parameter Name="hasta" Type="varchar" Mode="In" />
+    <Parameter Name="nombre" Type="varchar" Mode="In" />
+    <Parameter Name="apaterno" Type="varchar" Mode="In" />
+    <Parameter Name="amaterno" Type="varchar" Mode="In" />
+    <Parameter Name="promotor" Type="varchar" Mode="In" />
+    <Parameter Name="descripcion" Type="varchar" Mode="In" />
+    <Parameter Name="tienda" Type="varchar" Mode="In" />
+    <Parameter Name="idsolicitud" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="IMspr_GetReportes_Total_Tienda" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="desde" Type="varchar" Mode="In" />
+    <Parameter Name="hasta" Type="varchar" Mode="In" />
+    <Parameter Name="nombre" Type="varchar" Mode="In" />
+    <Parameter Name="apaterno" Type="varchar" Mode="In" />
+    <Parameter Name="amaterno" Type="varchar" Mode="In" />
+    <Parameter Name="promotor" Type="varchar" Mode="In" />
+    <Parameter Name="descripcion" Type="varchar" Mode="In" />
+    <Parameter Name="tienda" Type="varchar" Mode="In" />
+    <Parameter Name="idsolicitud" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="IMspr_GetStore" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="sUser" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="IMspr_REPORTrestantes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="dtFechaInical" Type="datetime" Mode="In" />
+    <Parameter Name="dtFechaFinal" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="IMspr_SetAppData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="NoFolio" Type="nvarchar" Mode="In" />
+    <Parameter Name="RFC" Type="nvarchar" Mode="In" />
+    <Parameter Name="ApellidoPaterno" Type="nvarchar" Mode="In" />
+    <Parameter Name="ApellidoMaterno" Type="nvarchar" Mode="In" />
+    <Parameter Name="Nombres" Type="nvarchar" Mode="In" />
+    <Parameter Name="Fecha" Type="datetime" Mode="In" />
+    <Parameter Name="EstatusActual" Type="nvarchar" Mode="In" />
+    <Parameter Name="TipoCredito" Type="nvarchar" Mode="In" />
+    <Parameter Name="Tienda" Type="nvarchar" Mode="In" />
+    <Parameter Name="sUsuario" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="IMspr_SetAppDataComplete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IDSolicitud" Type="int" Mode="In" />
+    <Parameter Name="Tienda" Type="nchar" Mode="In" />
+    <Parameter Name="Promotor" Type="nchar" Mode="In" />
+    <Parameter Name="ApellidoPaterno" Type="nchar" Mode="In" />
+    <Parameter Name="ApellidoMaterno" Type="nchar" Mode="In" />
+    <Parameter Name="Nombre" Type="nchar" Mode="In" />
+    <Parameter Name="TipoCredito" Type="bit" Mode="In" />
+    <Parameter Name="Sexo" Type="bit" Mode="In" />
+    <Parameter Name="Nacionalidad" Type="bit" Mode="In" />
+    <Parameter Name="CalleDomicilioActual" Type="nchar" Mode="In" />
+    <Parameter Name="NoExterior" Type="nchar" Mode="In" />
+    <Parameter Name="NoInterior" Type="nchar" Mode="In" />
+    <Parameter Name="Cruzacon" Type="nchar" Mode="In" />
+    <Parameter Name="Colonia" Type="nchar" Mode="In" />
+    <Parameter Name="Municipio" Type="nchar" Mode="In" />
+    <Parameter Name="Estado" Type="nchar" Mode="In" />
+    <Parameter Name="CP" Type="int" Mode="In" />
+    <Parameter Name="TiempoVivirDomicilioAA" Type="int" Mode="In" />
+    <Parameter Name="TiempoVivirDomicilioMM" Type="int" Mode="In" />
+    <Parameter Name="TiempoDomicilioAnteriorAA" Type="int" Mode="In" />
+    <Parameter Name="TiempoDomicilioAnteriorMM" Type="int" Mode="In" />
+    <Parameter Name="TelefonoCasa" Type="nchar" Mode="In" />
+    <Parameter Name="TelefonoOficina" Type="nchar" Mode="In" />
+    <Parameter Name="Extension" Type="nchar" Mode="In" />
+    <Parameter Name="TelefonoCelular" Type="nchar" Mode="In" />
+    <Parameter Name="EMail" Type="nchar" Mode="In" />
+    <Parameter Name="Casa" Type="nchar" Mode="In" />
+    <Parameter Name="PagoMensual" Type="decimal" Mode="In" />
+    <Parameter Name="FechaNacimientoDD" Type="int" Mode="In" />
+    <Parameter Name="FechaNacimientoMM" Type="int" Mode="In" />
+    <Parameter Name="FechaNacimientoAA" Type="int" Mode="In" />
+    <Parameter Name="RFC" Type="nchar" Mode="In" />
+    <Parameter Name="EstadoCivil" Type="nchar" Mode="In" />
+    <Parameter Name="NoDependientes" Type="int" Mode="In" />
+    <Parameter Name="NombreSolteroConyuge" Type="nchar" Mode="In" />
+    <Parameter Name="ConyugeTelefonoCelular" Type="nchar" Mode="In" />
+    <Parameter Name="ConyugeEMail" Type="nchar" Mode="In" />
+    <Parameter Name="ConyugeFechaNacimientoDD" Type="int" Mode="In" />
+    <Parameter Name="ConyugeFechaNacimientoMM" Type="int" Mode="In" />
+    <Parameter Name="ConyugeFechaNacimientoAA" Type="int" Mode="In" />
+    <Parameter Name="ConyugeRFC" Type="nchar" Mode="In" />
+    <Parameter Name="NombreEmpresa" Type="nchar" Mode="In" />
+    <Parameter Name="Puesto" Type="nchar" Mode="In" />
+    <Parameter Name="Giro" Type="nchar" Mode="In" />
+    <Parameter Name="Sector" Type="nchar" Mode="In" />
+    <Parameter Name="Caracter" Type="nchar" Mode="In" />
+    <Parameter Name="AntiguedadAA" Type="int" Mode="In" />
+    <Parameter Name="AntiguedadMM" Type="int" Mode="In" />
+    <Parameter Name="IngresosComprobablessueldo" Type="decimal" Mode="In" />
+    <Parameter Name="IngresosComprobablesConyuge" Type="decimal" Mode="In" />
+    <Parameter Name="IngresosComprobablesPadres" Type="decimal" Mode="In" />
+    <Parameter Name="IngresosComprobablesOtros" Type="decimal" Mode="In" />
+    <Parameter Name="IngresosComprobablesTotal" Type="decimal" Mode="In" />
+    <Parameter Name="Escolaridad" Type="nchar" Mode="In" />
+    <Parameter Name="EmpleoAnteriorEmpresa" Type="nchar" Mode="In" />
+    <Parameter Name="EmpleoAnteriorAntiguedadAA" Type="int" Mode="In" />
+    <Parameter Name="EmpleoAnteriorAntiguedadMM" Type="int" Mode="In" />
+    <Parameter Name="EmpleoAnteriorPuesto" Type="nchar" Mode="In" />
+    <Parameter Name="Ref1Institucion" Type="nchar" Mode="In" />
+    <Parameter Name="Ref1Tipo" Type="int" Mode="In" />
+    <Parameter Name="Ref1NodeCta" Type="nchar" Mode="In" />
+    <Parameter Name="Ref2Institucion" Type="nchar" Mode="In" />
+    <Parameter Name="Ref2Tipo" Type="int" Mode="In" />
+    <Parameter Name="Ref2NodeCta" Type="nchar" Mode="In" />
+    <Parameter Name="RefPer1Nombre" Type="nchar" Mode="In" />
+    <Parameter Name="RefPer1Telefono" Type="nchar" Mode="In" />
+    <Parameter Name="RefPer2Nombre" Type="nchar" Mode="In" />
+    <Parameter Name="RefPer2Telefono" Type="nchar" Mode="In" />
+    <Parameter Name="RefPer3Nombre" Type="nchar" Mode="In" />
+    <Parameter Name="RefPer3Telefono" Type="nchar" Mode="In" />
+    <Parameter Name="EdoCuenta" Type="int" Mode="In" />
+    <Parameter Name="NombreEmpresaConyuge" Type="nchar" Mode="In" />
+    <Parameter Name="PuestoConyuge" Type="nchar" Mode="In" />
+    <Parameter Name="DomicilioEmpresaConyuge" Type="nchar" Mode="In" />
+    <Parameter Name="DomicilioEmpresa" Type="nchar" Mode="In" />
+    <Parameter Name="RefPer1Domicilio" Type="nchar" Mode="In" />
+    <Parameter Name="RefPer2Domicilio" Type="nchar" Mode="In" />
+    <Parameter Name="RefPer3Domicilio" Type="nchar" Mode="In" />
+    <Parameter Name="TarjAdic1Nombre" Type="nchar" Mode="In" />
+    <Parameter Name="TarjAdic1Telefono" Type="nchar" Mode="In" />
+    <Parameter Name="TarjAdic2Nombre" Type="nchar" Mode="In" />
+    <Parameter Name="TarjAdic2Telefono" Type="nchar" Mode="In" />
+    <Parameter Name="TarjAdic3Nombre" Type="nchar" Mode="In" />
+    <Parameter Name="TarjAdic3Telefono" Type="nchar" Mode="In" />
+    <Parameter Name="MontoCredito" Type="decimal" Mode="In" />
+    <Parameter Name="Tradicional" Type="bit" Mode="In" />
+    <Parameter Name="PagosFijos" Type="bit" Mode="In" />
+    <Parameter Name="sUsuario" Type="nvarchar" Mode="In" />
+    <Parameter Name="EstatusActual" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="IMspr_SetAppDataUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IDSolicitud" Type="int" Mode="In" />
+    <Parameter Name="NoFolio" Type="nvarchar" Mode="In" />
+    <Parameter Name="RFC" Type="nvarchar" Mode="In" />
+    <Parameter Name="ApellidoPaterno" Type="nvarchar" Mode="In" />
+    <Parameter Name="ApellidoMaterno" Type="nvarchar" Mode="In" />
+    <Parameter Name="Nombres" Type="nvarchar" Mode="In" />
+    <Parameter Name="TipoCredito" Type="nvarchar" Mode="In" />
+    <Parameter Name="Tienda" Type="nvarchar" Mode="In" />
+    <Parameter Name="sUsuario" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="IMspr_SetAppField" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="iIDSolicitud" Type="int" Mode="In" />
+    <Parameter Name="sEstatus" Type="nvarchar" Mode="In" />
+    <Parameter Name="iCampo" Type="int" Mode="In" />
+    <Parameter Name="sValue" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="IMspr_SetFinished" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IDSolicitud" Type="int" Mode="In" />
+    <Parameter Name="sEstatus" Type="nvarchar" Mode="In" />
+    <Parameter Name="iFinished" Type="int" Mode="In" />
+  </Function>
+  <Function Name="IMspr_SetImageData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IDSolicitud" Type="int" Mode="In" />
+    <Parameter Name="TipoImagen" Type="nvarchar" Mode="In" />
+    <Parameter Name="Imagen" Type="image" Mode="In" />
+    <Parameter Name="sUsuario" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="IMspr_SetNota" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IDSolicitud" Type="int" Mode="In" />
+    <Parameter Name="IDNota" Type="int" Mode="In" />
+    <Parameter Name="sNota" Type="varchar(max)" Mode="In" />
+  </Function>
+  <Function Name="IMspr_SetReportObject" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IDReport" Type="int" Mode="In" />
+    <Parameter Name="IDSolicitud" Type="int" Mode="In" />
+    <Parameter Name="FileObject" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="IMspr_UpdateComplementos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+    <Parameter Name="IdSolicitud" Type="int" Mode="In" />
+    <Parameter Name="Revisada" Type="bit" Mode="In" />
+    <Parameter Name="Reviso" Type="varchar" Mode="In" />
+    <Parameter Name="Fecha" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="IMspr_vw_AppAppFields" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IDSolicitud" Type="int" Mode="In" />
+    <Parameter Name="IDEstatus" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="IMspr_vw_AppFieldStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IDEstatus" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="IMspr_vw_AppFollowingReport" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Usuario" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="IMspr_vw_AppViewReport" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Usuario" Type="nvarchar" Mode="In" />
+    <Parameter Name="NoConfirmacion" Type="int" Mode="In" />
+    <Parameter Name="IDEstado" Type="nvarchar" Mode="In" />
+    <Parameter Name="Fecha1" Type="datetime" Mode="In" />
+    <Parameter Name="Fecha2" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="IMspr_vw_AppWorkFlow" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Usuario" Type="nvarchar" Mode="In" />
+    <Parameter Name="IDSolicitud" Type="int" Mode="In" />
+    <Parameter Name="dFechaDesde" Type="datetime" Mode="In" />
+    <Parameter Name="dFechaHasta" Type="datetime" Mode="In" />
+    <Parameter Name="XsEstatus" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="IMspr_vw_ListReports" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IDReport" Type="int" Mode="In" />
+  </Function>
+  <Function Name="IMspr_vw_ReportSpec" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="sUsuario" Type="nvarchar" Mode="In" />
+    <Parameter Name="IDSolicitud" Type="int" Mode="In" />
+  </Function>
+  <Function Name="MAXIDLog" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int">
+    <Parameter Name="iIDSolicitud" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_ActualizaImagen" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="pre" Type="varchar" Mode="In" />
+    <Parameter Name="Imagen" Type="image" Mode="In" />
+  </Function>
+  <Function Name="sp_cargarPrecal" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="fecha1" Type="varchar" Mode="In" />
+    <Parameter Name="fecha2" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="sp_InsertarPre" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="pre" Type="varchar" Mode="In" />
+    <Parameter Name="nombres" Type="varchar" Mode="In" />
+    <Parameter Name="ap" Type="varchar" Mode="In" />
+    <Parameter Name="am" Type="varchar" Mode="In" />
+    <Parameter Name="nac" Type="varchar" Mode="In" />
+    <Parameter Name="dom" Type="varchar" Mode="In" />
+    <Parameter Name="col" Type="varchar" Mode="In" />
+    <Parameter Name="cd" Type="varchar" Mode="In" />
+    <Parameter Name="mun" Type="varchar" Mode="In" />
+    <Parameter Name="est" Type="varchar" Mode="In" />
+    <Parameter Name="CP" Type="varchar" Mode="In" />
+    <Parameter Name="cel" Type="varchar" Mode="In" />
+    <Parameter Name="email" Type="varchar" Mode="In" />
+    <Parameter Name="tienda" Type="varchar" Mode="In" />
+    <Parameter Name="promotor" Type="varchar" Mode="In" />
+    <Parameter Name="fecha" Type="datetime" Mode="In" />
+    <Parameter Name="usu" Type="varchar" Mode="In" />
+    <Parameter Name="Imagen" Type="image" Mode="In" />
+  </Function>
+  <Function Name="sp_InsertarPre2" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="pre" Type="varchar" Mode="In" />
+    <Parameter Name="nombres" Type="varchar" Mode="In" />
+    <Parameter Name="ap" Type="varchar" Mode="In" />
+    <Parameter Name="am" Type="varchar" Mode="In" />
+    <Parameter Name="nac" Type="varchar" Mode="In" />
+    <Parameter Name="dom" Type="varchar" Mode="In" />
+    <Parameter Name="col" Type="varchar" Mode="In" />
+    <Parameter Name="cd" Type="varchar" Mode="In" />
+    <Parameter Name="mun" Type="varchar" Mode="In" />
+    <Parameter Name="est" Type="varchar" Mode="In" />
+    <Parameter Name="CP" Type="varchar" Mode="In" />
+    <Parameter Name="cel" Type="varchar" Mode="In" />
+    <Parameter Name="email" Type="varchar" Mode="In" />
+    <Parameter Name="tienda" Type="varchar" Mode="In" />
+    <Parameter Name="promotor" Type="varchar" Mode="In" />
+    <Parameter Name="fecha" Type="datetime" Mode="In" />
+    <Parameter Name="usu" Type="varchar" Mode="In" />
+    <Parameter Name="MTQ" Type="varchar" Mode="In" />
+    <Parameter Name="Confirmado" Type="int" Mode="In" />
+    <Parameter Name="Imagen" Type="image" Mode="In" />
+    <Parameter Name="rfc" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="sp_InsertarPre3" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="pre" Type="varchar" Mode="In" />
+    <Parameter Name="nombres" Type="varchar" Mode="In" />
+    <Parameter Name="ap" Type="varchar" Mode="In" />
+    <Parameter Name="am" Type="varchar" Mode="In" />
+    <Parameter Name="nac" Type="varchar" Mode="In" />
+    <Parameter Name="dom" Type="varchar" Mode="In" />
+    <Parameter Name="col" Type="varchar" Mode="In" />
+    <Parameter Name="cd" Type="varchar" Mode="In" />
+    <Parameter Name="mun" Type="varchar" Mode="In" />
+    <Parameter Name="est" Type="varchar" Mode="In" />
+    <Parameter Name="CP" Type="varchar" Mode="In" />
+    <Parameter Name="cel" Type="varchar" Mode="In" />
+    <Parameter Name="email" Type="varchar" Mode="In" />
+    <Parameter Name="tienda" Type="varchar" Mode="In" />
+    <Parameter Name="promotor" Type="varchar" Mode="In" />
+    <Parameter Name="fecha" Type="datetime" Mode="In" />
+    <Parameter Name="usu" Type="varchar" Mode="In" />
+    <Parameter Name="MTQ" Type="varchar" Mode="In" />
+    <Parameter Name="Confirmado" Type="int" Mode="In" />
+    <Parameter Name="rfc" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="sp_InsertarPre4" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="pre" Type="varchar" Mode="In" />
+    <Parameter Name="nombres" Type="varchar" Mode="In" />
+    <Parameter Name="ap" Type="varchar" Mode="In" />
+    <Parameter Name="am" Type="varchar" Mode="In" />
+    <Parameter Name="nac" Type="varchar" Mode="In" />
+    <Parameter Name="dom" Type="varchar" Mode="In" />
+    <Parameter Name="col" Type="varchar" Mode="In" />
+    <Parameter Name="cd" Type="varchar" Mode="In" />
+    <Parameter Name="mun" Type="varchar" Mode="In" />
+    <Parameter Name="est" Type="varchar" Mode="In" />
+    <Parameter Name="CP" Type="varchar" Mode="In" />
+    <Parameter Name="cel" Type="varchar" Mode="In" />
+    <Parameter Name="email" Type="varchar" Mode="In" />
+    <Parameter Name="tienda" Type="varchar" Mode="In" />
+    <Parameter Name="promotor" Type="varchar" Mode="In" />
+    <Parameter Name="fecha" Type="datetime" Mode="In" />
+    <Parameter Name="usu" Type="varchar" Mode="In" />
+    <Parameter Name="MTQ" Type="varchar" Mode="In" />
+    <Parameter Name="Confirmado" Type="int" Mode="In" />
+    <Parameter Name="rfc" Type="varchar" Mode="In" />
+    <Parameter Name="curp" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="sp_obtenDetalle" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IDprecalificador" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="sp_obtenMTQ" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IDprecalificador" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="sp_verificar_rfc" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="rfc" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="sp_VerificarSinSubir" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="tienda" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="Update_Promotor" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="Validar_Solicitud" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IDSolicitud" Type="int" Mode="In" />
+  </Function>
+  <EntityContainer Name="IMSOL_mpModelStoreContainer">
+    <EntitySet Name="tblCampos" EntityType="Self.tblCampos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblConsultas" EntityType="Self.tblConsultas" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblEstatus" EntityType="Self.tblEstatus" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblEstatusCampos" EntityType="Self.tblEstatusCampos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblFlujos" EntityType="Self.tblFlujos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblFlujoTipos" EntityType="Self.tblFlujoTipos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblFlujoTrabajos" EntityType="Self.tblFlujoTrabajos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblImagenes" EntityType="Self.tblImagenes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblLogCat" EntityType="Self.tblLogCat" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblLogestatus" EntityType="Self.tblLogestatus" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblLogTarj" EntityType="Self.tblLogTarj" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblNotas" EntityType="Self.tblNotas" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblReportEstatus" EntityType="Self.tblReportEstatus" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblReports" EntityType="Self.tblReports" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblReportSecurity" EntityType="Self.tblReportSecurity" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblReportTypes" EntityType="Self.tblReportTypes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblSolicitudCampos" EntityType="Self.tblSolicitudCampos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblSolicitudes" EntityType="Self.tblSolicitudes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblSolicitudesDatos" EntityType="Self.tblSolicitudesDatos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblSolicitudReporteObjeto" EntityType="Self.tblSolicitudReporteObjeto" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblSolUltimoLog" EntityType="Self.tblSolUltimoLog" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblTarjSolicitudes" EntityType="Self.tblTarjSolicitudes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblUsuariosClient" EntityType="Self.tblUsuariosClient" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblUsuariosTiendas" EntityType="Self.tblUsuariosTiendas" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblComplementos" EntityType="Self.tblComplementos" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [tblComplementos].[ID] AS [ID], 
+    [tblComplementos].[IDSolicitud] AS [IDSolicitud], 
+    [tblComplementos].[Revisada] AS [Revisada], 
+    [tblComplementos].[Reviso] AS [Reviso], 
+    [tblComplementos].[Fecha] AS [Fecha], 
+    [tblComplementos].[Fecha_Envio] AS [Fecha_Envio]
+    FROM [dbo].[tblComplementos] AS [tblComplementos]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="TblPrecalificaciones" EntityType="Self.TblPrecalificaciones" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [TblPrecalificaciones].[IDprecalificador] AS [IDprecalificador], 
+    [TblPrecalificaciones].[Precalificacion] AS [Precalificacion], 
+    [TblPrecalificaciones].[Nombres] AS [Nombres], 
+    [TblPrecalificaciones].[Ap_Paterno] AS [Ap_Paterno], 
+    [TblPrecalificaciones].[Ap_Materno] AS [Ap_Materno], 
+    [TblPrecalificaciones].[Fecha_de_Nacimiento] AS [Fecha_de_Nacimiento], 
+    [TblPrecalificaciones].[Domicilio] AS [Domicilio], 
+    [TblPrecalificaciones].[Colonia] AS [Colonia], 
+    [TblPrecalificaciones].[Ciudad] AS [Ciudad], 
+    [TblPrecalificaciones].[Municipio] AS [Municipio], 
+    [TblPrecalificaciones].[Estado] AS [Estado], 
+    [TblPrecalificaciones].[CP] AS [CP], 
+    [TblPrecalificaciones].[Celular] AS [Celular], 
+    [TblPrecalificaciones].[Email] AS [Email], 
+    [TblPrecalificaciones].[Tienda] AS [Tienda], 
+    [TblPrecalificaciones].[Promotor] AS [Promotor], 
+    [TblPrecalificaciones].[Fecha] AS [Fecha], 
+    [TblPrecalificaciones].[Usuario] AS [Usuario], 
+    [TblPrecalificaciones].[Imagen] AS [Imagen], 
+    [TblPrecalificaciones].[MTQ] AS [MTQ], 
+    [TblPrecalificaciones].[Confirmado] AS [Confirmado], 
+    [TblPrecalificaciones].[RFC] AS [RFC], 
+    [TblPrecalificaciones].[completo] AS [completo], 
+    [TblPrecalificaciones].[CURP] AS [CURP]
+    FROM [dbo].[TblPrecalificaciones] AS [TblPrecalificaciones]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="IMvw_AppAppFields" EntityType="Self.IMvw_AppAppFields" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [IMvw_AppAppFields].[IDSolicitud] AS [IDSolicitud], 
+    [IMvw_AppAppFields].[IDEstatus] AS [IDEstatus], 
+    [IMvw_AppAppFields].[IDCampo] AS [IDCampo], 
+    [IMvw_AppAppFields].[Value] AS [Value]
+    FROM [dbo].[IMvw_AppAppFields] AS [IMvw_AppAppFields]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="IMvw_AppData" EntityType="Self.IMvw_AppData" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [IMvw_AppData].[IdSolicitud] AS [IdSolicitud], 
+    [IMvw_AppData].[NoFolio] AS [NoFolio], 
+    [IMvw_AppData].[RFC] AS [RFC], 
+    [IMvw_AppData].[ApellidoPaterno] AS [ApellidoPaterno], 
+    [IMvw_AppData].[ApellidoMaterno] AS [ApellidoMaterno], 
+    [IMvw_AppData].[Nombres] AS [Nombres], 
+    [IMvw_AppData].[EstatusActual] AS [EstatusActual], 
+    [IMvw_AppData].[TipoCredito] AS [TipoCredito], 
+    [IMvw_AppData].[TipoImagen] AS [TipoImagen], 
+    [IMvw_AppData].[Imagen] AS [Imagen]
+    FROM [dbo].[IMvw_AppData] AS [IMvw_AppData]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="Imvw_AppDataControlDesk" EntityType="Self.Imvw_AppDataControlDesk" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Imvw_AppDataControlDesk].[IdSolicitud] AS [IdSolicitud], 
+    [Imvw_AppDataControlDesk].[NoFolio] AS [NoFolio], 
+    [Imvw_AppDataControlDesk].[RFC] AS [RFC], 
+    [Imvw_AppDataControlDesk].[ApellidoPaterno] AS [ApellidoPaterno], 
+    [Imvw_AppDataControlDesk].[ApellidoMaterno] AS [ApellidoMaterno], 
+    [Imvw_AppDataControlDesk].[Nombres] AS [Nombres], 
+    [Imvw_AppDataControlDesk].[Fecha] AS [Fecha], 
+    [Imvw_AppDataControlDesk].[EstatusActual] AS [EstatusActual], 
+    [Imvw_AppDataControlDesk].[TipoCredito] AS [TipoCredito], 
+    [Imvw_AppDataControlDesk].[Tienda] AS [Tienda], 
+    [Imvw_AppDataControlDesk].[sUsuario] AS [sUsuario], 
+    [Imvw_AppDataControlDesk].[FechaControl] AS [FechaControl]
+    FROM [dbo].[Imvw_AppDataControlDesk] AS [Imvw_AppDataControlDesk]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="IMvw_AppDataToPrint" EntityType="Self.IMvw_AppDataToPrint" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [IMvw_AppDataToPrint].[IdSolicitud] AS [IdSolicitud], 
+    [IMvw_AppDataToPrint].[NoFolio] AS [NoFolio], 
+    [IMvw_AppDataToPrint].[RFC] AS [RFC], 
+    [IMvw_AppDataToPrint].[ApellidoPaterno] AS [ApellidoPaterno], 
+    [IMvw_AppDataToPrint].[ApellidoMaterno] AS [ApellidoMaterno], 
+    [IMvw_AppDataToPrint].[Nombres] AS [Nombres], 
+    [IMvw_AppDataToPrint].[TipoCredito] AS [TipoCredito], 
+    [IMvw_AppDataToPrint].[EstatusActual] AS [EstatusActual], 
+    [IMvw_AppDataToPrint].[Fecha] AS [Fecha], 
+    [IMvw_AppDataToPrint].[Imagen] AS [Imagen], 
+    [IMvw_AppDataToPrint].[Tienda] AS [Tienda]
+    FROM [dbo].[IMvw_AppDataToPrint] AS [IMvw_AppDataToPrint]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="IMvw_AppDatatoPrintList" EntityType="Self.IMvw_AppDatatoPrintList" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [IMvw_AppDatatoPrintList].[IdSolicitud] AS [IdSolicitud], 
+    [IMvw_AppDatatoPrintList].[NoFolio] AS [NoFolio], 
+    [IMvw_AppDatatoPrintList].[RFC] AS [RFC], 
+    [IMvw_AppDatatoPrintList].[ApellidoPaterno] AS [ApellidoPaterno], 
+    [IMvw_AppDatatoPrintList].[ApellidoMaterno] AS [ApellidoMaterno], 
+    [IMvw_AppDatatoPrintList].[Nombres] AS [Nombres], 
+    [IMvw_AppDatatoPrintList].[Fecha] AS [Fecha], 
+    [IMvw_AppDatatoPrintList].[EstatusActual] AS [EstatusActual], 
+    [IMvw_AppDatatoPrintList].[TipoCredito] AS [TipoCredito], 
+    [IMvw_AppDatatoPrintList].[Tienda] AS [Tienda]
+    FROM [dbo].[IMvw_AppDatatoPrintList] AS [IMvw_AppDatatoPrintList]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="IMvw_AppFieldStatus" EntityType="Self.IMvw_AppFieldStatus" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [IMvw_AppFieldStatus].[IDEstatus] AS [IDEstatus], 
+    [IMvw_AppFieldStatus].[Estatus] AS [Estatus], 
+    [IMvw_AppFieldStatus].[Descripcion] AS [Descripcion], 
+    [IMvw_AppFieldStatus].[Aplicacion] AS [Aplicacion], 
+    [IMvw_AppFieldStatus].[IDCampo] AS [IDCampo], 
+    [IMvw_AppFieldStatus].[Nombre] AS [Nombre], 
+    [IMvw_AppFieldStatus].[Etiqueta] AS [Etiqueta], 
+    [IMvw_AppFieldStatus].[Longitud] AS [Longitud], 
+    [IMvw_AppFieldStatus].[Validaciones] AS [Validaciones]
+    FROM [dbo].[IMvw_AppFieldStatus] AS [IMvw_AppFieldStatus]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="IMvw_AppFollowingReport" EntityType="Self.IMvw_AppFollowingReport" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [IMvw_AppFollowingReport].[IdSolicitud] AS [IdSolicitud], 
+    [IMvw_AppFollowingReport].[NoFolio] AS [NoFolio], 
+    [IMvw_AppFollowingReport].[RFC] AS [RFC], 
+    [IMvw_AppFollowingReport].[ApellidoPaterno] AS [ApellidoPaterno], 
+    [IMvw_AppFollowingReport].[ApellidoMaterno] AS [ApellidoMaterno], 
+    [IMvw_AppFollowingReport].[Nombres] AS [Nombres], 
+    [IMvw_AppFollowingReport].[TipoCredito] AS [TipoCredito], 
+    [IMvw_AppFollowingReport].[Tienda] AS [Tienda], 
+    [IMvw_AppFollowingReport].[Estado] AS [Estado], 
+    [IMvw_AppFollowingReport].[Estatus de Tarea] AS [Estatus de Tarea], 
+    [IMvw_AppFollowingReport].[Fecha] AS [Fecha], 
+    [IMvw_AppFollowingReport].[Usuario] AS [Usuario], 
+    [IMvw_AppFollowingReport].[IDEstatus] AS [IDEstatus]
+    FROM [dbo].[IMvw_AppFollowingReport] AS [IMvw_AppFollowingReport]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="IMvw_AppFollowingReportDetail" EntityType="Self.IMvw_AppFollowingReportDetail" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [IMvw_AppFollowingReportDetail].[IdSolicitud] AS [IdSolicitud], 
+    [IMvw_AppFollowingReportDetail].[NoFolio] AS [NoFolio], 
+    [IMvw_AppFollowingReportDetail].[RFC] AS [RFC], 
+    [IMvw_AppFollowingReportDetail].[ApellidoPaterno] AS [ApellidoPaterno], 
+    [IMvw_AppFollowingReportDetail].[ApellidoMaterno] AS [ApellidoMaterno], 
+    [IMvw_AppFollowingReportDetail].[Nombres] AS [Nombres], 
+    [IMvw_AppFollowingReportDetail].[TipoCredito] AS [TipoCredito], 
+    [IMvw_AppFollowingReportDetail].[Tienda] AS [Tienda], 
+    [IMvw_AppFollowingReportDetail].[Estado] AS [Estado], 
+    [IMvw_AppFollowingReportDetail].[Fecha] AS [Fecha], 
+    [IMvw_AppFollowingReportDetail].[sUsuario] AS [sUsuario]
+    FROM [dbo].[IMvw_AppFollowingReportDetail] AS [IMvw_AppFollowingReportDetail]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="IMvw_AppFollowingReportStore" EntityType="Self.IMvw_AppFollowingReportStore" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [IMvw_AppFollowingReportStore].[IdSolicitud] AS [IdSolicitud], 
+    [IMvw_AppFollowingReportStore].[NoFolio] AS [NoFolio], 
+    [IMvw_AppFollowingReportStore].[RFC] AS [RFC], 
+    [IMvw_AppFollowingReportStore].[ApellidoPaterno] AS [ApellidoPaterno], 
+    [IMvw_AppFollowingReportStore].[ApellidoMaterno] AS [ApellidoMaterno], 
+    [IMvw_AppFollowingReportStore].[Nombres] AS [Nombres], 
+    [IMvw_AppFollowingReportStore].[TipoCredito] AS [TipoCredito], 
+    [IMvw_AppFollowingReportStore].[Tienda] AS [Tienda], 
+    [IMvw_AppFollowingReportStore].[Estado] AS [Estado], 
+    [IMvw_AppFollowingReportStore].[Fecha] AS [Fecha], 
+    [IMvw_AppFollowingReportStore].[sUsuario] AS [sUsuario]
+    FROM [dbo].[IMvw_AppFollowingReportStore] AS [IMvw_AppFollowingReportStore]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="IMvw_AppLastLog" EntityType="Self.IMvw_AppLastLog" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [IMvw_AppLastLog].[IdSolicitud] AS [IdSolicitud], 
+    [IMvw_AppLastLog].[FechaEstatus] AS [FechaEstatus], 
+    [IMvw_AppLastLog].[Estatus] AS [Estatus], 
+    [IMvw_AppLastLog].[Usuario] AS [Usuario]
+    FROM [dbo].[IMvw_AppLastLog] AS [IMvw_AppLastLog]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="IMvw_AppLastLogFull" EntityType="Self.IMvw_AppLastLogFull" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [IMvw_AppLastLogFull].[IdSolicitud] AS [IdSolicitud], 
+    [IMvw_AppLastLogFull].[FechaEstatus] AS [FechaEstatus], 
+    [IMvw_AppLastLogFull].[Estatus] AS [Estatus], 
+    [IMvw_AppLastLogFull].[Usuario] AS [Usuario], 
+    [IMvw_AppLastLogFull].[Terminado] AS [Terminado], 
+    [IMvw_AppLastLogFull].[Superestatus] AS [Superestatus]
+    FROM [dbo].[IMvw_AppLastLogFull] AS [IMvw_AppLastLogFull]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="IMvw_AppLog" EntityType="Self.IMvw_AppLog" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [IMvw_AppLog].[IdLogestatus] AS [IdLogestatus], 
+    [IMvw_AppLog].[IdSolicitud] AS [IdSolicitud], 
+    [IMvw_AppLog].[Fecha] AS [Fecha], 
+    [IMvw_AppLog].[Usuario] AS [Usuario], 
+    [IMvw_AppLog].[Terminado] AS [Terminado], 
+    [IMvw_AppLog].[Estatus] AS [Estatus], 
+    [IMvw_AppLog].[Descripcion] AS [Descripcion], 
+    [IMvw_AppLog].[Superestatus] AS [Superestatus]
+    FROM [dbo].[IMvw_AppLog] AS [IMvw_AppLog]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="IMvw_AppNotas" EntityType="Self.IMvw_AppNotas" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [IMvw_AppNotas].[IdSolicitud] AS [IdSolicitud], 
+    [IMvw_AppNotas].[IDNota] AS [IDNota], 
+    [IMvw_AppNotas].[Nota] AS [Nota]
+    FROM [dbo].[IMvw_AppNotas] AS [IMvw_AppNotas]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="IMvw_AppViewReport" EntityType="Self.IMvw_AppViewReport" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [IMvw_AppViewReport].[IdSolicitud] AS [IdSolicitud], 
+    [IMvw_AppViewReport].[NoFolio] AS [NoFolio], 
+    [IMvw_AppViewReport].[RFC] AS [RFC], 
+    [IMvw_AppViewReport].[ApellidoPaterno] AS [ApellidoPaterno], 
+    [IMvw_AppViewReport].[ApellidoMaterno] AS [ApellidoMaterno], 
+    [IMvw_AppViewReport].[Nombres] AS [Nombres], 
+    [IMvw_AppViewReport].[TipoCredito] AS [TipoCredito], 
+    [IMvw_AppViewReport].[Tienda] AS [Tienda], 
+    [IMvw_AppViewReport].[Fecha] AS [Fecha], 
+    [IMvw_AppViewReport].[Usuario] AS [Usuario], 
+    [IMvw_AppViewReport].[IDEstado] AS [IDEstado], 
+    [IMvw_AppViewReport].[Estado] AS [Estado], 
+    [IMvw_AppViewReport].[IDSuperEstado] AS [IDSuperEstado], 
+    [IMvw_AppViewReport].[SuperEstado] AS [SuperEstado], 
+    [IMvw_AppViewReport].[Terminado] AS [Terminado]
+    FROM [dbo].[IMvw_AppViewReport] AS [IMvw_AppViewReport]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="IMvw_AppWorkFlow" EntityType="Self.IMvw_AppWorkFlow" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [IMvw_AppWorkFlow].[IdSolicitud] AS [IdSolicitud], 
+    [IMvw_AppWorkFlow].[NoFolio] AS [NoFolio], 
+    [IMvw_AppWorkFlow].[RFC] AS [RFC], 
+    [IMvw_AppWorkFlow].[ApellidoPaterno] AS [ApellidoPaterno], 
+    [IMvw_AppWorkFlow].[ApellidoMaterno] AS [ApellidoMaterno], 
+    [IMvw_AppWorkFlow].[Nombres] AS [Nombres], 
+    [IMvw_AppWorkFlow].[TipoCredito] AS [TipoCredito], 
+    [IMvw_AppWorkFlow].[Tienda] AS [Tienda], 
+    [IMvw_AppWorkFlow].[Usuario] AS [Usuario], 
+    [IMvw_AppWorkFlow].[Aplicacion] AS [Aplicacion], 
+    [IMvw_AppWorkFlow].[IDEstatus] AS [IDEstatus], 
+    [IMvw_AppWorkFlow].[Estatus] AS [Estatus], 
+    [IMvw_AppWorkFlow].[FechaEstatus] AS [FechaEstatus], 
+    [IMvw_AppWorkFlow].[Terminado] AS [Terminado], 
+    [IMvw_AppWorkFlow].[Superestatus] AS [Superestatus]
+    FROM [dbo].[IMvw_AppWorkFlow] AS [IMvw_AppWorkFlow]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="IMvw_AssignedWF" EntityType="Self.IMvw_AssignedWF" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [IMvw_AssignedWF].[IdSolicitud] AS [IdSolicitud], 
+    [IMvw_AssignedWF].[NoFolio] AS [NoFolio], 
+    [IMvw_AssignedWF].[RFC] AS [RFC], 
+    [IMvw_AssignedWF].[ApellidoPaterno] AS [ApellidoPaterno], 
+    [IMvw_AssignedWF].[ApellidoMaterno] AS [ApellidoMaterno], 
+    [IMvw_AssignedWF].[Nombres] AS [Nombres], 
+    [IMvw_AssignedWF].[TipoCredito] AS [TipoCredito], 
+    [IMvw_AssignedWF].[Tienda] AS [Tienda], 
+    [IMvw_AssignedWF].[Usuario] AS [Usuario], 
+    [IMvw_AssignedWF].[Aplicacion] AS [Aplicacion], 
+    [IMvw_AssignedWF].[IDEstatus] AS [IDEstatus], 
+    [IMvw_AssignedWF].[Estatus] AS [Estatus]
+    FROM [dbo].[IMvw_AssignedWF] AS [IMvw_AssignedWF]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="IMvw_Estatus" EntityType="Self.IMvw_Estatus" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [IMvw_Estatus].[IDEstatus] AS [IDEstatus], 
+    [IMvw_Estatus].[Estatus] AS [Estatus], 
+    [IMvw_Estatus].[Descripcion] AS [Descripcion]
+    FROM [dbo].[IMvw_Estatus] AS [IMvw_Estatus]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="IMvw_ListReports" EntityType="Self.IMvw_ListReports" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [IMvw_ListReports].[IDReport] AS [IDReport], 
+    [IMvw_ListReports].[ReportName] AS [ReportName], 
+    [IMvw_ListReports].[ReportType] AS [ReportType], 
+    [IMvw_ListReports].[Parameters] AS [Parameters], 
+    [IMvw_ListReports].[FileExtensionName] AS [FileExtensionName], 
+    [IMvw_ListReports].[FileName] AS [FileName], 
+    [IMvw_ListReports].[StoreProcedureName] AS [StoreProcedureName]
+    FROM [dbo].[IMvw_ListReports] AS [IMvw_ListReports]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="IMvw_MonitorLog" EntityType="Self.IMvw_MonitorLog" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [IMvw_MonitorLog].[IdSolicitud] AS [IdSolicitud], 
+    [IMvw_MonitorLog].[NoFolio] AS [NoFolio], 
+    [IMvw_MonitorLog].[Nombres] AS [Nombres], 
+    [IMvw_MonitorLog].[ApellidoMaterno] AS [ApellidoMaterno], 
+    [IMvw_MonitorLog].[ApellidoPaterno] AS [ApellidoPaterno], 
+    [IMvw_MonitorLog].[IdLogestatus] AS [IdLogestatus], 
+    [IMvw_MonitorLog].[Fecha] AS [Fecha], 
+    [IMvw_MonitorLog].[sUsuario] AS [sUsuario], 
+    [IMvw_MonitorLog].[Terminado] AS [Terminado], 
+    [IMvw_MonitorLog].[Newestatus] AS [Newestatus], 
+    [IMvw_MonitorLog].[Superestatus] AS [Superestatus]
+    FROM [dbo].[IMvw_MonitorLog] AS [IMvw_MonitorLog]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="IMvw_Report_DocControl" EntityType="Self.IMvw_Report_DocControl" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [IMvw_Report_DocControl].[IdSolicitud] AS [IdSolicitud], 
+    [IMvw_Report_DocControl].[NoFolio] AS [NoFolio], 
+    [IMvw_Report_DocControl].[RFC] AS [RFC], 
+    [IMvw_Report_DocControl].[Nombres] AS [Nombres], 
+    [IMvw_Report_DocControl].[ApellidoMaterno] AS [ApellidoMaterno], 
+    [IMvw_Report_DocControl].[ApellidoPaterno] AS [ApellidoPaterno], 
+    [IMvw_Report_DocControl].[Etiqueta] AS [Etiqueta], 
+    [IMvw_Report_DocControl].[Value] AS [Value], 
+    [IMvw_Report_DocControl].[IDEstatus] AS [IDEstatus], 
+    [IMvw_Report_DocControl].[IDCampo] AS [IDCampo]
+    FROM [dbo].[IMvw_Report_DocControl] AS [IMvw_Report_DocControl]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="IMvw_ReportPAGARE" EntityType="Self.IMvw_ReportPAGARE" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [IMvw_ReportPAGARE].[IdSolicitud] AS [IdSolicitud], 
+    [IMvw_ReportPAGARE].[NoFolio] AS [NoFolio], 
+    [IMvw_ReportPAGARE].[RFC] AS [RFC], 
+    [IMvw_ReportPAGARE].[ApellidoPaterno] AS [ApellidoPaterno], 
+    [IMvw_ReportPAGARE].[ApellidoMaterno] AS [ApellidoMaterno], 
+    [IMvw_ReportPAGARE].[Nombres] AS [Nombres], 
+    [IMvw_ReportPAGARE].[Tienda] AS [Tienda], 
+    [IMvw_ReportPAGARE].[Value] AS [Value]
+    FROM [dbo].[IMvw_ReportPAGARE] AS [IMvw_ReportPAGARE]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="IMvw_ReportSpec" EntityType="Self.IMvw_ReportSpec" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [IMvw_ReportSpec].[IdSolicitud] AS [IdSolicitud], 
+    [IMvw_ReportSpec].[IDReport] AS [IDReport], 
+    [IMvw_ReportSpec].[IDEstatus] AS [IDEstatus], 
+    [IMvw_ReportSpec].[ReportName] AS [ReportName], 
+    [IMvw_ReportSpec].[Parameters] AS [Parameters], 
+    [IMvw_ReportSpec].[sUsuario] AS [sUsuario], 
+    [IMvw_ReportSpec].[StoreProcedureName] AS [StoreProcedureName], 
+    [IMvw_ReportSpec].[FileName] AS [FileName], 
+    [IMvw_ReportSpec].[IDReportType] AS [IDReportType], 
+    [IMvw_ReportSpec].[FileExtensionName] AS [FileExtensionName]
+    FROM [dbo].[IMvw_ReportSpec] AS [IMvw_ReportSpec]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="IMvw_ReportSpecObject" EntityType="Self.IMvw_ReportSpecObject" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [IMvw_ReportSpecObject].[IdSolicitud] AS [IdSolicitud], 
+    [IMvw_ReportSpecObject].[IDReport] AS [IDReport], 
+    [IMvw_ReportSpecObject].[IDEstatus] AS [IDEstatus], 
+    [IMvw_ReportSpecObject].[ReportName] AS [ReportName], 
+    [IMvw_ReportSpecObject].[Parameters] AS [Parameters], 
+    [IMvw_ReportSpecObject].[sUsuario] AS [sUsuario], 
+    [IMvw_ReportSpecObject].[StoreProcedureName] AS [StoreProcedureName], 
+    [IMvw_ReportSpecObject].[FileName] AS [FileName], 
+    [IMvw_ReportSpecObject].[IDReportType] AS [IDReportType], 
+    [IMvw_ReportSpecObject].[FileExtensionName] AS [FileExtensionName], 
+    [IMvw_ReportSpecObject].[FileObject] AS [FileObject]
+    FROM [dbo].[IMvw_ReportSpecObject] AS [IMvw_ReportSpecObject]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="IMvw_SolicitudesDatos" EntityType="Self.IMvw_SolicitudesDatos" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [IMvw_SolicitudesDatos].[IDSolicitud] AS [IDSolicitud], 
+    [IMvw_SolicitudesDatos].[Tienda] AS [Tienda], 
+    [IMvw_SolicitudesDatos].[Promotor] AS [Promotor], 
+    [IMvw_SolicitudesDatos].[ApellidoPaterno] AS [ApellidoPaterno], 
+    [IMvw_SolicitudesDatos].[ApellidoMaterno] AS [ApellidoMaterno], 
+    [IMvw_SolicitudesDatos].[Nombre] AS [Nombre], 
+    [IMvw_SolicitudesDatos].[TipoCredito] AS [TipoCredito], 
+    [IMvw_SolicitudesDatos].[Sexo] AS [Sexo], 
+    [IMvw_SolicitudesDatos].[Nacionalidad] AS [Nacionalidad], 
+    [IMvw_SolicitudesDatos].[CalleDomicilioActual] AS [CalleDomicilioActual], 
+    [IMvw_SolicitudesDatos].[NoExterior] AS [NoExterior], 
+    [IMvw_SolicitudesDatos].[NoInterior] AS [NoInterior], 
+    [IMvw_SolicitudesDatos].[Cruzacon] AS [Cruzacon], 
+    [IMvw_SolicitudesDatos].[Colonia] AS [Colonia], 
+    [IMvw_SolicitudesDatos].[Municipio] AS [Municipio], 
+    [IMvw_SolicitudesDatos].[Estado] AS [Estado], 
+    [IMvw_SolicitudesDatos].[CP] AS [CP], 
+    [IMvw_SolicitudesDatos].[TiempoVivirDomicilioAA] AS [TiempoVivirDomicilioAA], 
+    [IMvw_SolicitudesDatos].[TiempoVivirDomicilioMM] AS [TiempoVivirDomicilioMM], 
+    [IMvw_SolicitudesDatos].[TiempoDomicilioAnteriorAA] AS [TiempoDomicilioAnteriorAA], 
+    [IMvw_SolicitudesDatos].[TiempoDomicilioAnteriorMM] AS [TiempoDomicilioAnteriorMM], 
+    [IMvw_SolicitudesDatos].[TelefonoCasa] AS [TelefonoCasa], 
+    [IMvw_SolicitudesDatos].[TelefonoOficina] AS [TelefonoOficina], 
+    [IMvw_SolicitudesDatos].[Extension] AS [Extension], 
+    [IMvw_SolicitudesDatos].[TelefonoCelular] AS [TelefonoCelular], 
+    [IMvw_SolicitudesDatos].[EMail] AS [EMail], 
+    [IMvw_SolicitudesDatos].[Casa] AS [Casa], 
+    [IMvw_SolicitudesDatos].[PagoMensual] AS [PagoMensual], 
+    [IMvw_SolicitudesDatos].[FechaNacimientoDD] AS [FechaNacimientoDD], 
+    [IMvw_SolicitudesDatos].[FechaNacimientoMM] AS [FechaNacimientoMM], 
+    [IMvw_SolicitudesDatos].[FechaNacimientoAA] AS [FechaNacimientoAA], 
+    [IMvw_SolicitudesDatos].[RFC] AS [RFC], 
+    [IMvw_SolicitudesDatos].[EstadoCivil] AS [EstadoCivil], 
+    [IMvw_SolicitudesDatos].[NoDependientes] AS [NoDependientes], 
+    [IMvw_SolicitudesDatos].[NombreSolteroConyuge] AS [NombreSolteroConyuge], 
+    [IMvw_SolicitudesDatos].[ConyugeTelefonoCelular] AS [ConyugeTelefonoCelular], 
+    [IMvw_SolicitudesDatos].[ConyugeEMail] AS [ConyugeEMail], 
+    [IMvw_SolicitudesDatos].[ConyugeFechaNacimientoDD] AS [ConyugeFechaNacimientoDD], 
+    [IMvw_SolicitudesDatos].[ConyugeFechaNacimientoMM] AS [ConyugeFechaNacimientoMM], 
+    [IMvw_SolicitudesDatos].[ConyugeFechaNacimientoAA] AS [ConyugeFechaNacimientoAA], 
+    [IMvw_SolicitudesDatos].[ConyugeRFC] AS [ConyugeRFC], 
+    [IMvw_SolicitudesDatos].[NombreEmpresa] AS [NombreEmpresa], 
+    [IMvw_SolicitudesDatos].[Puesto] AS [Puesto], 
+    [IMvw_SolicitudesDatos].[Giro] AS [Giro], 
+    [IMvw_SolicitudesDatos].[Sector] AS [Sector], 
+    [IMvw_SolicitudesDatos].[Caracter] AS [Caracter], 
+    [IMvw_SolicitudesDatos].[AntiguedadAA] AS [AntiguedadAA], 
+    [IMvw_SolicitudesDatos].[AntiguedadMM] AS [AntiguedadMM], 
+    [IMvw_SolicitudesDatos].[IngresosComprobablessueldo] AS [IngresosComprobablessueldo], 
+    [IMvw_SolicitudesDatos].[IngresosComprobablesConyuge] AS [IngresosComprobablesConyuge], 
+    [IMvw_SolicitudesDatos].[IngresosComprobablesPadres] AS [IngresosComprobablesPadres], 
+    [IMvw_SolicitudesDatos].[IngresosComprobablesOtros] AS [IngresosComprobablesOtros], 
+    [IMvw_SolicitudesDatos].[IngresosComprobablesTotal] AS [IngresosComprobablesTotal], 
+    [IMvw_SolicitudesDatos].[Escolaridad] AS [Escolaridad], 
+    [IMvw_SolicitudesDatos].[EmpleoAnteriorEmpresa] AS [EmpleoAnteriorEmpresa], 
+    [IMvw_SolicitudesDatos].[EmpleoAnteriorAntiguedadAA] AS [EmpleoAnteriorAntiguedadAA], 
+    [IMvw_SolicitudesDatos].[EmpleoAnteriorAntiguedadMM] AS [EmpleoAnteriorAntiguedadMM], 
+    [IMvw_SolicitudesDatos].[EmpleoAnteriorPuesto] AS [EmpleoAnteriorPuesto], 
+    [IMvw_SolicitudesDatos].[Ref1Institucion] AS [Ref1Institucion], 
+    [IMvw_SolicitudesDatos].[Ref1Tipo] AS [Ref1Tipo], 
+    [IMvw_SolicitudesDatos].[Ref1NodeCta] AS [Ref1NodeCta], 
+    [IMvw_SolicitudesDatos].[Ref2Institucion] AS [Ref2Institucion], 
+    [IMvw_SolicitudesDatos].[Ref2Tipo] AS [Ref2Tipo], 
+    [IMvw_SolicitudesDatos].[Ref2NodeCta] AS [Ref2NodeCta], 
+    [IMvw_SolicitudesDatos].[RefPer1Nombre] AS [RefPer1Nombre], 
+    [IMvw_SolicitudesDatos].[RefPer1Telefono] AS [RefPer1Telefono], 
+    [IMvw_SolicitudesDatos].[RefPer2Nombre] AS [RefPer2Nombre], 
+    [IMvw_SolicitudesDatos].[RefPer2Telefono] AS [RefPer2Telefono], 
+    [IMvw_SolicitudesDatos].[RefPer3Nombre] AS [RefPer3Nombre], 
+    [IMvw_SolicitudesDatos].[RefPer3Telefono] AS [RefPer3Telefono], 
+    [IMvw_SolicitudesDatos].[EdoCuenta] AS [EdoCuenta], 
+    [IMvw_SolicitudesDatos].[NombreEmpresaConyuge] AS [NombreEmpresaConyuge], 
+    [IMvw_SolicitudesDatos].[PuestoConyuge] AS [PuestoConyuge], 
+    [IMvw_SolicitudesDatos].[DomicilioEmpresaConyuge] AS [DomicilioEmpresaConyuge], 
+    [IMvw_SolicitudesDatos].[DomicilioEmpresa] AS [DomicilioEmpresa], 
+    [IMvw_SolicitudesDatos].[RefPer1Domicilio] AS [RefPer1Domicilio], 
+    [IMvw_SolicitudesDatos].[RefPer2Domicilio] AS [RefPer2Domicilio], 
+    [IMvw_SolicitudesDatos].[RefPer3Domicilio] AS [RefPer3Domicilio], 
+    [IMvw_SolicitudesDatos].[TarjAdic1Nombre] AS [TarjAdic1Nombre], 
+    [IMvw_SolicitudesDatos].[TarjAdic1Telefono] AS [TarjAdic1Telefono], 
+    [IMvw_SolicitudesDatos].[TarjAdic2Nombre] AS [TarjAdic2Nombre], 
+    [IMvw_SolicitudesDatos].[TarjAdic2Telefono] AS [TarjAdic2Telefono], 
+    [IMvw_SolicitudesDatos].[TarjAdic3Nombre] AS [TarjAdic3Nombre], 
+    [IMvw_SolicitudesDatos].[TarjAdic3Telefono] AS [TarjAdic3Telefono], 
+    [IMvw_SolicitudesDatos].[MontoCredito] AS [MontoCredito], 
+    [IMvw_SolicitudesDatos].[Tradicional] AS [Tradicional], 
+    [IMvw_SolicitudesDatos].[PagosFijos] AS [PagosFijos], 
+    [IMvw_SolicitudesDatos].[PreAprobado] AS [PreAprobado]
+    FROM [dbo].[IMvw_SolicitudesDatos] AS [IMvw_SolicitudesDatos]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_tblEstatusCampos_tblCampos" Association="Self.FK_tblEstatusCampos_tblCampos">
+      <End Role="tblCampos" EntitySet="tblCampos" />
+      <End Role="tblEstatusCampos" EntitySet="tblEstatusCampos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblEstatusCampos_tblEstatusCampos" Association="Self.FK_tblEstatusCampos_tblEstatusCampos">
+      <End Role="tblEstatus" EntitySet="tblEstatus" />
+      <End Role="tblEstatusCampos" EntitySet="tblEstatusCampos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblFlujoTrabajos_tblEstatus" Association="Self.FK_tblFlujoTrabajos_tblEstatus">
+      <End Role="tblEstatus" EntitySet="tblEstatus" />
+      <End Role="tblFlujoTrabajos" EntitySet="tblFlujoTrabajos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblFlujoTrabajos_tblFlujos" Association="Self.FK_tblFlujoTrabajos_tblFlujos">
+      <End Role="tblFlujos" EntitySet="tblFlujos" />
+      <End Role="tblFlujoTrabajos" EntitySet="tblFlujoTrabajos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblFlujoTrabajos_tblFlujoTipos" Association="Self.FK_tblFlujoTrabajos_tblFlujoTipos">
+      <End Role="tblFlujoTipos" EntitySet="tblFlujoTipos" />
+      <End Role="tblFlujoTrabajos" EntitySet="tblFlujoTrabajos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblLogestatus_tblEstatus" Association="Self.FK_tblLogestatus_tblEstatus">
+      <End Role="tblEstatus" EntitySet="tblEstatus" />
+      <End Role="tblLogestatus" EntitySet="tblLogestatus" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblLogestatus_tblSolicitudes" Association="Self.FK_tblLogestatus_tblSolicitudes">
+      <End Role="tblSolicitudes" EntitySet="tblSolicitudes" />
+      <End Role="tblLogestatus" EntitySet="tblLogestatus" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblLogTarj_tblSolicitudes" Association="Self.FK_tblLogTarj_tblSolicitudes">
+      <End Role="tblLogCat" EntitySet="tblLogCat" />
+      <End Role="tblLogTarj" EntitySet="tblLogTarj" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblReportEstatus_tblEstatus" Association="Self.FK_tblReportEstatus_tblEstatus">
+      <End Role="tblEstatus" EntitySet="tblEstatus" />
+      <End Role="tblReportEstatus" EntitySet="tblReportEstatus" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblReportEstatus_tblReports" Association="Self.FK_tblReportEstatus_tblReports">
+      <End Role="tblReports" EntitySet="tblReports" />
+      <End Role="tblReportEstatus" EntitySet="tblReportEstatus" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblReports_tblReportTypes" Association="Self.FK_tblReports_tblReportTypes">
+      <End Role="tblReportTypes" EntitySet="tblReportTypes" />
+      <End Role="tblReports" EntitySet="tblReports" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblReportSecurity_tblReports" Association="Self.FK_tblReportSecurity_tblReports">
+      <End Role="tblReports" EntitySet="tblReports" />
+      <End Role="tblReportSecurity" EntitySet="tblReportSecurity" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblReportSecurity_tblUsuariosClient" Association="Self.FK_tblReportSecurity_tblUsuariosClient">
+      <End Role="tblUsuariosClient" EntitySet="tblUsuariosClient" />
+      <End Role="tblReportSecurity" EntitySet="tblReportSecurity" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblSolicitudCampos_tblCampos" Association="Self.FK_tblSolicitudCampos_tblCampos">
+      <End Role="tblCampos" EntitySet="tblCampos" />
+      <End Role="tblSolicitudCampos" EntitySet="tblSolicitudCampos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblSolicitudCampos_tblEstatus" Association="Self.FK_tblSolicitudCampos_tblEstatus">
+      <End Role="tblEstatus" EntitySet="tblEstatus" />
+      <End Role="tblSolicitudCampos" EntitySet="tblSolicitudCampos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblSolicitudReporteObjeto_tblReports" Association="Self.FK_tblSolicitudReporteObjeto_tblReports">
+      <End Role="tblReports" EntitySet="tblReports" />
+      <End Role="tblSolicitudReporteObjeto" EntitySet="tblSolicitudReporteObjeto" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblUsuariosTiendas_tblUsuarioClient" Association="Self.FK_tblUsuariosTiendas_tblUsuarioClient">
+      <End Role="tblUsuariosClient" EntitySet="tblUsuariosClient" />
+      <End Role="tblUsuariosTiendas" EntitySet="tblUsuariosTiendas" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
