@@ -198,3 +198,4 @@ C:\Users\LuisCortes\Documents\Proyectos\Original\MapcoTracking\MapcoSolutionTrac
 C:\Users\LuisCortes\Documents\Proyectos\Original\MapcoTracking\MapcoSolutionTrackings\obj\Debug\MapcoSolutionTrackings.dll
 C:\Users\LuisCortes\Documents\Proyectos\Original\MapcoTracking\MapcoSolutionTrackings\obj\Debug\MapcoSolutionTrackings.pdb
 C:\Users\LuisCortes\Documents\Proyectos\Original\MapcoTracking\MapcoSolutionTrackings\obj\Debug\MapcoSolutionTrackings.csprojAssemblyReference.cache
+C:\Users\LuisCortes\Documents\Proyectos\Original\MapcoTracking\MapcoSolutionTrackings\bin\wwwroot\lib\bootstrap\dist\css\bootstrap.css

@@ -188,12 +188,46 @@
     <Content Include="wwwroot\js\site.min.js" />
     <Content Include="wwwroot\lib\bootstrap\dist\css\bootstrap-theme.css" />
     <Content Include="wwwroot\lib\bootstrap\dist\css\bootstrap-theme.min.css" />
-    <Content Include="wwwroot\lib\bootstrap\dist\css\bootstrap.css" />
+    <Content Include="wwwroot\lib\bootstrap\dist\css\bootstrap.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="wwwroot\lib\bootstrap\dist\css\bootstrap.min.css" />
     <Content Include="wwwroot\lib\bootstrap\dist\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="wwwroot\lib\bootstrap\dist\js\bootstrap.js" />
     <Content Include="wwwroot\lib\bootstrap\dist\js\bootstrap.min.js" />
     <Content Include="wwwroot\lib\bootstrap\dist\js\npm.js" />
+    <Content Include="wwwroot\lib\DataTables\css\dataTables.bootstrap.css" />
+    <Content Include="wwwroot\lib\DataTables\css\dataTables.bootstrap.min.css" />
+    <Content Include="wwwroot\lib\DataTables\css\dataTables.bootstrap4.css" />
+    <Content Include="wwwroot\lib\DataTables\css\dataTables.bootstrap4.min.css" />
+    <Content Include="wwwroot\lib\DataTables\css\dataTables.foundation.css" />
+    <Content Include="wwwroot\lib\DataTables\css\dataTables.foundation.min.css" />
+    <Content Include="wwwroot\lib\DataTables\css\dataTables.jqueryui.css" />
+    <Content Include="wwwroot\lib\DataTables\css\dataTables.jqueryui.min.css" />
+    <Content Include="wwwroot\lib\DataTables\css\dataTables.semanticui.css" />
+    <Content Include="wwwroot\lib\DataTables\css\dataTables.semanticui.min.css" />
+    <Content Include="wwwroot\lib\DataTables\css\jquery.dataTables.css" />
+    <Content Include="wwwroot\lib\DataTables\css\jquery.dataTables.min.css" />
+    <Content Include="wwwroot\lib\DataTables\images\sort_asc.png" />
+    <Content Include="wwwroot\lib\DataTables\images\sort_asc_disabled.png" />
+    <Content Include="wwwroot\lib\DataTables\images\sort_both.png" />
+    <Content Include="wwwroot\lib\DataTables\images\sort_desc.png" />
+    <Content Include="wwwroot\lib\DataTables\images\sort_desc_disabled.png" />
+    <Content Include="wwwroot\lib\DataTables\js\dataTables.bootstrap.js" />
+    <Content Include="wwwroot\lib\DataTables\js\dataTables.bootstrap.min.js" />
+    <Content Include="wwwroot\lib\DataTables\js\dataTables.bootstrap4.js" />
+    <Content Include="wwwroot\lib\DataTables\js\dataTables.bootstrap4.min.js" />
+    <Content Include="wwwroot\lib\DataTables\js\dataTables.buttons.min.js" />
+    <Content Include="wwwroot\lib\DataTables\js\dataTables.foundation.js" />
+    <Content Include="wwwroot\lib\DataTables\js\dataTables.foundation.min.js" />
+    <Content Include="wwwroot\lib\DataTables\js\dataTables.jqueryui.js" />
+    <Content Include="wwwroot\lib\DataTables\js\dataTables.jqueryui.min.js" />
+    <Content Include="Views\Home\dataTables.languaje.es.json" />
+    <None Include="wwwroot\lib\DataTables\js\dataTables.languaje.es.json" />
+    <Content Include="wwwroot\lib\DataTables\js\dataTables.semanticui.js" />
+    <Content Include="wwwroot\lib\DataTables\js\dataTables.semanticui.min.js" />
+    <Content Include="wwwroot\lib\DataTables\js\jquery.dataTables.js" />
+    <Content Include="wwwroot\lib\DataTables\js\jquery.dataTables.min.js" />
     <Content Include="wwwroot\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.js" />
     <Content Include="wwwroot\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.min.js" />
     <Content Include="wwwroot\lib\jquery-validation-unobtrusive\LICENSE.txt" />
@@ -430,6 +464,7 @@
     </Compile>
     <Compile Include="Models\ErrorViewModel.cs" />
     <Compile Include="Models\ModelReports.cs" />
+    <Compile Include="Models\ModelResults.cs" />
     <Compile Include="Models\ModelUserLogin.cs" />
     <Compile Include="App_Data\sp_cargarPrecal_Result.cs">
       <DependentUpon>DbSetMapco.tt</DependentUpon>
@@ -560,6 +595,7 @@
     <Compile Include="App_Data\Validar_Usuario_VickyForm_Result.cs">
       <DependentUpon>DbSetGlobal.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Status.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
