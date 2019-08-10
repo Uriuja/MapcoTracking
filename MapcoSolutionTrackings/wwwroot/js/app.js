@@ -23,7 +23,7 @@
                 'copy', 'excel', 'pdf'
             ],
             "language": {
-                "url": "~/home/dataTables.languaje.es.json"
+                "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
             }
         });
 
@@ -80,10 +80,10 @@
                 $('#tableContainer').DataTable({
                     dom: 'Bfrtip',
                     buttons: [
-                        'copy', 'excel', 'pdf'
+                        "copy", "excel", "csv", "pdf", //"print"
                     ],
                     "language": {
-                        "url": "`~/wwwroot/dataTables.languaje.es.json"
+                        "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
                     }
                 });
                    
