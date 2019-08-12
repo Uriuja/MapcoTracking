@@ -11,17 +11,6 @@
 
     let events = function () {
         console.log("CARGANDO...");
-
-        $('#tableContainer,#tableContainerPrecalification').DataTable({
-            //dom: 'Bfrtip',
-            //buttons: [
-            //    "copy", "excel", "csv", "pdf"
-            //],
-            "language": {
-                "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
-            }
-        });
-
         $("#desde,#hasta,#desdeP,#hastaP").datepicker({
             dateFormat: "yy-mm-dd",
             dayNames: ["Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado"],
@@ -227,9 +216,22 @@
 
     function validateForm() {
         let _level = sessionStorage.getItem("PrincipalLevel");
-        if (_level != "Administrado") {
+        if (_level != "Administrador") {
             $("#filtrosCascada,#btnPrecalifications,#btnAll").addClass("hide");
         }
+        //Dibujando las tablas
+        setTimeout(function(){
+            $('#tableContainer,#tableContainerPrecalification').DataTable({
+                //dom: 'Bfrtip',
+                //buttons: [
+                //    "copy", "excel", "csv", "pdf"
+                //],
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+                }
+            });
+        }, 1000);
+        
     }
 
 

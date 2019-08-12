@@ -514,6 +514,9 @@ namespace MapcoSolutionTrackings.Controllers
                     cmd.Connection = con;
                     da.SelectCommand = cmd;
                     da.Fill(t);
+                    //TODO: Ciclar los resultados y meterlos a una lsita para que se regrese eso en un json
+                    // De los 4 store procedure
+                   
                     //GridView1.DataSource = t;
                     //GridView1.Columns[0].Visible = true;
                     //GridView2.DataSource = t;
