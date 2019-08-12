@@ -409,5 +409,168 @@ namespace MapcoSolutionTrackings.Controllers
             }
             return util.GetResponse(items_Mapco, "Consulta Exitosa", true);
         }
+
+        public Object Generar_Precalificacion(ModelReports modelPreca)
+        {
+            UtilController util = new UtilController();
+            try
+            {
+                string Query = "";
+                switch (modelPreca.aprobado)
+                {
+                    case "0":
+                        Query = "select IDprecalificador,Precalificacion,Confirmado,Nombres,Ap_Paterno,Ap_Materno,Fecha_de_Nacimiento,Ciudad,Municipio,Estado,Tienda,promotor,Fecha   FROM [IMSOL_mp].[dbo].[TblPrecalificaciones] where Fecha>= '" + Convert.ToDateTime(modelPreca.desde).ToString("yyyy-dd-MM") + " 00:00:00' and Fecha<= '" + Convert.ToDateTime(modelPreca.hasta).ToString("yyyy-dd-MM") + " 23:59:59' order by Fecha";
+                        break;
+                    default:
+                        Query = "select IDprecalificador,Precalificacion,Confirmado,Nombres,Ap_Paterno,Ap_Materno,Fecha_de_Nacimiento,Ciudad,Municipio,Estado,Tienda,promotor,Fecha   FROM [IMSOL_mp].[dbo].[TblPrecalificaciones] where Fecha>= '" + Convert.ToDateTime(modelPreca.desde).ToString("yyyy-dd-MM") + " 00:00:00' and Fecha<= '" + Convert.ToDateTime(modelPreca.hasta).ToString("yyyy-dd-MM") + " 23:59:59' and Precalificacion = '" + modelPreca.aprobado + "' order by Fecha";
+                        break;
+                }
+                string query = (string)Query.Clone();
+                string constr = ConfigurationManager.ConnectionStrings["Mapco"].ToString(); // connection string
+                SqlConnection con = new SqlConnection(constr);
+                con.Open();
+                System.Data.DataTable dt = new System.Data.DataTable();
+                SqlCommand cmd = new SqlCommand(query, con);
+                cmd.CommandTimeout = 0;
+                SqlDataReader reader1 = cmd.ExecuteReader();
+                List<ModelResults> resultList = new List<ModelResults>();
+                while (reader1.Read())
+                {
+                    ModelResults result = new ModelResults();
+                    result.noConsulta = reader1.GetValue(0).ToString();
+                    result.preCalificación = reader1.GetValue(1).ToString();
+                    result.confirmado = reader1.GetValue(2).ToString();
+                    result.fecha = reader1.GetValue(12).ToString();
+                    result.nombre = reader1.GetValue(3).ToString();
+                    result.apePat = reader1.GetValue(4).ToString();
+                    result.apeMat = reader1.GetValue(5).ToString();
+                    result.fechaNacimiento = reader1.GetValue(6).ToString();
+                    result.ciudad = reader1.GetValue(7).ToString();
+                    result.municipio = reader1.GetValue(8).ToString();
+                    result.estado = reader1.GetValue(9).ToString();
+                    result.promotor = reader1.GetValue(11).ToString();
+                    result.tienda = reader1.GetValue(10).ToString();
+                    resultList.Add(result);
+                }
+                con.Close();
+                return util.GetResponse(resultList, "Consulta Exitosa", true);
+
+
+
+            }
+            catch (Exception ex)
+            {
+                return util.GetResponse(ex, "Error de sistema", false);
+            }
+
+        }
+
+        public Object Generar_ReporteNormal(ModelReports model)
+        {
+            UtilController util = new UtilController();
+            int dia_mes = Convert.ToInt32(DateTime.Now.ToString("dd"));
+            DateTime inicio_mes = DateTime.Now;
+            inicio_mes = inicio_mes.AddDays(Convert.ToInt32((-dia_mes) + 1));
+            DateTime minimo = inicio_mes.AddMonths(-2);
+            string Minimo = Convert.ToString(minimo.ToString("yyyy-MM-dd"));
+            if (Convert.ToDateTime(Minimo) > Convert.ToDateTime(model.desde))
+            {
+
+            }
+            else
+            {
+                try
+                {
+                    SqlCommand cmd = new SqlCommand();
+                    SqlDataAdapter da = new SqlDataAdapter(cmd);
+                    DataTable t = new DataTable();
+                    SqlCommand cmd2 = new SqlCommand();
+                    SqlDataAdapter da2 = new SqlDataAdapter(cmd2);
+                    DataTable t2 = new DataTable();
+                    SqlCommand cmd3 = new SqlCommand();
+                    SqlDataAdapter da3 = new SqlDataAdapter(cmd3);
+                    DataTable t3 = new DataTable();
+                    SqlCommand cmd4 = new SqlCommand();
+                    SqlDataAdapter da4 = new SqlDataAdapter(cmd4);
+                    DataTable t4 = new DataTable();
+                    string connString = ConfigurationManager.ConnectionStrings["Mapco"].ToString();
+                    SqlConnection con = new SqlConnection(connString);
+                    con.Open();
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd2.CommandType = CommandType.StoredProcedure;
+                    cmd3.CommandType = CommandType.StoredProcedure;
+                    cmd4.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Clear();
+                    cmd.Parameters.Add("@desde", SqlDbType.VarChar).Value = Convert.ToDateTime(model.desde).ToString("yyyy-dd-MM") + " 00:00:00";
+                    cmd.Parameters.Add("@hasta", SqlDbType.VarChar).Value = Convert.ToDateTime(model.hasta).ToString("yyyy-dd-MM") + " 23:59:59";
+                    cmd.Parameters.Add("@nombre", SqlDbType.VarChar).Value = model.name;
+                    cmd.Parameters.Add("@apaterno", SqlDbType.VarChar).Value = model.APaterno;
+                    cmd.Parameters.Add("@amaterno", SqlDbType.VarChar).Value = model.Amaterno;
+                    cmd.Parameters.Add("@promotor", SqlDbType.VarChar).Value = model.promotor;
+                    cmd.Parameters.Add("@descripcion", SqlDbType.VarChar).Value = model.Ddl_Estatus;
+                    cmd.Parameters.Add("@tienda", SqlDbType.VarChar).Value = model.tienda.Replace("Tienda ", "");
+                    cmd.Parameters.Add("@idsolicitud", SqlDbType.VarChar).Value = model.solicitud;
+                    cmd.CommandText = "IMspr_GetReportes";
+                    cmd.Connection = con;
+                    da.SelectCommand = cmd;
+                    da.Fill(t);
+                    //GridView1.DataSource = t;
+                    //GridView1.Columns[0].Visible = true;
+                    //GridView2.DataSource = t;
+                    cmd2.Parameters.Clear();
+                    cmd2.Parameters.Add("@desde", SqlDbType.VarChar).Value = Convert.ToDateTime(model.desde).ToString("yyyy-dd-MM") + " 00:00:00";
+                    cmd2.Parameters.Add("@hasta", SqlDbType.VarChar).Value = Convert.ToDateTime(model.hasta).ToString("yyyy-dd-MM") + " 23:59:59";
+                    cmd2.Parameters.Add("@nombre", SqlDbType.VarChar).Value = model.name;
+                    cmd2.Parameters.Add("@apaterno", SqlDbType.VarChar).Value = model.APaterno;
+                    cmd2.Parameters.Add("@amaterno", SqlDbType.VarChar).Value = model.Amaterno;
+                    cmd2.Parameters.Add("@promotor", SqlDbType.VarChar).Value = model.promotor;
+                    cmd2.Parameters.Add("@descripcion", SqlDbType.VarChar).Value = model.Ddl_Estatus;
+                    cmd2.Parameters.Add("@tienda", SqlDbType.VarChar).Value = model.tienda.Replace("Tienda ", "");
+                    cmd2.Parameters.Add("@idsolicitud", SqlDbType.VarChar).Value = model.solicitud;
+                    cmd2.CommandText = "IMspr_GetReportes_Estatus";
+                    cmd2.Connection = con;
+                    da2.SelectCommand = cmd2;
+                    da2.Fill(t2);
+                    //GridView3.DataSource = t2;
+                    cmd3.Parameters.Clear();
+                    cmd3.Parameters.Add("@desde", SqlDbType.VarChar).Value = Convert.ToDateTime(model.desde).ToString("yyyy-dd-MM") + " 00:00:00";
+                    cmd3.Parameters.Add("@hasta", SqlDbType.VarChar).Value = Convert.ToDateTime(model.hasta).ToString("yyyy-dd-MM") + " 23:59:59";
+                    cmd3.Parameters.Add("@nombre", SqlDbType.VarChar).Value = model.name;
+                    cmd3.Parameters.Add("@apaterno", SqlDbType.VarChar).Value = model.APaterno;
+                    cmd3.Parameters.Add("@amaterno", SqlDbType.VarChar).Value = model.Amaterno;
+                    cmd3.Parameters.Add("@promotor", SqlDbType.VarChar).Value = model.promotor;
+                    cmd3.Parameters.Add("@descripcion", SqlDbType.VarChar).Value = model.Ddl_Estatus;
+                    cmd3.Parameters.Add("@tienda", SqlDbType.VarChar).Value = model.tienda.Replace("Tienda ", "");
+                    cmd3.Parameters.Add("@idsolicitud", SqlDbType.VarChar).Value = model.solicitud;
+                    cmd3.CommandText = "IMspr_GetReportes_Estatus_Descripcion";
+                    cmd3.Connection = con;
+                    da3.SelectCommand = cmd3;
+                    da3.Fill(t3);
+                    //GridView4.DataSource = t3;
+                    cmd4.Parameters.Clear();
+                    cmd4.Parameters.Add("@desde", SqlDbType.VarChar).Value = Convert.ToDateTime(model.desde).ToString("yyyy-dd-MM") + " 00:00:00";
+                    cmd4.Parameters.Add("@hasta", SqlDbType.VarChar).Value = Convert.ToDateTime(model.hasta).ToString("yyyy-dd-MM") + " 23:59:59";
+                    cmd4.Parameters.Add("@nombre", SqlDbType.VarChar).Value = model.name;
+                    cmd4.Parameters.Add("@apaterno", SqlDbType.VarChar).Value = model.APaterno;
+                    cmd4.Parameters.Add("@amaterno", SqlDbType.VarChar).Value = model.Amaterno;
+                    cmd4.Parameters.Add("@promotor", SqlDbType.VarChar).Value = model.promotor;
+                    cmd4.Parameters.Add("@descripcion", SqlDbType.VarChar).Value = model.Ddl_Estatus;
+                    cmd4.Parameters.Add("@tienda", SqlDbType.VarChar).Value = model.tienda.Replace("Tienda ", "");
+                    cmd4.Parameters.Add("@idsolicitud", SqlDbType.VarChar).Value = model.solicitud;
+                    cmd4.CommandText = "IMspr_GetReportes_Total_Tienda";
+                    cmd4.Connection = con;
+                    da4.SelectCommand = cmd4;
+                    da4.Fill(t4);
+                    con.Close();
+                    return util.GetResponse(t, "Consulta Exitosa", false);
+                }
+                catch (Exception ex)
+                {
+                    return util.GetResponse(ex, "Error de sistema", false);
+                }
+            }
+            return null;
+        }
+
     }
 }

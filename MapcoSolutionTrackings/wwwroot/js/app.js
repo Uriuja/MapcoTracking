@@ -3,12 +3,7 @@
     let public = {};
 
     public.init = () => {
-        $("body").ajaxStart(function () {
-            $("#loading").removeClass("hide");
-        });
-        $("body").ajaxStop(function () {
-            $("#loading").addClass("hide");
-        });
+        validateForm();
         events();
         fillData();
         fillStatus();
@@ -17,23 +12,23 @@
     let events = function () {
         console.log("CARGANDO...");
 
-        $('#tableContainer').DataTable({
-            dom: 'Bfrtip',
-            buttons: [
-                'copy', 'excel', 'pdf'
-            ],
+        $('#tableContainer,#tableContainerPrecalification').DataTable({
+            //dom: 'Bfrtip',
+            //buttons: [
+            //    "copy", "excel", "csv", "pdf"
+            //],
             "language": {
                 "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
             }
         });
 
-        $("#desde,#hasta").datepicker({
+        $("#desde,#hasta,#desdeP,#hastaP").datepicker({
             dateFormat: "yy-mm-dd",
             dayNames: ["Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado"],
             dayNamesMin: ["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa"],
             monthNames: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
             maxDate: new Date(),
-            minDate: "-2m"
+            minDate: "-3m"
         });
         $('#tableContainer').on('autoFill', function (e, datatable, cells) {
             alert((cells.length * cells[0].length) + ' cells were updated');
@@ -42,6 +37,49 @@
             $("#frmSearch")[0].reset();
             $("#resultContainer").addClass("hide");
         });
+        $("#btnSendPrecalifications").click(function(){
+            let _data = {
+                desde: $("#desdeP").val(),
+                hasta: $("#hastaP").val(),
+                aprobado: $("#aprobado").val(),
+            };
+            let jsonData = JSON.stringify(_data);
+            $.ajax({
+                url: "/Search/Generar_Precalificacion",
+                data: jsonData,
+                contentType: "application/json; charset=utf-8",
+                dataType: 'json',
+                type: "POST",
+
+            }).done(function (data) {
+                console.log("Respuesta: ", data);
+                let _collection = data.data;
+                let _tabla = $('#tableContainerPrecalification').DataTable();
+                _tabla.destroy();
+                $("#rowsP").html("");
+                for (let i = 0; i < _collection.length; i++) {
+                    let _row = _collection[i];
+                    $("#rowsP").append('<tr><td>' + _row.noConsulta + '</td><td>' + _row.preCalificación + '</td><td>'
+                        + _row.confirmado + '</td><td>' + _row.fecha + '</td><td>' + _row.nombre + '</td><td>'
+                        + _row.apePat + '</td><td>' + _row.apeMat + '</td><td>'
+                        + _row.fechaNacimiento + '</td><td>' + _row.ciudad + '</td><td>' + _row.municipio + '</td><td>'
+                        + _row.estado + '</td><td>' + _row.promotor + '</td><td>' + _row.tienda + '</td></tr>');
+                }
+
+                $('#tableContainerPrecalification').DataTable({
+                    dom: 'Bfrtip',
+                    buttons: [
+                        "copy", "excel", "csv", "pdf", //"print"
+                    ],
+                    "language": {
+                        "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+                    }
+                });
+            }).fail(function (data) {
+                console.log("Respuesta: ", data);
+            });
+        })
+
         $("#btnSend").click(function () {
             let _data = {
                 desde: $("#desde").val(),
@@ -55,9 +93,15 @@
                 tienda: $("#tienda").val(),
             };
             let jsonData = JSON.stringify(_data);
-
+            let _level = sessionStorage.getItem("PrincipalLevel");
+            let _url = "";
+            if (_level == "Administrador") {
+                _url = "/Search/Search";
+            } else {
+                _url = "/Search/Generar_ReporteNormal";
+            }
             $.ajax({
-                url: "/Search/Search",
+                url: _url,
                 data: jsonData,
                 contentType: "application/json; charset=utf-8",
                 dataType: 'json',
@@ -66,15 +110,15 @@
             }).done(function (data) {
                 console.log("Respuesta: ", data);
                 let _collection = data.data;
-                $("#rows").html("");
                 let _tabla = $('#tableContainer').DataTable();
                 _tabla.destroy();
+                $("#rows").html("");
                 for (let i = 0; i < _collection.length; i++){
                     let _row = _collection[i];
                     $("#rows").append('<tr><td>' + _row.noConsulta + '</td><td>' + _row.fecha + '</td><td>'
                         + _row.nombre + '</td><td>' + _row.apePat + '</td><td>' + _row.apeMat + '</td><td>'
                         + _row.estatus + '</td><td>' + _row.motivoStatus + '</td><td>'
-                        + _row.estatusRecepcion + '</td><td>' + _row.promotor + '</td><td>' + _row.tienda + '</tr>');
+                        + _row.estatusRecepcion + '</td><td>' + _row.promotor + '</td><td>' + _row.tienda + '</td></tr>');
                 }
          
                 $('#tableContainer').DataTable({
@@ -93,7 +137,24 @@
              });
             
         });
+
+        $("#btnPrecalifications").click(function () {
+            $("#container1").addClass("hide");
+            $("#container2").removeClass("hide");
+        });
+
+        $("#btnReturn").click(function () {
+            $("#container2").addClass("hide");
+            $("#container1").removeClass("hide");
+        });
+
+        $("#btnCloseSesion").click(function () {
+            sessionStorage.clear();
+            location.assign(location.origin + "");
+        });
     }
+
+   
 
     function fillStatus() {
         $.ajax({
@@ -162,6 +223,13 @@
             out.push(i);
         }
         return out;
+    }
+
+    function validateForm() {
+        let _level = sessionStorage.getItem("PrincipalLevel");
+        if (_level != "Administrado") {
+            $("#filtrosCascada,#btnPrecalifications,#btnAll").addClass("hide");
+        }
     }
 
 

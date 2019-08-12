@@ -19,6 +19,7 @@ namespace MapcoSolutionTrackings.Models
         public string promotor { get; set; }
 
         public string tienda { get; set; }
+        public string aprobado { get; set; }
 
 
     }

@@ -11,6 +11,7 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script type="text/javascript" src="~/wwwroot/lib/bootstrap/dist/js/bootstrap.js"></script>
     <link href="~/wwwroot/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <script type="text/javascript" src="~/wwwroot/js/util.js"></script>
     <script type="text/javascript" src="~/wwwroot/js/app.js"></script>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="~/wwwroot/lib/DataTables/css/jquery.dataTables.css">
@@ -34,12 +35,12 @@
             <div class="container-fluid">
                 <div class="navbar-wrapper">
                     <div class="navbar-toggle">
-                        
+
                     </div>
                     <h2 class="white">Seguimiento de Solicitudes</h2>
                 </div>
-                <button class="navbar-toggler logout" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation"  >
-                   Cerrar Sesión
+                <button class="navbar-toggler logout" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation" id="btnCloseSesion">
+                    Cerrar Sesión
                 </button>
                 <div class="collapse navbar-collapse justify-content-end" id="navigation">
                     <img src="~/wwwroot/images/img/logomagpco.jpg" class="logo">
@@ -47,134 +48,205 @@
             </div>
         </nav>
     </div>
-    <div class="col-md-12">
-        <section class="form_wrap">
-            
-            <form action="" class="form_contact" id="frmSearch" name="frmSearch">
-                <h2>Generar Reporte Administrador</h2>
-                <div class="user_info col-md-12">
-                    <div class="row">
-                        <div class="form-group col-md-4">
-                            <label for="ap_pat">Apellido Paterno</label>
-                            <input type="text" id="ap_pat">
+    <div class="" id="container1">
+        <div class="col-md-12" id="report">
+            <section class="form_wrap">
+                <form action="" class="form_contact" id="frmSearch" name="frmSearch">
+                    <h2>Generar Reporte Administrador</h2>
+                    <div class="user_info col-md-12">
+                        <div class="row">
+                            <div class="form-group col-md-4">
+                                <label for="ap_pat">Apellido Paterno</label>
+                                <input type="text" id="ap_pat">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="ap_mat">Apellido Materno</label>
+                                <input type="text" id="ap_mat">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="mensaje">Nombres</label>
+                                <input type="text" id="name">
+                            </div>
                         </div>
-                        <div class="form-group col-md-4">
-                            <label for="ap_mat">Apellido Materno</label>
-                            <input type="text" id="ap_mat">
+                        <div class="row">
+                            <div class="form-group col-md-3">
+                                <label for="desde">Desde</label>
+                                <input type="text" id="desde">
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="hasta">Hasta</label>
+                                <input type="text" id="hasta">
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="promotor">Promotor</label>
+                                <input type="text" id="promotor">
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="solicitud">Id Solicitud</label>
+                                <input type="text" id="solicitud">
+                            </div>
                         </div>
-                        <div class="form-group col-md-4">
-                            <label for="mensaje">Nombres</label>
-                            <input type="text" id="name">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-group col-md-3">
-                            <label for="desde">Desde</label>
-                            <input type="text" id="desde">
-                        </div>
-                        <div class="form-group col-md-3">
-                            <label for="hasta">Hasta</label>
-                            <input type="text" id="hasta">
-                        </div>
-                        <div class="form-group col-md-3">
-                            <label for="promotor">Promotor</label>
-                            <input type="text" id="promotor">
-                        </div>
-                        <div class="form-group col-md-3">
-                            <label for="solicitud">Id Solicitud</label>
-                            <input type="text" id="solicitud">
-                        </div>
-                    </div>
 
-                    <div class="row">
-                        <div class="form-group col-md-3">
-                            <label for="region">Región</label><br />
-                            <select name="region" id="region" class="custom-select-sm">
-                                <option value="0">SELECCIONE:</option>
-                            </select>
+                        <div class="row" id="filtrosCascada">
+                            <div class="form-group col-md-3">
+                                <label for="region">Región</label><br />
+                                <select name="region" id="region" class="custom-select-sm">
+                                    <option value="0">SELECCIONE:</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="subregion">Subregión</label><br />
+                                <select name="subregion" id="subregion" class="custom-select-sm">
+                                    <option value="0">SELECCIONE:</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="tienda">Tienda</label><br />
+                                <select name="tienda" id="tienda" class="custom-select-sm">
+                                    <option value="0">SELECCIONE:</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="status">Estatus</label><br />
+                                <select name="status" id="status" class="custom-select-sm">
+                                    <option value="0">SELECCIONE:</option>
+                                </select>
+                            </div>
                         </div>
-                        <div class="form-group col-md-3">
-                            <label for="subregion">Subregión</label><br />
-                            <select name="subregion" id="subregion" class="custom-select-sm">
-                                <option value="0">SELECCIONE:</option>
-                            </select>
-                        </div>
-                        <div class="form-group col-md-3">
-                            <label for="tienda">Tienda</label><br />
-                            <select name="tienda" id="tienda" class="custom-select-sm">
-                                <option value="0">SELECCIONE:</option>
-                            </select>
-                        </div>
-                        <div class="form-group col-md-3">
-                            <label for="status">Estatus</label><br />
-                            <select name="status" id="status" class="custom-select-sm">
-                                <option value="0">SELECCIONE:</option>
-                            </select>
-                        </div>
-                    </div>
 
-                    <div class="row">
-                        <div class="form-group col-md-3">
-                            <br />
-                            <input type="button" value="Generar" id="btnSend" class="btn btn-primary">
+                        <div class="row">
+                            <div class="form-group col-md-3">
+                                <br />
+                                <input type="button" value="Generar" id="btnSend" class="btn btn-primary">
+                            </div>
+                            <div class="form-group col-md-3">
+                                <br />
+                                <input type="button" value="Limpiar" id="btnClean" class="btn btn-primary">
+                            </div>
+                            <div class="form-group col-md-3">
+                                <br />
+                                <input type="button" value="Precalificaciones" id="btnPrecalifications" class="btn btn-primary">
+                            </div>
+                            <div class="form-group col-md-3">
+                                <br />
+                                <input type="button" value="Todas las solicitudes" id="btnAll" class="btn btn-primary">
+                            </div>
                         </div>
-                        <div class="form-group col-md-3">
-                            <br />
-                            <input type="button" value="Limpiar" id="btnClean" class="btn btn-primary">
-                        </div>
-                        <div class="form-group col-md-3">
-                            <br />
-                            <input type="button" value="Precalificaciones" id="btnClean" class="btn btn-primary">
-                        </div>
-                        <div class="form-group col-md-3">
-                            <br />
-                            <input type="button" value="Todas las solicitudes" id="btnClean" class="btn btn-primary">
-                        </div>
-                    </div>
 
+                    </div>
+                </form>
+            </section>
+        </div>
+        <div class="container" id="resultContainer">
+            <div class="row">
+                <div class="data col-md-12">
+                    <table class="table" id="tableContainer">
+                        <thead>
+                            <tr>
+                                <th>Solicitud</th>
+                                <th>Fecha</th>
+                                <th>Nombre(s)</th>
+                                <th>Apellido Paterno</th>
+                                <th>Apellido Materno</th>
+                                <th>Estatus</th>
+                                <th>Motivo Estatus</th>
+                                <th>Estatus Recepción</th>
+                                <th>Promotor</th>
+                                <th>Tienda</th>
+                            </tr>
+                        </thead>
+                        <tbody id="rows">
+                        </tbody>
+                    </table>
                 </div>
-            </form>
-        </section>
-    </div>
-    <div class="container" id="resultContainer">
-        <div class="row">
-            <div class="data col-md-12">
-                <table class="table" id="tableContainer"> 
-                    <thead>
-                        <tr>
-                            <th>Solicitud</th>
-                            <th>Fecha</th>
-                            <th>Nombre(s)</th>
-                            <th>Apellido Paterno</th>
-                            <th>Apellido Materno</th>
-                            <th>Estatus</th>
-                            <th>Motivo Estatus</th>
-                            <th>Estatus Recepción</th>
-                            <th>Promotor</th>
-                            <th>Tienda</th>
-                        </tr>
-                    </thead>
-                    <tbody id="rows">
-
-                    </tbody>
-                </table>
             </div>
         </div>
     </div>
+    <div class="hide" id="container2">
+        <div class="col-md-12" id="reportPRecalification">
+            <section class="form_wrap">
+                <form action="" class="form_contact" id="frmSearchPrecalificaciones" name="frmSearchPrecalificaciones">
+                    <h2>Precalificaciones</h2>
+                    <div class="user_info col-md-12">
+                        <div class="row">
+                            <div class="form-group col-md-3">
+                                <label for="desde">Desde</label>
+                                <input type="text" id="desdeP">
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="hasta">Hasta</label>
+                                <input type="text" id="hastaP">
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label>Aprobado</label>
+                                <br /> 
+                                <select name="aprobado" id="aprobado" class="custom-select-sm">
+                                    <option value="0">SELECCIONE:</option>
+                                    <option value="Aprobado">Aprobado</option>
+                                    <option value="Declinado">Declinado</option>
+                                    <option value="Capturado">Capturado</option>
+                                    <option value="Pre-Calificado">Pre-Calificado</option>
 
-    <div id="loading" class="hide">
-        <div id="loading-center">
-            <div id="loading-center-absolute">
-                <div class="object" id="object_one"></div>
-                <div class="object" id="object_two"></div>
-                <div class="object" id="object_three"></div>
-                <div class="object" id="object_four"></div>
-                <div class="object" id="object_five"></div>
-                <div class="object" id="object_six"></div>
-                <div class="object" id="object_seven"></div>
-                <div class="object" id="object_eight"></div>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-3">
+                                <br />
+                                <input type="button" value="Generar" id="btnSendPrecalifications" class="btn btn-primary">
+                            </div>
+                            <div class="form-group col-md-3">
+                                <br />
+                                <input type="button" value="Regresar" id="btnReturn" class="btn btn-primary">
+                            </div>
+                            
+                        </div>
+
+                    </div>
+                </form>
+            </section>
+        </div>
+        <div class="container" id="resultContainerPrecalification">
+            <div class="row">
+                <div class="data col-md-12 adjust">
+                    <table class="table" id="tableContainerPrecalification">
+                        <thead>
+                            <tr>
+                                <th>No Consulta</th>
+                                <th>Precalificación</th>
+                                <th>Confirmado</th>
+                                <th>Fecha</th>
+                                <th>Nombre(s)</th>
+                                <th>Apellido Paterno</th>
+                                <th>Apellido Materno</th>
+                                <th>Fecha de Nacimiento</th>
+                                <th>Ciudad</th>
+                                <th>Municipio</th>
+                                <th>Estado</th>
+                                <th>Promotor</th>
+                                <th>Tienda</th>
+                            </tr>
+                        </thead>
+                        <tbody id="rowsP">
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
+        <div id="loading" class="hide">
+            <div id="loading-center">
+                <div id="loading-center-absolute">
+                    <div class="object" id="object_one"></div>
+                    <div class="object" id="object_two"></div>
+                    <div class="object" id="object_three"></div>
+                    <div class="object" id="object_four"></div>
+                    <div class="object" id="object_five"></div>
+                    <div class="object" id="object_six"></div>
+                    <div class="object" id="object_seven"></div>
+                    <div class="object" id="object_eight"></div>
+                </div>
+            </div>
+        </div>
 </body>
 </html>

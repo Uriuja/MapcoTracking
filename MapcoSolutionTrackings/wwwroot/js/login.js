@@ -32,6 +32,7 @@
                         button: "Aceptar",
                     });
                 } else if (data.code == 200) {
+                    sessionStorage.setItem("PrincipalLevel", data.data.level);
                     location.assign(location.origin + "/Home/GoReports");
                 }
                

@@ -52,6 +52,10 @@ namespace MapcoSolutionTrackings.Controllers
                     {
                         nivel = "Administrador";
                     }
+                    else
+                    {
+                        nivel = "User";
+                    }
                     Session["Nivel"] = nivel;
                     string connString2 = ConfigurationManager.ConnectionStrings["Mapco"].ToString();
                     SqlConnection con2 = new SqlConnection(connString2);
@@ -63,8 +67,11 @@ namespace MapcoSolutionTrackings.Controllers
                     da2.Fill(dt2);
                     Session["Usuario_Mapco"] = "Valido";
                     Session["Tienda"] = dt2.Rows[0]["sTienda"].ToString();
+                    Models.User user = new Models.User();
+                    user.level = nivel;
+                    user.user = model.user;
                     con.Close();
-                    return util.GetResponse(null, "Acceso Correcto", true);
+                    return util.GetResponse(user, "Acceso Correcto", true);
                 }
                 else
                 {

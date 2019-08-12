@@ -153,7 +153,7 @@ h2{
 }
 
 #loading {
-    background-color: #E79D01;
+    background-color: #213977;
     height: 100%;
     width: 100%;
     position: fixed;
@@ -441,20 +441,23 @@ input[type=text], select {
 }
 
 
-@media (min-width: 900px) {
+@media (min-width: 1280px) {
     .logo {
         text-align: right;
-        margin-left: 60%;
+        margin-left: 67%;
         position: absolute;
         z-index: 100;
-        margin-top: -30px;
+        /*margin-top: -30px;*/
+    }
+    #btnCloseSesion{
+        margin-top: -40px;
     }
 }
 
-@media (max-width: 900px) {
+@media (min-width: 1281px) {
     .logo {
         text-align: right;
-        margin-left: 60%;
+        margin-left: 61%;
         position: absolute;
         z-index: 100;
     }
@@ -471,4 +474,16 @@ input[type=text], select {
     height:30px;
     background-color:transparent;
     color:white
+}
+
+.dt-button {
+    border-radius: 20px;
+    width: 130px;
+    height: 30px;
+    background-color: #213977;
+    color: white
+}
+
+.radios {
+    width: 50px!important
 }

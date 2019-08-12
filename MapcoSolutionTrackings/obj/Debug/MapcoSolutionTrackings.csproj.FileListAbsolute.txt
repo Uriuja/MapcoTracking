@@ -95,6 +95,7 @@ C:\Users\52331\source\repos\MapcoSolutionTrackings\MapcoSolutionTrackings\bin\Sy
 C:\Users\52331\source\repos\MapcoSolutionTrackings\MapcoSolutionTrackings\bin\System.Text.Encodings.Web.xml
 C:\Users\52331\source\repos\MapcoSolutionTrackings\MapcoSolutionTrackings\bin\System.Web.Helpers.Crypto.dll
 C:\Users\52331\source\repos\MapcoSolutionTrackings\MapcoSolutionTrackings\bin\System.Web.Helpers.Crypto.pdb
+C:\Users\LuisCortes\Documents\Proyectos\Original\MapcoTracking\MapcoSolutionTrackings\bin\wwwroot\lib\bootstrap\dist\css\bootstrap.css
 C:\Users\LuisCortes\Documents\Proyectos\Original\MapcoTracking\MapcoSolutionTrackings\bin\MapcoSolutionTrackings.dll.config
 C:\Users\LuisCortes\Documents\Proyectos\Original\MapcoTracking\MapcoSolutionTrackings\bin\MapcoSolutionTrackings.dll
 C:\Users\LuisCortes\Documents\Proyectos\Original\MapcoTracking\MapcoSolutionTrackings\bin\MapcoSolutionTrackings.pdb
@@ -193,9 +194,14 @@ C:\Users\LuisCortes\Documents\Proyectos\Original\MapcoTracking\MapcoSolutionTrac
 C:\Users\LuisCortes\Documents\Proyectos\Original\MapcoTracking\MapcoSolutionTrackings\bin\System.Web.Helpers.xml
 C:\Users\LuisCortes\Documents\Proyectos\Original\MapcoTracking\MapcoSolutionTrackings\bin\System.Web.Mvc.xml
 C:\Users\LuisCortes\Documents\Proyectos\Original\MapcoTracking\MapcoSolutionTrackings\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\LuisCortes\Documents\Proyectos\Original\MapcoTracking\MapcoSolutionTrackings\bin\es\System.Web.Razor.resources.dll
+C:\Users\LuisCortes\Documents\Proyectos\Original\MapcoTracking\MapcoSolutionTrackings\bin\es\System.Web.Webpages.resources.dll
+C:\Users\LuisCortes\Documents\Proyectos\Original\MapcoTracking\MapcoSolutionTrackings\bin\es\System.Web.Webpages.Deployment.resources.dll
+C:\Users\LuisCortes\Documents\Proyectos\Original\MapcoTracking\MapcoSolutionTrackings\bin\es\System.Web.Webpages.Razor.resources.dll
+C:\Users\LuisCortes\Documents\Proyectos\Original\MapcoTracking\MapcoSolutionTrackings\bin\es\System.Web.Helpers.resources.dll
+C:\Users\LuisCortes\Documents\Proyectos\Original\MapcoTracking\MapcoSolutionTrackings\bin\es\System.Web.Mvc.resources.dll
 C:\Users\LuisCortes\Documents\Proyectos\Original\MapcoTracking\MapcoSolutionTrackings\obj\Debug\MapcoSolutionTrackings.csproj.CoreCompileInputs.cache
 C:\Users\LuisCortes\Documents\Proyectos\Original\MapcoTracking\MapcoSolutionTrackings\obj\Debug\MapcoSolutionTrackings.csproj.CopyComplete
 C:\Users\LuisCortes\Documents\Proyectos\Original\MapcoTracking\MapcoSolutionTrackings\obj\Debug\MapcoSolutionTrackings.dll
 C:\Users\LuisCortes\Documents\Proyectos\Original\MapcoTracking\MapcoSolutionTrackings\obj\Debug\MapcoSolutionTrackings.pdb
 C:\Users\LuisCortes\Documents\Proyectos\Original\MapcoTracking\MapcoSolutionTrackings\obj\Debug\MapcoSolutionTrackings.csprojAssemblyReference.cache
-C:\Users\LuisCortes\Documents\Proyectos\Original\MapcoTracking\MapcoSolutionTrackings\bin\wwwroot\lib\bootstrap\dist\css\bootstrap.css

@@ -166,6 +166,7 @@
       <DependentUpon>DbSetMapco.edmx</DependentUpon>
       <LastGenOutput>DbSetMapco.cs</LastGenOutput>
     </Content>
+    <Content Include="Views\Home\PreCal.cshtml" />
     <Content Include="Web.config" />
     <Content Include="wwwroot\css\estilos.css" />
     <Content Include="wwwroot\css\main.css" />
@@ -186,6 +187,7 @@
     <Content Include="wwwroot\js\app.js" />
     <Content Include="wwwroot\js\site.js" />
     <Content Include="wwwroot\js\site.min.js" />
+    <Content Include="wwwroot\js\util.js" />
     <Content Include="wwwroot\lib\bootstrap\dist\css\bootstrap-theme.css" />
     <Content Include="wwwroot\lib\bootstrap\dist\css\bootstrap-theme.min.css" />
     <Content Include="wwwroot\lib\bootstrap\dist\css\bootstrap.css">
@@ -222,7 +224,6 @@
     <Content Include="wwwroot\lib\DataTables\js\dataTables.foundation.min.js" />
     <Content Include="wwwroot\lib\DataTables\js\dataTables.jqueryui.js" />
     <Content Include="wwwroot\lib\DataTables\js\dataTables.jqueryui.min.js" />
-    <Content Include="Views\Home\dataTables.languaje.es.json" />
     <None Include="wwwroot\lib\DataTables\js\dataTables.languaje.es.json" />
     <Content Include="wwwroot\lib\DataTables\js\dataTables.semanticui.js" />
     <Content Include="wwwroot\lib\DataTables\js\dataTables.semanticui.min.js" />
@@ -241,10 +242,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\PrecalificacionesController.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Controllers\ReportsController.cs" />
+    <Compile Include="Controllers\PrecalificacionesController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\UtilController.cs" />
     <Compile Include="Models\MetricItem_Mapco.cs" />
@@ -595,7 +593,8 @@
     <Compile Include="App_Data\Validar_Usuario_VickyForm_Result.cs">
       <DependentUpon>DbSetGlobal.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Status.cs" />
+    <Compile Include="Models\User.cs" />
+    <Compile Include="obj\Status.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -616,7 +615,6 @@
     </Content>
     <None Include="packages.config" />
     <Content Include="Views\Home\_LoginMapco.cshtml" />
-    <Content Include="Views\Home\Reports.cshtml" />
     <Content Include="Views\Home\GoReports.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -640,11 +638,7 @@
     <Content Include="wwwroot\lib\jquery\.bower.json" />
     <Content Include="wwwroot\lib\jquery\dist\jquery.min.map" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Views\Search\" />
-    <Folder Include="Views\Shared\" />
-    <Folder Include="Views\Util\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>

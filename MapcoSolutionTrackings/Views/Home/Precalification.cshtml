@@ -1,16 +1,32 @@
-﻿<!DOCTYPE html>
+﻿<!DOCTYPE>
+
 <html>
 <head>
-   
+    <meta name="viewport" content="width=device-width" />
+    <title>GoReports</title>
     <meta charset="utf-8" />
-   
+
     <link href="~/wwwroot/css/estilos.css" rel="stylesheet" />
-    <link href="~/wwwroot/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
-    <script type="text/javascript" src="~/wwwroot/lib/bootstrap/dist/js/bootstrap.js"></script>
-    <script type="text/javascript" src="~/wwwroot/js/app.js"></script>
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script type="text/javascript" src="~/wwwroot/lib/bootstrap/dist/js/bootstrap.js"></script>
+    <link href="~/wwwroot/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <script type="text/javascript" src="~/wwwroot/js/util.js"></script>
+    <script type="text/javascript" src="~/wwwroot/js/app.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="~/wwwroot/lib/DataTables/css/jquery.dataTables.css">
+    <link rel="stylesheet" href="~/wwwroot/lib/DataTables/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" />
+
+
+
+    <script src="~/wwwroot/lib/DataTables/js/jquery.dataTables.js"></script>
+    <script src="~/wwwroot/lib/DataTables/js/dataTables.buttons.min.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script type="text/javascript" src="//cdn.datatables.net/buttons/1.5.6/js/buttons.html5.min.js"></script>
+
     <title></title>
 </head>
 <body>
@@ -21,23 +37,22 @@
                     <div class="navbar-toggle">
 
                     </div>
-                    <img src="">
+                    <h2 class="white">Seguimiento de Solicitudes</h2>
                 </div>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-bar navbar-kebab"></span>
-                    <span class="navbar-toggler-bar navbar-kebab"></span>
-                    <span class="navbar-toggler-bar navbar-kebab"></span>
+                <button class="navbar-toggler logout" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+                    Cerrar Sesión
                 </button>
                 <div class="collapse navbar-collapse justify-content-end" id="navigation">
-
+                    <img src="~/wwwroot/images/img/logomagpco.jpg" class="logo">
                 </div>
             </div>
         </nav>
     </div>
-    <div class="col-md-12">
+    <div class="col-md-12" id="report">
         <section class="form_wrap">
+
             <form action="" class="form_contact" id="frmSearch" name="frmSearch">
-                <h2>Generar Reporte Tienda</h2>
+                <h2>Generar Reporte Administrador</h2>
                 <div class="user_info col-md-12">
                     <div class="row">
                         <div class="form-group col-md-4">
@@ -73,68 +88,74 @@
                     </div>
 
                     <div class="row">
-                        <div class="form-group col-md-4">
-                            <label for="mensaje">Estatus</label>
-                            <select name="estatus" id="estatus" class="custom-select">
-                                <option value="0">Seleccione</option>
-                                <option value="Solicitud Aprobada">Solicitud Aprobada</option>
-                                <option value="Solicitud Cancelada">Solicitud Cancelada</option>
-                                <option value="Solicitud Ingresada">Solicitud Ingresada</option>
-                                <option value="Solicitud Pendiente/En Proceso">Solicitud Pendiente/En Proceso</option>
-                                <option value="Solicitud Rechazada">Solicitud Rechazada</option>
+                        <div class="form-group col-md-3">
+                            <label for="region">Región</label><br />
+                            <select name="region" id="region" class="custom-select-sm">
+                                <option value="0">SELECCIONE:</option>
                             </select>
                         </div>
-                        <div class="form-group col-md-4">
+                        <div class="form-group col-md-3">
+                            <label for="subregion">Subregión</label><br />
+                            <select name="subregion" id="subregion" class="custom-select-sm">
+                                <option value="0">SELECCIONE:</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="tienda">Tienda</label><br />
+                            <select name="tienda" id="tienda" class="custom-select-sm">
+                                <option value="0">SELECCIONE:</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="status">Estatus</label><br />
+                            <select name="status" id="status" class="custom-select-sm">
+                                <option value="0">SELECCIONE:</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-3">
                             <br />
                             <input type="button" value="Generar" id="btnSend" class="btn btn-primary">
                         </div>
-                        <div class="form-group col-md-4">
+                        <div class="form-group col-md-3">
                             <br />
                             <input type="button" value="Limpiar" id="btnClean" class="btn btn-primary">
                         </div>
+                        <div class="form-group col-md-3">
+                            <br />
+                            <input type="button" value="Precalificaciones" id="btnPrecalifications" class="btn btn-primary">
+                        </div>
+                        <div class="form-group col-md-3">
+                            <br />
+                            <input type="button" value="Todas las solicitudes" id="btnAll" class="btn btn-primary">
+                        </div>
                     </div>
+
                 </div>
             </form>
         </section>
     </div>
-    <div class="container hide" id="resultContainer">
-        <div class="row adjust">
+    <div class="container" id="resultContainer">
+        <div class="row">
             <div class="data col-md-12">
-                <table class="table">
+                <table class="table" id="tableContainer">
                     <thead>
                         <tr>
-                            <th>No Consulta</th>
-                            <th>Precalificación</th>
-                            <th>Confirmado</th>
+                            <th>Solicitud</th>
                             <th>Fecha</th>
-                            <th>Nombre</th>
+                            <th>Nombre(s)</th>
                             <th>Apellido Paterno</th>
                             <th>Apellido Materno</th>
-                            <th>Fecha de Nacimiento</th>
-                            <th>Ciudad</th>
-                            <th>Municipio</th>
-                            <th>Estado</th>
+                            <th>Estatus</th>
+                            <th>Motivo Estatus</th>
+                            <th>Estatus Recepción</th>
                             <th>Promotor</th>
                             <th>Tienda</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr class="table-primary">
-                            <td>65515</td>
-                            <td>Declinado</td>
-                            <td>1</td>
-                            <td>01/06/2019 08:03:08 a. m.</td>
-                            <td>OCTAVIO</td>
-                            <td>LEYVA</td>
-                            <td>ROMERO</td>
-                            <td>1959-12-19</td>
-                            <td></td>
-                            <td></td>
-                            <td>Sinaloa</td>
-                            <td>856</td>
-                            <td>0520</td>
-                        </tr>
-
+                    <tbody id="rows">
                     </tbody>
                 </table>
             </div>

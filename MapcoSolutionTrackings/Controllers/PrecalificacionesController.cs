@@ -5,14 +5,23 @@ using System.Configuration;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 using System.Web.UI;
 
 namespace MapcoSolutionTrackings.Controllers
 {
-    public class PrecalificacionesController : System.Web.UI.Page
+    public class PrecalificacionesController : Controller
     {
-        protected void Generar_Reporte(ModelReports modelPreca, object sender, EventArgs e)
+
+        // GET: Home
+        public ActionResult Index()
         {
+            return View("~/Views/Home/_LoginMapco.cshtml");
+        }
+
+        protected Object Generar_Reporte(ModelReports modelPreca, object sender, EventArgs e)
+        {
+            UtilController util = new UtilController();
             try
             {
                 string Query = "";
@@ -21,41 +30,37 @@ namespace MapcoSolutionTrackings.Controllers
                 string constr = ConfigurationManager.ConnectionStrings["Mapco"].ToString(); // connection string
                 SqlConnection con = new SqlConnection(constr);
                 con.Open();
-
-
                 System.Data.DataTable dt = new System.Data.DataTable();
                 SqlCommand cmd = new SqlCommand(query, con);
                 cmd.CommandTimeout = 0;
-                SqlDataAdapter adp = new SqlDataAdapter(cmd);
-                adp.Fill(dt);
-                //GridView1.DataSource = dt;
-                //GridView1.Columns[0].Visible = true;
-                if (dt.Rows.Count > 0)
+                SqlDataReader reader1 = cmd.ExecuteReader();
+                List<ModelResults> resultList = new List<ModelResults>();
+                while (reader1.Read())
                 {
-                    //LBRegistros.Visible = true;
-                    //LBRegistros.Font.Bold = true;
-                    //LBRegistros.Text = "Registros encontrados: " + dt.Rows.Count.ToString();
-                    //GridView1.Visible = true;
-                    //GridView1.DataBind();
-                    //Btn_Export_To_Excel.Visible = true;
-                    //Btn_Excel2.Visible = true;
-                }
-                else
-                {
-                    //Btn_Export_To_Excel.Visible = false;
-                    //Btn_Excel2.Visible = false;
-                    //LBRegistros.Visible = false;
-                    //GridView1.Visible = false;
-
-                    ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "Scroll", "alert('No hay coincidencias!')", true);
+                    ModelResults result = new ModelResults();
+                    //result.noConsulta = reader1.GetValue(0).ToString();
+                    ////result.preCalificación = reader1.GetValue(1).ToString();
+                    ////result.confirmado = reader1.GetValue(2).ToString();
+                    //result.fecha = reader1.GetValue(1).ToString();
+                    //result.nombre = reader1.GetValue(2).ToString();
+                    //result.apePat = reader1.GetValue(3).ToString();
+                    //result.apeMat = reader1.GetValue(4).ToString();
+                    //result.estatus = reader1.GetValue(5).ToString();
+                    //result.motivoStatus = reader1.GetValue(6).ToString();
+                    //result.estatusRecepcion = reader1.GetValue(7).ToString();
+                    //result.promotor = reader1.GetValue(8).ToString();
+                    //result.tienda = reader1.GetValue(10).ToString();
+                    //resultList.Add(result);
                 }
                 con.Close();
-                ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "Scroll", "scroll();", true);
+                return util.GetResponse(resultList, "Consulta Exitosa", true);
+             
+               
 
             }
             catch (Exception ex)
             {
-                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Popup32", "alert('Ocurrio Un Error, Por Favor Contacte Al Area De IT\\n" + ex.Message.Replace("'", "\"") + " ')", true);
+                return util.GetResponse(ex, "Error de sistema", false);
             }
 
         }
