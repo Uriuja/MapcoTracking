@@ -90,20 +90,20 @@
                         <div class="row" id="filtrosCascada">
                             <div class="form-group col-md-3">
                                 <label for="region">Región</label><br />
-                                <select name="region" id="region" class="custom-select-sm">
-                                    <option value="0">SELECCIONE:</option>
+                                <select name="region" id="region" class="custom-select-sm changeFilters" multiple>
+                                    @*<option value="0">SELECCIONE:</option>*@
                                 </select>
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="subregion">Subregión</label><br />
-                                <select name="subregion" id="subregion" class="custom-select-sm">
-                                    <option value="0">SELECCIONE:</option>
+                                <select name="subregion" id="subregion" class="custom-select-sm changeFilters" multiple>
+                                    @*<option value="0">SELECCIONE:</option>*@
                                 </select>
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="tienda">Tienda</label><br />
-                                <select name="tienda" id="tienda" class="custom-select-sm">
-                                    <option value="0">SELECCIONE:</option>
+                                <select name="tienda" id="tienda" class="custom-select-sm changeFilters" multiple>
+                                    @*<option value="0">SELECCIONE:</option>*@
                                 </select>
                             </div>
                             <div class="form-group col-md-3">
@@ -118,6 +118,7 @@
                             <div class="form-group col-md-3">
                                 <br />
                                 <input type="button" value="Generar" id="btnSend" class="btn btn-primary">
+                                @*<button type="submit" id="btnSend" class="btn btn-primary btnSubmit">Generar</button>*@
                             </div>
                             <div class="form-group col-md-3">
                                 <br />
@@ -162,11 +163,12 @@
             </div>
         </div>
         <div class="container hide" id="totales">
-            <div class="row">
+            @*<div class="row">
                 <div class="data col-md-12">
                 </div>
-            </div>
+            </div>*@
             <div class="row">
+                <br /><hr class="divisor" /><br />
                 <div class="data col-md-12">
                     <table class="table" id="tableTotalesA">
                         <thead>
@@ -184,6 +186,7 @@
                 </div>
             </div>
             <div class="row">
+                <br /><hr class="divisor" /><br />
                 <div class="data col-md-12">
                     <table class="table" id="tableTotalesB">
                         <thead>
@@ -203,6 +206,7 @@
                 </div>
             </div>
             <div class="row">
+                <br /><hr class="divisor" /><br />
                 <div class="data col-md-12">
                     <table class="table" id="tableTotalesC">
                         <thead>
@@ -213,7 +217,7 @@
                         </thead>
                         <tbody id="rowsTotalesC">
                         </tbody>
-                        </table>
+                    </table>
                 </div>
             </div>
         </div>

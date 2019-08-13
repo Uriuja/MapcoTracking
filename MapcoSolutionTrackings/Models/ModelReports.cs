@@ -21,6 +21,12 @@ namespace MapcoSolutionTrackings.Models
         public string tienda { get; set; }
         public string aprobado { get; set; }
 
+        public List<string> region { get; set; }
+
+        public List<string> subregion { get; set; }
+
+        public List<string> tiendaSelect { get; set; }
+
 
     }
 }

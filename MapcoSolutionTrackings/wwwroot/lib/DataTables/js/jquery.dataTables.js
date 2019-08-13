@@ -1167,22 +1167,24 @@
 			
 				$( rowOne[0] ).children('th, td').each( function (i, cell) {
 					var col = oSettings.aoColumns[i];
-			
-					if ( col.mData === i ) {
-						var sort = a( cell, 'sort' ) || a( cell, 'order' );
-						var filter = a( cell, 'filter' ) || a( cell, 'search' );
-			
-						if ( sort !== null || filter !== null ) {
-							col.mData = {
-								_:      i+'.display',
-								sort:   sort !== null   ? i+'.@data-'+sort   : undefined,
-								type:   sort !== null   ? i+'.@data-'+sort   : undefined,
-								filter: filter !== null ? i+'.@data-'+filter : undefined
-							};
-			
-							_fnColumnOptions( oSettings, i );
-						}
-					}
+                    if (col != undefined) {  // by me
+                        if (col.mData === i) {
+                            var sort = a(cell, 'sort') || a(cell, 'order');
+                            var filter = a(cell, 'filter') || a(cell, 'search');
+
+                            if (sort !== null || filter !== null) {
+                                col.mData = {
+                                    _: i + '.display',
+                                    sort: sort !== null ? i + '.@data-' + sort : undefined,
+                                    type: sort !== null ? i + '.@data-' + sort : undefined,
+                                    filter: filter !== null ? i + '.@data-' + filter : undefined
+                                };
+
+                                _fnColumnOptions(oSettings, i);
+                            }
+                        }
+                    }
+					
 				} );
 			}
 			

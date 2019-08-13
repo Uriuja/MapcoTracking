@@ -11,15 +11,42 @@
 
     let events = function () {
         console.log("CARGANDO...");
-        $("#desde,#hasta,#desdeP,#hastaP").datepicker({
-            dateFormat: "yy-mm-dd",
-            dayNames: ["Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado"],
-            dayNamesMin: ["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa"],
-            monthNames: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
-            maxDate: new Date(),
-            minDate: "-3m"
+        
+
+        $(".changeFilters").click(function () {
+            let _data = {
+                region: $("#region").val(),
+                subregion: $("#subregion").val(),
+                tiendaSelect: $("#tienda").val(),
+            };
+            let jsonData = JSON.stringify(_data);
+            $.ajax({
+                url: "/Search/Fill_Data",
+                data: jsonData,
+                contentType: "application/json; charset=utf-8",
+                dataType: 'json',
+                type: "POST",
+
+            }).done(function (data) {
+                console.log("Respuesta: ", data);
+                let subregion = data.data.subregion;
+                let tienda = data.data.tiendaSelect;
+                if (subregion != null) {
+                    $("#subregion").html("");
+                    for (s = 0; s < subregion.length; s++) {
+                        $("#subregion").append('<option value= "' + subregion[s] + '">' + subregion[s].toUpperCase() + '</>');
+                    }
+                }
+                if (tienda != null) {
+                    $("#tienda").html("");
+                    for (t = 0; t < tienda.length; t++) {
+                        $("#tienda").append('<option value= "' + tienda[t] + '">' + tienda[t].toUpperCase() + '</>');
+                    }
+                }
+            }).fail(function (data) {
+                console.log("Respuesta: ", data);
+            });
         });
- 
 
         $('#tableContainer').on('autoFill', function (e, datatable, cells) {
             alert((cells.length * cells[0].length) + ' cells were updated');
@@ -28,7 +55,7 @@
             $("#frmSearch")[0].reset();
             $("#resultContainer").addClass("hide");
         });
-        $("#btnSendPrecalifications").click(function(){
+        $("#btnSendPrecalifications").click(function () {
             let _data = {
                 desde: $("#desdeP").val(),
                 hasta: $("#hastaP").val(),
@@ -70,99 +97,115 @@
             }).fail(function (data) {
                 console.log("Respuesta: ", data);
             });
-        })
+        });
 
         $("#btnSend").click(function () {
-            $("#totales").addClass("hide");
-            $("#resultContainer").removeClass("hide");
-            let _data = {
-                desde: $("#desde").val(),
-                hasta: $("#hasta").val(),
-                name: $("#name").val(),
-                Amaterno: $("#ap_mat").val(),
-                APaterno: $("#ap_pat").val(),
-                Ddl_Estatus: $("#status").val(),
-                solicitud: $("#solicitud").val(),
-                promotor: $("#promotor").val(),
-                tienda: $("#tienda").val(),
-            };
-            let jsonData = JSON.stringify(_data);
-            let _level = sessionStorage.getItem("PrincipalLevel");
-            let _url = "";
-            if (_level == "Administrador") {
-                _url = "/Search/Search";
-            } else {
-                _url = "/Search/Generar_ReporteNormal";
+            let _desde = $("#desde").val();
+            let _hasta = $("#hasta").val();
+            if (_desde == "" || _hasta == "" ){
+                console.log("Ingresa los parametros de fecha");
+            }else {
+                try {
+                    $("#totales").addClass("hide");
+                    $("#resultContainer").removeClass("hide");
+                    let _data = {
+                        desde: $("#desde").val(),
+                        hasta: $("#hasta").val(),
+                        name: $("#name").val(),
+                        Amaterno: $("#ap_mat").val(),
+                        APaterno: $("#ap_pat").val(),
+                        Ddl_Estatus: $("#status").val(),
+                        solicitud: $("#solicitud").val(),
+                        promotor: $("#promotor").val(),
+                        tienda: $("#tienda").val(),
+                        //Se agrega la region subregion y tienda
+                        region: $("#region").val(),
+                        subregion: $("#subregion").val(),
+                        tiendaSelect: $("#tienda").val()
+                    };
+                    let jsonData = JSON.stringify(_data);
+                    let _level = sessionStorage.getItem("PrincipalLevel");
+                    let _url = "";
+                    if (_level == "Administrador") {
+                        _url = "/Search/Search";
+                    } else {
+                        _url = "/Search/Generar_ReporteNormal";
+                    }
+                    $.ajax({
+                        url: _url,
+                        data: jsonData,
+                        contentType: "application/json; charset=utf-8",
+                        dataType: 'json',
+                        type: "POST",
+
+                    }).done(function (data) {
+                        console.log("Respuesta: ", data);
+                        let _collections = data.data;
+                        // Se dividen las colecciones
+                        //Model Result
+                        let _collection = _collections.modelResult;
+                        let _tabla = $('#tableContainer').DataTable();
+                        _tabla.destroy();
+                        $("#rows").html("");
+                        for (let i = 0; i < _collection.length; i++) {
+                            let _row = _collection[i];
+                            $("#rows").append('<tr><td>' + _row.noConsulta + '</td><td>' + _row.fecha + '</td><td>'
+                                + _row.nombre + '</td><td>' + _row.apePat + '</td><td>' + _row.apeMat + '</td><td>'
+                                + _row.estatus + '</td><td>' + _row.motivoStatus + '</td><td>'
+                                + _row.estatusRecepcion + '</td><td>' + _row.promotor + '</td><td>' + _row.tienda + '</td></tr>');
+                        }
+                        // ModelA
+                        let _modelA = _collections.modelA;
+                        let _tablaA = $('#tableTotalesA').DataTable();
+                        _tablaA.destroy();
+                        $("#rowsTotalesA").html("");
+                        for (let i = 0; i < _modelA.length; i++) {
+                            let _row = _modelA[i];
+                            $("#rowsTotalesA").append('<tr><td>' + _row.ingresadas + '</td><td>' + _row.aprobadas + '</td><td>'
+                                + _row.rechazadas + '</td><td>' + _row.pendientes + '</td><td>' + _row.canceladas + '</td></tr>');
+                        }
+                        //ModelB
+                        let _modelB = _collections.modelB;
+                        let _tablaB = $('#tableTotalesB').DataTable();
+                        _tablaB.destroy();
+                        $("#rowsTotalesB").html("");
+                        for (let i = 0; i < _modelB.length; i++) {
+                            let _row = _modelB[i];
+                            $("#rowsTotalesB").append('<tr><td>' + _row.estatus + '</td><td>' + _row.buroCredito + '</td><td>'
+                                + _row.verificacionTelefonica + '</td><td>' + _row.politicaDeCredito + '</td><td>' + _row.solicitudDuplicada + '</td><td>'
+                                + _row.documentacionIncompleta + '</td><td>' + _row.pendienteDocumentacion + '</td><td>' + _row.enProceso + '</td></tr>');
+                        }
+                        //ModelC
+                        let _modelC = _collections.modelC;
+                        let _tablaC = $('#tableTotalesC').DataTable();
+                        _tablaC.destroy();
+                        $("#rowsTotalesC").html("");
+                        for (let i = 0; i < _modelC.length; i++) {
+                            let _row = _modelC[i];
+                            $("#rowsTotalesC").append('<tr><td>' + _row.tienda + '</td><td>' + _row.ingresadas + '</td></tr>');
+                        }
+
+                        $('#tableContainer,#tableTotalesA,#tableTotalesB,#tableTotalesC').DataTable({
+                            dom: 'Bfrtip',
+                            buttons: [
+                                "copy", "excel", "csv", "pdf", //"print"
+                            ],
+                            "language": {
+                                "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+                            },
+                            "ordering": false
+                        });
+
+
+                    }).fail(function (data) {
+                        console.log("Respuesta: ", data);
+                    });
+                } catch (err) {
+                    console.log("Error: ", err.message);
+                }
             }
-            $.ajax({
-                url: _url,
-                data: jsonData,
-                contentType: "application/json; charset=utf-8",
-                dataType: 'json',
-                type: "POST",
-
-            }).done(function (data) {
-                console.log("Respuesta: ", data);
-                let _collections = data.data;
-                // Se dividen las colecciones
-                //Model Result
-                let _collection = _collections.modelResult;
-                let _tabla = $('#tableContainer').DataTable();
-                _tabla.destroy();
-                $("#rows").html("");
-                for (let i = 0; i < _collection.length; i++){
-                    let _row = _collection[i];
-                    $("#rows").append('<tr><td>' + _row.noConsulta + '</td><td>' + _row.fecha + '</td><td>'
-                        + _row.nombre + '</td><td>' + _row.apePat + '</td><td>' + _row.apeMat + '</td><td>'
-                        + _row.estatus + '</td><td>' + _row.motivoStatus + '</td><td>'
-                        + _row.estatusRecepcion + '</td><td>' + _row.promotor + '</td><td>' + _row.tienda + '</td></tr>');
-                }
-                // ModelA
-                let _modelA = _collections.modelA;
-                let _tablaA = $('#tableTotalesA').DataTable();
-                _tablaA.destroy();
-                $("#rowsTotalesA").html("");
-                for (let i = 0; i < _modelA.length; i++) {
-                    let _row = _modelA[i];
-                    $("#rowsTotalesA").append('<tr><td>' + _row.ingresadas + '</td><td>' + _row.aprobadas + '</td><td>'
-                        + _row.rechazadas + '</td><td>' + _row.pendientes + '</td><td>' + _row.canceladas + '</td></tr>');
-                }
-                //ModelB
-                let _modelB = _collections.modelB;
-                let _tablaB = $('#tableTotalesB').DataTable();
-                _tablaB.destroy();
-                $("#rowsTotalesB").html("");
-                for (let i = 0; i < _modelB.length; i++) {
-                    let _row = _modelB[i];
-                    $("#rowsTotalesB").append('<tr><td>' + _row.estatus + '</td><td>' + _row.buroCredito + '</td><td>'
-                        + _row.verificacionTelefonica + '</td><td>' + _row.politicaDeCredito + '</td><td>' + _row.solicitudDuplicada + '</td><td>'
-                        + _row.documentacionIncompleta + '</td><td>' + _row.pendienteDocumentacion + '</td><td>' + _row.enProceso + '</td></tr>');
-                }
-                //ModelC
-                let _modelC = _collections.modelC;
-                let _tablaC = $('#tableTotalesC').DataTable();
-                _tablaC.destroy();
-                $("#rowsTotalesC").html("");
-                for (let i = 0; i < _modelC.length; i++) {
-                    let _row = _modelC[i];
-                    $("#rowsTotalesC").append('<tr><td>' + _row.tienda + '</td><td>' + _row.ingresadas + '</td></tr>');
-                }
-
-                $('#tableContainer,#tableTotalesA,#tableTotalesB,#tableTotalesC').DataTable({
-                    dom: 'Bfrtip',
-                    buttons: [
-                        "copy", "excel", "csv", "pdf", //"print"
-                    ],
-                    "language": {
-                        "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
-                    },
-                    "ordering": false
-                });
-                   
             
-             }).fail(function (data) {
-                console.log("Respuesta: ", data);
-             });
+            
             
         });
 
@@ -187,8 +230,6 @@
             $("#resultContainer").addClass("hide");
         });
     }
-
-   
 
     function fillStatus() {
         $.ajax({
@@ -265,7 +306,22 @@
             $("#filtrosCascada,#btnPrecalifications,#btnAll").addClass("hide");
         }
         //Dibujando las tablas
-        setTimeout(function(){
+        setTimeout(function () {
+
+            $("#desde,#hasta,#desdeP,#hastaP").datepicker({
+                dateFormat: "yy-mm-dd",
+                dayNames: ["Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado"],
+                dayNamesMin: ["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa"],
+                monthNames: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
+                maxDate: new Date(),
+                minDate: "-3m"
+            });
+
+            let now = new Date();
+            $('#hasta,#hastaP').datepicker('setDate', now);
+            now.setMonth(now.getMonth() - 2);
+            $('#desde,#desdeP').datepicker('setDate', now);
+
             $('#tableContainer,#tableContainerPrecalification,#tableTotalesA,#tableTotalesB,#tableTotalesC').DataTable({
                 //dom: 'Bfrtip',
                 //buttons: [
@@ -278,8 +334,6 @@
         }, 1000);
         
     }
-
-
     return public;
 
 })();

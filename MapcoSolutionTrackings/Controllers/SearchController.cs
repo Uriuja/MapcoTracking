@@ -6,6 +6,19 @@ using System.Web.Mvc;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Data.SqlClient;
+using System.Configuration;
+using System.Data;
+using System.IO;
+using System.Web.UI.HtmlControls;
+using System.Text;
+using System.Web.Services;
 using MapcoSolutionTrackings.Models;
 
 namespace MapcoSolutionTrackings.Controllers
@@ -106,7 +119,7 @@ namespace MapcoSolutionTrackings.Controllers
                 " and (A.APELLIDOMATERNO like '%" + modRepo.Amaterno + "%')" +
                 " and (B.Descripcion = '" + modRepo.Ddl_Estatus + "')" +
                 " and (A.IDSOLICITUD like '%" + modRepo.solicitud + "%')" +
-                " and (A.Promotor like '%" + modRepo.promotor + "%')) ";// + PARAMETER;
+                " and (A.Promotor like '%" + modRepo.promotor + "%')) " + PARAMETER;
 
                 Query3 = "select" +
                 " B.Descripcion as Estatus, " +
@@ -132,7 +145,7 @@ namespace MapcoSolutionTrackings.Controllers
                 " and (A.APELLIDOMATERNO like '%" + modRepo.Amaterno + "%')" +
                 " and (B.Descripcion = '" + modRepo.Ddl_Estatus + "')" +
                 " and (A.IDSOLICITUD like '%" + modRepo.solicitud + "%')" +
-                " and (A.Promotor like '%" + modRepo.promotor + "%')) " + //PARAMETER +
+                " and (A.Promotor like '%" + modRepo.promotor + "%')) " + PARAMETER +
                 " group by B.Descripcion";
 
                 Query4 = "select " +
@@ -147,7 +160,7 @@ namespace MapcoSolutionTrackings.Controllers
                 " and (A.APELLIDOMATERNO like '%" + modRepo.Amaterno + "%')" +
                 " and (B.Descripcion = '" + modRepo.Ddl_Estatus + "')" +
                 " and (A.IDSOLICITUD like '%" + modRepo.solicitud + "%')" +
-                " and (A.Promotor like '%" + modRepo.promotor + "%')) " + //PARAMETER +
+                " and (A.Promotor like '%" + modRepo.promotor + "%')) " + PARAMETER +
                 " group by Tienda order by count(A.idsolicitud) desc ";
 
             }
@@ -202,7 +215,7 @@ namespace MapcoSolutionTrackings.Controllers
                 " and( (A.NOMBRES like '%" + modRepo.name + "%') and (A.APELLIDOPATERNO like '%" + modRepo.APaterno + "%')" +
                 " and (A.APELLIDOMATERNO like '%" + modRepo.Amaterno + "%')" +
                 " and (A.IDSOLICITUD like '%" + modRepo.solicitud + "%')" +
-                " and (A.Promotor like '%" + modRepo.promotor + "%')) " +// PARAMETER + 
+                " and (A.Promotor like '%" + modRepo.promotor + "%')) " + PARAMETER + 
                 " ORDER BY A.IdSolicitud";
 
                 Query2 = "select" +
@@ -226,9 +239,9 @@ namespace MapcoSolutionTrackings.Controllers
                 "  A.FECHA >= '" + Convert.ToDateTime(modRepo.desde).ToString("yyyy-dd-MM") + " 00:00:00'   and A.FECHA <= '" + Convert.ToDateTime(modRepo.hasta).ToString("yyyy-dd-MM") + " 23:59:59'" +
                 " and( (A.NOMBRES like '%" + modRepo.name + "%') and (A.APELLIDOPATERNO like '%" + modRepo.APaterno + "%')" +
                 " and (A.APELLIDOMATERNO like '%" + modRepo.Amaterno + "%')" +
-                " and (B.Descripcion = '" + modRepo.Ddl_Estatus + "')" +
+               // " and (B.Descripcion = '" + modRepo.Ddl_Estatus + "')" +
                 " and (A.IDSOLICITUD like '%" + modRepo.solicitud + "%')" +
-                " and (A.Promotor like '%" + modRepo.promotor + "%')) "; //+ PARAMETER;
+                " and (A.Promotor like '%" + modRepo.promotor + "%')) " + PARAMETER;
 
                 Query3 = "select " +
                 " B.Descripcion as Estatus, " +
@@ -253,7 +266,7 @@ namespace MapcoSolutionTrackings.Controllers
                 " and( (A.NOMBRES like '%" + modRepo.name + "%') and (A.APELLIDOPATERNO like '%" + modRepo.APaterno + "%')" +
                 " and (A.APELLIDOMATERNO like '%" + modRepo.Amaterno + "%')" +
                 " and (A.IDSOLICITUD like '%" + modRepo.solicitud + "%')" +
-                " and (A.Promotor like '%" + modRepo.promotor + "%')) " + //PARAMETER +
+                " and (A.Promotor like '%" + modRepo.promotor + "%')) " + PARAMETER +
                 " group by B.Descripcion";
 
 
@@ -268,7 +281,7 @@ namespace MapcoSolutionTrackings.Controllers
                 " and( (A.NOMBRES like '%" + modRepo.name + "%') and (A.APELLIDOPATERNO like '%" + modRepo.APaterno + "%')" +
                 " and (A.APELLIDOMATERNO like '%" + modRepo.APaterno + "%')" +
                 " and (A.IDSOLICITUD like '%" + modRepo.solicitud + "%')" +
-                " and (A.Promotor like '%" + modRepo.promotor + "%')) " + //PARAMETER +
+                " and (A.Promotor like '%" + modRepo.promotor + "%')) " + PARAMETER +
                 " group by Tienda order by count(A.idsolicitud) desc ";
 
             }
@@ -279,11 +292,11 @@ namespace MapcoSolutionTrackings.Controllers
             string query2 = (string)Query2.Clone();
             string query3 = (string)Query3.Clone();
             string query4 = (string)Query4.Clone();
-            //string parameters = Get_Query_Filters();
-            //query = query.Replace(PARAMETER, parameters);
-            //query2 = query2.Replace(PARAMETER, parameters);
-            //query3 = query3.Replace(PARAMETER, parameters);
-            //query4 = query4.Replace(PARAMETER, parameters);
+            string parameters = Get_Query_Filters(modRepo);
+            query = query.Replace(PARAMETER, parameters);
+            query2 = query2.Replace(PARAMETER, parameters);
+            query3 = query3.Replace(PARAMETER, parameters);
+            query4 = query4.Replace(PARAMETER, parameters);
             string constr = ConfigurationManager.ConnectionStrings["Mapco"].ToString(); // connection string
             SqlConnection con = new SqlConnection(constr);
             SqlConnection con2 = new SqlConnection(constr);
@@ -624,6 +637,212 @@ namespace MapcoSolutionTrackings.Controllers
             }
             return null;
         }
+
+        public Object Fill_Data(ModelReports model)
+        {
+            UtilController util = new UtilController();
+            List<MetricItem_Mapco> items = Get_Metrics_Data();
+            //List<string> selectedRegion = new List<string>();
+            //foreach (ListItem item in model.region)
+            //{
+            //    if (item.Selected)
+            //    {
+            //        selectedRegion.Add(item.Text);
+            //    }
+            //}
+            //List<string> selectedSubregion = new List<string>();
+            //foreach (ListItem item in model.subregion)
+            //{
+            //    if (item.Selected)
+            //    {
+            //        selectedSubregion.Add(item.Text);
+            //    }
+            //}
+            //List<string> selectedTienda = new List<string>();
+            //foreach (ListItem item in LB_Tienda.Items)
+            //{
+            //    if (item.Selected)
+            //    {
+            //        selectedTienda.Add(item.Text);
+            //    }
+            //}
+            List<string> selectedRegion = model.region;
+            List<string> selectedSubregion = model.subregion;
+            List<string> selectedTienda = model.tiendaSelect;
+            if (selectedRegion.Count > 0)
+            {
+                items = (from item_Mapco in items
+                         where selectedRegion.Contains(item_Mapco.Region)
+                         select item_Mapco).ToList();
+            }
+
+            if (selectedSubregion.Count > 0)
+            {
+                items = (from item_Mapco in items
+                         where selectedSubregion.Contains(item_Mapco.Subregion)
+                         select item_Mapco).ToList();
+            }
+
+            if (selectedTienda.Count > 0)
+            {
+                items = (from item_Mapco in items
+                         where selectedTienda.Contains(item_Mapco.Tienda)
+                         select item_Mapco).ToList();
+            }
+            ModelReports response = new ModelReports();
+            response = Fill_Filters(false, items,model);
+           
+            //response.region = selectedRegion;
+            //response.subregion = selectedSubregion;
+            //response.tiendaSelect = selectedTienda;
+            return util.GetResponse(response, "Consulta Exitosa", true);
+        }
+
+        private ModelReports Fill_Filters(bool willClearFilters, List<MetricItem_Mapco> items, ModelReports model)
+        {
+            ModelReports response = new ModelReports();
+            int count = model.region.Count();
+            if (willClearFilters || count == 0)
+            {
+                response.region = (from item in items
+                                        orderby item.Region
+                                        select item.Region).Distinct().ToList();
+            }
+            count = model.subregion.Count();
+            if (willClearFilters || count == 0)
+            {
+                response.subregion = (from item in items
+                                           orderby item.Subregion
+                                           select item.Subregion).Distinct().ToList();
+     
+            }
+            count = model.tiendaSelect.Count();
+            if (willClearFilters || count == 0)
+            {
+                response.tiendaSelect = (from item in items
+                                        orderby item.Tienda
+                                        select item.Tienda).Distinct().ToList();
+            }
+            return response;
+
+            //int count = LB_Region.GetSelectedIndices().Count();
+            //count = LB_Region.GetSelectedIndices().Count();
+            //if (willClearFilters || count == 0)
+            //{
+            //    LB_Region.DataSource = (from item in items
+            //                            orderby item.Region
+            //                            select item.Region).Distinct().ToList();
+            //    LB_Region.DataBind();
+            //}
+
+            //count = LB_Subregion.GetSelectedIndices().Count();
+            //if (willClearFilters || count == 0)
+            //{
+            //    LB_Subregion.DataSource = (from item in items
+            //                               orderby item.Subregion
+            //                               select item.Subregion).Distinct().ToList();
+            //    LB_Subregion.DataBind();
+            //}
+
+
+            //count = LB_Tienda.GetSelectedIndices().Count();
+            //if (willClearFilters || count == 0)
+            //{
+            //    LB_Tienda.DataSource = (from item in items
+            //                            orderby item.Tienda
+            //                            select item.Tienda).Distinct().ToList();
+            //    LB_Tienda.DataBind();
+            //}
+        }
+
+        public List<MetricItem_Mapco> Get_Metrics_Data()
+        {
+            String Connection_String = ConfigurationManager.ConnectionStrings["Mapco"].ConnectionString;
+            List<MetricItem_Mapco> items_Mapco = new List<MetricItem_Mapco>();
+            using (SqlConnection conn = new SqlConnection(Connection_String))
+            {
+                // using (SqlCommand cmd = new SqlCommand("SELECT distinct A.IdSolicitud ,Replace(CONVERT(VARCHAR,A.fecha,106), ' ', '-') as [Fecha], A.Nombres ,A.APELLIDOPATERNO, A.APELLIDOMATERNO  , B.DESCRIPCION ,A.Promotor,A.Tienda  FROM dbo.tblSolicitudes  AS A JOIN dbo.tblEstatus AS B ON A.EstatusActual=B.IDEstatus left  join dbo.tblNotas as  N on (A.IdSolicitud = N.IDSolicitud and N.IDNota = 0)" /* where A.FECHA >= '" + Convert.ToDateTime(Txt_Desde.Text).ToString("yyyy-dd-MM") + "'   and A.FECHA <= '" + Convert.ToDateTime(Txt_Hasta.Text).ToString("yyyy-dd-MM") + "'"*/, conn))
+                using (SqlCommand cmd = new SqlCommand("select distinct region,subregion,sTienda from tblUsuariosTiendas where administrador <> 1 order by sTienda asc", conn))
+                {
+
+                    try
+                    {
+                        conn.Open();
+                        SqlDataReader reader = cmd.ExecuteReader();
+                        while (reader.Read())
+                        {
+                            MetricItem_Mapco item_Mapco = new MetricItem_Mapco();
+                            /* item_Dportenis.IdSolicitud = reader.GetInt32(0);
+                             item_Dportenis.Fecha = reader.GetString(1).Trim();
+                             item_Dportenis.Nombres = reader.GetString(2).Trim();
+                             item_Dportenis.APELLIDOPATERNO = reader.GetString(3).Trim();
+                             item_Dportenis.APELLIDOMATERNO = reader.GetString(4).Trim();
+                             item_Dportenis.DESCRIPCION = reader.GetString(5).Trim();
+                             item_Dportenis.Promotor = reader.GetString(6).Trim();
+                             item_Dportenis.Tienda = reader.GetString(7).Trim();*/
+                            item_Mapco.Region = reader.GetString(0).Trim();
+                            item_Mapco.Subregion = reader.GetString(1).Trim();
+                            item_Mapco.Tienda = reader.GetString(2).Trim();
+                            items_Mapco.Add(item_Mapco);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        return null;
+                    }
+                    finally
+                    {
+                        conn.Close();
+                    }
+                }
+            }
+            return items_Mapco;
+        }
+
+        public string Get_Query_Filters(ModelReports model)
+        {
+            string filters = "";
+            List<string> selectedRegion = model.region;
+            if (selectedRegion != null && selectedRegion.Count > 0)
+            {
+                filters += " AND U.Region IN ( ";
+                foreach (string region in selectedRegion)
+                {
+                    filters += "'" + region.Trim() + "', ";
+                }
+                filters += ") ";
+                filters = filters.Replace(", )", ")");
+            }
+            List<string> selectedSubregion = model.subregion;
+            if (selectedSubregion != null && selectedSubregion.Count > 0)
+            {
+                filters += " AND U.Subregion IN ( ";
+                foreach (string subregion in selectedSubregion)
+                {
+                    filters += "'" + subregion.Trim() + "', ";
+                }
+                filters += ") ";
+                filters = filters.Replace(", )", ")");
+            }
+            List<string> selectedTienda = model.tiendaSelect;
+            if (selectedTienda != null && selectedTienda.Count > 0)
+            {
+                filters += " AND A.tienda IN ( ";
+                foreach (string tienda in selectedTienda)
+                {
+                    filters += "'" + tienda.Trim() + "', ";
+                }
+                filters += ") ";
+                filters = filters.Replace(", )", ")");
+            }
+            filters += " ";
+            return filters;
+
+        }
+
+
+       
+
 
     }
 }

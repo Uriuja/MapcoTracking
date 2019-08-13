@@ -25,7 +25,7 @@ body{
 
 .form_wrap{
     width: 1050px;
-    height: 450px;
+    height: 520px;
     margin: 50px auto;
     display: flex;
     background: #fff;
@@ -430,7 +430,6 @@ h2{
     }
 }
 select{
-    border-radius:20px!important;
     height: 25px;
     width:205px;
     border: none;   
@@ -494,4 +493,22 @@ input[type=text], select {
 
 .dataTables_length{
     display: none;
+}
+
+.divisor{
+    border-width: 5px;
+}
+
+.btnSubmit {
+    width: 200px;
+    background: #213977!important;
+    padding: 10px!important;
+    border: none!important;
+    border-radius: 25px!important;
+    align-self: flex-end;
+    color: #fff!important;
+    font-family: 'Open sans';
+    font-size: 15px!important;
+    font-weight: 600!important;
+    cursor: pointer!important;
 }
