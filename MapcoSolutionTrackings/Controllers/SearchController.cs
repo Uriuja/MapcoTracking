@@ -106,7 +106,7 @@ namespace MapcoSolutionTrackings.Controllers
                 " and (A.APELLIDOMATERNO like '%" + modRepo.Amaterno + "%')" +
                 " and (B.Descripcion = '" + modRepo.Ddl_Estatus + "')" +
                 " and (A.IDSOLICITUD like '%" + modRepo.solicitud + "%')" +
-                " and (A.Promotor like '%" + modRepo.promotor + "%')) " + PARAMETER;
+                " and (A.Promotor like '%" + modRepo.promotor + "%')) ";// + PARAMETER;
 
                 Query3 = "select" +
                 " B.Descripcion as Estatus, " +
@@ -132,7 +132,7 @@ namespace MapcoSolutionTrackings.Controllers
                 " and (A.APELLIDOMATERNO like '%" + modRepo.Amaterno + "%')" +
                 " and (B.Descripcion = '" + modRepo.Ddl_Estatus + "')" +
                 " and (A.IDSOLICITUD like '%" + modRepo.solicitud + "%')" +
-                " and (A.Promotor like '%" + modRepo.promotor + "%')) " + PARAMETER +
+                " and (A.Promotor like '%" + modRepo.promotor + "%')) " + //PARAMETER +
                 " group by B.Descripcion";
 
                 Query4 = "select " +
@@ -147,7 +147,7 @@ namespace MapcoSolutionTrackings.Controllers
                 " and (A.APELLIDOMATERNO like '%" + modRepo.Amaterno + "%')" +
                 " and (B.Descripcion = '" + modRepo.Ddl_Estatus + "')" +
                 " and (A.IDSOLICITUD like '%" + modRepo.solicitud + "%')" +
-                " and (A.Promotor like '%" + modRepo.promotor + "%')) " + PARAMETER +
+                " and (A.Promotor like '%" + modRepo.promotor + "%')) " + //PARAMETER +
                 " group by Tienda order by count(A.idsolicitud) desc ";
 
             }
@@ -202,7 +202,8 @@ namespace MapcoSolutionTrackings.Controllers
                 " and( (A.NOMBRES like '%" + modRepo.name + "%') and (A.APELLIDOPATERNO like '%" + modRepo.APaterno + "%')" +
                 " and (A.APELLIDOMATERNO like '%" + modRepo.Amaterno + "%')" +
                 " and (A.IDSOLICITUD like '%" + modRepo.solicitud + "%')" +
-                " and (A.Promotor like '%" + modRepo.promotor + "%')) " + PARAMETER + " ORDER BY A.IdSolicitud";
+                " and (A.Promotor like '%" + modRepo.promotor + "%')) " +// PARAMETER + 
+                " ORDER BY A.IdSolicitud";
 
                 Query2 = "select" +
                 " SUM(CASE WHEN B.descripcion IN ('Solicitud Aprobada','Solicitud Rechazada'," +
@@ -227,7 +228,7 @@ namespace MapcoSolutionTrackings.Controllers
                 " and (A.APELLIDOMATERNO like '%" + modRepo.Amaterno + "%')" +
                 " and (B.Descripcion = '" + modRepo.Ddl_Estatus + "')" +
                 " and (A.IDSOLICITUD like '%" + modRepo.solicitud + "%')" +
-                " and (A.Promotor like '%" + modRepo.promotor + "%')) " + PARAMETER;
+                " and (A.Promotor like '%" + modRepo.promotor + "%')) "; //+ PARAMETER;
 
                 Query3 = "select " +
                 " B.Descripcion as Estatus, " +
@@ -252,7 +253,7 @@ namespace MapcoSolutionTrackings.Controllers
                 " and( (A.NOMBRES like '%" + modRepo.name + "%') and (A.APELLIDOPATERNO like '%" + modRepo.APaterno + "%')" +
                 " and (A.APELLIDOMATERNO like '%" + modRepo.Amaterno + "%')" +
                 " and (A.IDSOLICITUD like '%" + modRepo.solicitud + "%')" +
-                " and (A.Promotor like '%" + modRepo.promotor + "%')) " + PARAMETER +
+                " and (A.Promotor like '%" + modRepo.promotor + "%')) " + //PARAMETER +
                 " group by B.Descripcion";
 
 
@@ -267,7 +268,7 @@ namespace MapcoSolutionTrackings.Controllers
                 " and( (A.NOMBRES like '%" + modRepo.name + "%') and (A.APELLIDOPATERNO like '%" + modRepo.APaterno + "%')" +
                 " and (A.APELLIDOMATERNO like '%" + modRepo.APaterno + "%')" +
                 " and (A.IDSOLICITUD like '%" + modRepo.solicitud + "%')" +
-                " and (A.Promotor like '%" + modRepo.promotor + "%')) " + PARAMETER +
+                " and (A.Promotor like '%" + modRepo.promotor + "%')) " + //PARAMETER +
                 " group by Tienda order by count(A.idsolicitud) desc ";
 
             }
@@ -285,22 +286,21 @@ namespace MapcoSolutionTrackings.Controllers
             //query4 = query4.Replace(PARAMETER, parameters);
             string constr = ConfigurationManager.ConnectionStrings["Mapco"].ToString(); // connection string
             SqlConnection con = new SqlConnection(constr);
+            SqlConnection con2 = new SqlConnection(constr);
+            SqlConnection con3 = new SqlConnection(constr);
+            SqlConnection con4 = new SqlConnection(constr);
             try
             {
-
-                //string constr = ConfigurationManager.ConnectionStrings["Mapco"].ToString(); // connection string
-                //SqlConnection con2 = new SqlConnection(constr);
-                //SqlConnection con3 = new SqlConnection(constr);
-                //SqlConnection con4 = new SqlConnection(constr);
-                System.Data.DataTable dt = new System.Data.DataTable();
-                System.Data.DataTable dt2 = new System.Data.DataTable();
-                System.Data.DataTable dt3 = new System.Data.DataTable();
-                System.Data.DataTable dt4 = new System.Data.DataTable();
+                              
+                //System.Data.DataTable dt = new System.Data.DataTable();
+                //System.Data.DataTable dt2 = new System.Data.DataTable();
+                //System.Data.DataTable dt3 = new System.Data.DataTable();
+                //System.Data.DataTable dt4 = new System.Data.DataTable();
 
                 SqlCommand cmd = new SqlCommand(query, con);
-                //SqlCommand cmd2 = new SqlCommand(query2, con2);
-                //SqlCommand cmd3 = new SqlCommand(query3, con3);
-                //SqlCommand cmd4 = new SqlCommand(query4, con4);
+                SqlCommand cmd2 = new SqlCommand(query2, con2);
+                SqlCommand cmd3 = new SqlCommand(query3, con3);
+                SqlCommand cmd4 = new SqlCommand(query4, con4);
                 con.Open();
                 SqlDataReader reader1 = cmd.ExecuteReader();
                 List<ModelResults> resultList = new List<ModelResults>();
@@ -321,17 +321,67 @@ namespace MapcoSolutionTrackings.Controllers
                     result.tienda = reader1.GetValue(10).ToString();
                     resultList.Add(result);        
                 }
-                return util.GetResponse(resultList, "Consulta Exitosa", true);
+                con.Close();
+                con2.Open();
+                SqlDataReader reader2 = cmd2.ExecuteReader();
+                List<ModeltotalesA> resultListA = new List<ModeltotalesA>();
+                while (reader2.Read())
+                {
+                    ModeltotalesA resultA = new ModeltotalesA();
+                    resultA.ingresadas = reader2.GetValue(0).ToString();
+                    resultA.aprobadas = reader2.GetValue(1).ToString();
+                    resultA.rechazadas = reader2.GetValue(2).ToString();
+                    resultA.pendientes = reader2.GetValue(3).ToString();
+                    resultA.canceladas = reader2.GetValue(4).ToString();
+                   resultListA.Add(resultA);
+                }
+                con2.Close();
+                con3.Open();
+                SqlDataReader reader3 = cmd3.ExecuteReader();
+                List<ModeltotalesB> resultListB = new List<ModeltotalesB>();
+                while (reader3.Read())
+                {
+                    ModeltotalesB resultB = new ModeltotalesB();
+                    resultB.estatus = reader3.GetValue(0).ToString();
+                    resultB.buroCredito = reader3.GetValue(1).ToString();
+                    resultB.verificacionTelefonica = reader3.GetValue(2).ToString();
+                    resultB.politicaDeCredito = reader3.GetValue(3).ToString();
+                    resultB.solicitudDuplicada = reader3.GetValue(4).ToString();
+                    resultB.documentacionIncompleta = reader3.GetValue(5).ToString();
+                    resultB.pendienteDocumentacion = reader3.GetValue(6).ToString();
+                    resultB.enProceso = reader3.GetValue(7).ToString();
+                    resultListB.Add(resultB);
+                }
+                con3.Close();
+                con4.Open();
+                SqlDataReader reader4 = cmd4.ExecuteReader();
+                List<ModeltotalesC> resultListC = new List<ModeltotalesC>();
+                while (reader4.Read())
+                {
+                    ModeltotalesC resultC = new ModeltotalesC();
+                    resultC.tienda = reader4.GetValue(0).ToString();
+                    resultC.ingresadas = reader4.GetValue(1).ToString();
+                    resultListC.Add(resultC);
+                }
+                con4.Close();
+                ModelFull full = new ModelFull();
+                full.modelResult = resultList;
+                full.modelA = resultListA;
+                full.modelB = resultListB;
+                full.modelC = resultListC;
+
+
+                return util.GetResponse(full, "Consulta Exitosa", true);
             }
 
             catch (Exception ex)
             {
                 return util.GetResponse(ex, "Error de sistema", false);
             }
-            finally
-            {
-                con.Close();
-            }
+            //finally
+            //{
+            //    con.Close();
+            //}
           
         }
 

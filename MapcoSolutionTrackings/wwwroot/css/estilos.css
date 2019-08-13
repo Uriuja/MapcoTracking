@@ -487,3 +487,11 @@ input[type=text], select {
 .radios {
     width: 50px!important
 }
+
+.derecha{
+    text-align: right;
+}
+
+.dataTables_length{
+    display: none;
+}

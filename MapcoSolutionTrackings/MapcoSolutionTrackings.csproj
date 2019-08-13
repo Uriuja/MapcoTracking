@@ -461,8 +461,12 @@
       <DependentUpon>DbSetMapco.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ErrorViewModel.cs" />
+    <Compile Include="Models\ModelFull.cs" />
     <Compile Include="Models\ModelReports.cs" />
     <Compile Include="Models\ModelResults.cs" />
+    <Compile Include="Models\ModeltotalesA.cs" />
+    <Compile Include="Models\ModeltotalesB.cs" />
+    <Compile Include="Models\ModeltotalesC.cs" />
     <Compile Include="Models\ModelUserLogin.cs" />
     <Compile Include="App_Data\sp_cargarPrecal_Result.cs">
       <DependentUpon>DbSetMapco.tt</DependentUpon>

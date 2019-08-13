@@ -19,6 +19,8 @@
             maxDate: new Date(),
             minDate: "-3m"
         });
+ 
+
         $('#tableContainer').on('autoFill', function (e, datatable, cells) {
             alert((cells.length * cells[0].length) + ' cells were updated');
         });
@@ -62,7 +64,8 @@
                     ],
                     "language": {
                         "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
-                    }
+                    },
+                    "ordering": false
                 });
             }).fail(function (data) {
                 console.log("Respuesta: ", data);
@@ -70,6 +73,8 @@
         })
 
         $("#btnSend").click(function () {
+            $("#totales").addClass("hide");
+            $("#resultContainer").removeClass("hide");
             let _data = {
                 desde: $("#desde").val(),
                 hasta: $("#hasta").val(),
@@ -98,7 +103,10 @@
 
             }).done(function (data) {
                 console.log("Respuesta: ", data);
-                let _collection = data.data;
+                let _collections = data.data;
+                // Se dividen las colecciones
+                //Model Result
+                let _collection = _collections.modelResult;
                 let _tabla = $('#tableContainer').DataTable();
                 _tabla.destroy();
                 $("#rows").html("");
@@ -109,15 +117,46 @@
                         + _row.estatus + '</td><td>' + _row.motivoStatus + '</td><td>'
                         + _row.estatusRecepcion + '</td><td>' + _row.promotor + '</td><td>' + _row.tienda + '</td></tr>');
                 }
-         
-                $('#tableContainer').DataTable({
+                // ModelA
+                let _modelA = _collections.modelA;
+                let _tablaA = $('#tableTotalesA').DataTable();
+                _tablaA.destroy();
+                $("#rowsTotalesA").html("");
+                for (let i = 0; i < _modelA.length; i++) {
+                    let _row = _modelA[i];
+                    $("#rowsTotalesA").append('<tr><td>' + _row.ingresadas + '</td><td>' + _row.aprobadas + '</td><td>'
+                        + _row.rechazadas + '</td><td>' + _row.pendientes + '</td><td>' + _row.canceladas + '</td></tr>');
+                }
+                //ModelB
+                let _modelB = _collections.modelB;
+                let _tablaB = $('#tableTotalesB').DataTable();
+                _tablaB.destroy();
+                $("#rowsTotalesB").html("");
+                for (let i = 0; i < _modelB.length; i++) {
+                    let _row = _modelB[i];
+                    $("#rowsTotalesB").append('<tr><td>' + _row.estatus + '</td><td>' + _row.buroCredito + '</td><td>'
+                        + _row.verificacionTelefonica + '</td><td>' + _row.politicaDeCredito + '</td><td>' + _row.solicitudDuplicada + '</td><td>'
+                        + _row.documentacionIncompleta + '</td><td>' + _row.pendienteDocumentacion + '</td><td>' + _row.enProceso + '</td></tr>');
+                }
+                //ModelC
+                let _modelC = _collections.modelC;
+                let _tablaC = $('#tableTotalesC').DataTable();
+                _tablaC.destroy();
+                $("#rowsTotalesC").html("");
+                for (let i = 0; i < _modelC.length; i++) {
+                    let _row = _modelC[i];
+                    $("#rowsTotalesC").append('<tr><td>' + _row.tienda + '</td><td>' + _row.ingresadas + '</td></tr>');
+                }
+
+                $('#tableContainer,#tableTotalesA,#tableTotalesB,#tableTotalesC').DataTable({
                     dom: 'Bfrtip',
                     buttons: [
                         "copy", "excel", "csv", "pdf", //"print"
                     ],
                     "language": {
                         "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
-                    }
+                    },
+                    "ordering": false
                 });
                    
             
@@ -135,11 +174,17 @@
         $("#btnReturn").click(function () {
             $("#container2").addClass("hide");
             $("#container1").removeClass("hide");
+            $("#totales").addClass("hide")
         });
 
         $("#btnCloseSesion").click(function () {
             sessionStorage.clear();
             location.assign(location.origin + "");
+        });
+
+        $("#btnAll").click(function () {
+            $("#totales").removeClass("hide");
+            $("#resultContainer").addClass("hide");
         });
     }
 
@@ -221,7 +266,7 @@
         }
         //Dibujando las tablas
         setTimeout(function(){
-            $('#tableContainer,#tableContainerPrecalification').DataTable({
+            $('#tableContainer,#tableContainerPrecalification,#tableTotalesA,#tableTotalesB,#tableTotalesC').DataTable({
                 //dom: 'Bfrtip',
                 //buttons: [
                 //    "copy", "excel", "csv", "pdf"
